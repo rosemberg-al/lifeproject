@@ -1,0 +1,125 @@
+<div class="box-body">
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @content, :description %>">
+
+        <%= f.label :description %> <br>
+        <%= f.text_field :description, {:class => "form-control"} %>
+        <%= error_tag @content, :description %>
+
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @content, :content_type_id %>">
+        <%= f.hidden_field :type_feature %>
+        <%= f.label :content_type_id %> <br>
+        <%= f.select :content_type_id, @content_types.collect {|t| [ t.description, t.id ] },{ include_blank: true } ,{:class => "form-control",:onchange => "change_type()"} %>
+        <%= error_tag @content, :content_type_id %>
+    </div>
+
+    <div class="col-md-6   <%= error_div @content, :content_genre_id %>">
+        <%= f.label :content_genre_id %> <br>
+        <%= f.select :content_genre_id, @content_genres.collect {|t| [ t.description, t.id ] }, { include_blank: true } ,:class => "form-control" %>
+        <%= error_tag @content, :content_genre_id %>
+    </div>
+  </div>
+
+
+  <div class="row col-md-12" id="fields_book"
+  <% if (@content.nil? || @content.type_feature.nil? || @content.type_feature!="printed") %> style="display:none;" <%end%>
+  >
+    <div class="col-md-6   <%= error_div @content, :book_publisher %>">
+        <%= f.label :book_publisher %> <br>
+        <%= f.text_field :book_publisher, :class => "form-control" %>
+        <%= error_tag @content, :book_publisher %>
+    </div>
+
+    <div class="col-md-6   <%= error_div @content, :book_date_published %>">
+        <%= f.label :book_date_published %> <br>
+        <%= f.date_field :book_date_published, :class => "form-control" %>
+        <%= error_tag @content, :book_date_published %>
+    </div>
+  </div>
+
+
+  <div class="row col-md-12" id="fields_movie"
+  <% if (@content.nil? || @content.type_feature.nil? || @content.type_feature!="audiovisual") %> style="display:none;" <%end%>
+  >
+    <div class="col-md-4   <%= error_div @content, :movie_company %>">
+        <%= f.label :movie_company %> <br>
+        <%= f.text_field :movie_company, :class => "form-control" %>
+        <%= error_tag @content, :movie_company %>
+    </div>
+
+    <div class="col-md-4   <%= error_div @content, :movie_date_released %>">
+        <%= f.label :movie_date_released %> <br>
+        <%= f.date_field :movie_date_released, :class => "form-control" %>
+        <%= error_tag @content, :movie_date_released %>
+    </div>
+
+    <div class="col-md-4   <%= error_div @content, :movie_time %>">
+        <%= f.label :movie_time %> <br>
+        <%= f.number_field :movie_time, :class => "form-control" %>
+        <%= error_tag @content, :movie_time %>
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-9   <%= error_div @content, :synopsis %>">
+        <%= f.label :synopsis %> <br>
+        <%= f.text_area :synopsis, cols: 20, rows: 10 ,:class => "form-control" %>
+        <%= error_tag @content, :synopsis %>
+    </div>
+  </div>
+
+</div>
+
+
+<% content_for :javascript do %>
+
+
+function change_type(){
+
+  var type_printed = [
+    <% @content_types.each do |ct|  %>
+      <%=raw "\"#{ct.feature}\"," %>
+    <% end  %>
+  ];
+
+  var type_printed_index = [
+    <% @content_types.each do |ct|  %>
+      <% if ct == @content_types.last %>
+      <%="#{ct.id}"%>
+      <% else %>
+      <%="#{ct.id},"%>
+      <% end  %>
+    <% end  %>
+  ];
+
+  var value=$('#content_content_type_id').val();
+  var position = $.inArray(parseInt(value), type_printed_index);
+  var feature="";
+  if(position!=-1){
+    feature=type_printed[position];
+    $('#content_type_feature').val(feature);
+  }
+
+  $('#fields_book').css('display', 'none');
+  $('#fields_movie').css('display', 'none');
+
+  $('#content_movie_time').val('');
+  $('#content_movie_company').val('');
+  $('#content_movie_date_released').val('');
+
+  $('#content_book_publisher').val('');
+  $('#content_book_date_published').val('');  
+
+  if(feature=="printed"){
+    $('#fields_book').css('display', 'block');
+  } else if (feature=="audiovisual") {
+    $('#fields_movie').css('display', 'block');
+  }
+
+  //console.log($('#content_content_type_id').val());
+}
+<% end %>

@@ -1,0 +1,20 @@
+
+<%= button_click  t('button.new'),"location.href='#{path_new}';" %>
+<%= button_click  t('button.index'),"location.href='#{path_index}';" %>
+<%= button_click  t('button.edit'),"location.href='#{path_edit}';" %>
+
+
+
+<% content_for :javascript do %>
+  shortcut.add("F7",function(){
+    location.href='<%=path_new%>';
+  });
+
+  shortcut.add("F8",function(){
+    location.href='<%=path_index%>';
+  });
+
+  shortcut.add("F10",function(){
+    location.href='<%=path_edit%>';
+  });
+<% end %>

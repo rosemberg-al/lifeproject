@@ -1,0 +1,19 @@
+<ul class="sidebar-menu" data-widget="tree">
+  <li class="header">MAIN NAVIGATION</li>
+  <li class="treeview">
+    <a href="#">
+      <i class="fa fa-dashboard"></i> <span><%= t 'layout.culture'%></span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="<%=subjects_path%>"><i class="fa fa-circle-o"></i><%= t 'layout.subjects'%></a></li>
+      <li><a href="<%=content_genres_path%>"><i class="fa fa-circle-o"></i><%= t 'layout.content_genres'%></a></li>
+      <li><a href="<%=content_types_path%>"><i class="fa fa-circle-o"></i><%= t 'layout.content_types'%></a></li>
+      <li><a href="<%=people_path%>"><i class="fa fa-circle-o"></i><%= t 'layout.people'%></a></li>
+      <li><a href="<%=contents_path%>"><i class="fa fa-circle-o"></i><%= t 'layout.contents'%></a></li>
+      <li><a href="<%=content_summaries_path%>"><i class="fa fa-circle-o"></i><%= t 'layout.content_summaries'%></a></li>
+    </ul>
+  </li>
+</ul>

@@ -1,0 +1,23 @@
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+
+<% if @person.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible">
+    <%= t 'general.form_error' %>
+  </div>
+<% end %>
+
+<%= form_for @person do |f| %>
+<div class="box box-primary">
+<div class="box box-default">
+
+  <%= render 'form' , f: f %>
+  <div class="box-footer">
+  <%= button_save new_person_path,people_path,f %>
+  </div>
+
+</div>
+</div>
+<% end %>

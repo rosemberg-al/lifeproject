@@ -1,0 +1,301 @@
+pt-BR:
+ views:
+   pagination:
+    first: "&laquo; Primeira"
+    last: "Última &raquo;"
+    previous: "&lsaquo; Anterior"
+    next: "Próxima &rsaquo;"
+    truncate: "..."
+
+ dialogs:
+   inactivate: 'Você tem certeza que quer inativar?'
+   activate: 'Você tem certeza que quer ativar?'
+   remove_confim: Você tem certeza que deseja remover o registro?
+
+ flash:
+  notice:
+   signed_in: Login efetuado com sucesso.
+   signed_out: Logout efetuado com sucesso. Até logo!.
+   save_success: Registro gravado com sucesso.
+   inactivate_success: Registro inativado com sucesso.
+   activate_success: Registro ativado com sucesso.
+  alert:
+   needs_login: Para continuar, você precisa está logado.
+
+ button:
+   new: 'F7 - Novo'
+   search: 'F9 - Pesquisar'
+   index: 'F8 - Abrir'
+   save: 'F12 - Gravar'
+   edit: 'F10 - Editar'
+   inactivate: 'Inativar'
+   activate: 'Ativar'
+
+ enums:
+   type_content_person:
+    author: Autor
+    director: Diretor
+    writer: Escritor
+    actor: Ator
+    speaker: Palestrante
+   content_summary_type:
+    summary: Resumo
+    annotation: Fichamento
+    article: Artigo
+    report: Relatório
+    text: Texto
+
+ errors:
+  messages:
+   invalid_login: 'Usuário ou senha inválidos'
+
+ helpers:
+  submit:
+   user_session:
+    create: 'Entrar'
+   subject:
+    create: "Gravar"
+    update: "Gravar"
+
+ links:
+   back: Voltar
+
+ general:
+   form_error: Há erros no formulário, por favor verifique.
+
+ layout:
+   subjects: Assunto
+   content_genres: Gênero
+   content_types: Tipo de Conteúdo
+   contents: Conteúdo
+   people: Pessoa/Artista
+   culture: Cultura
+   signup: Cadastro
+   signin: Login
+   my_profile: Meu perfil
+   signout: Logout
+   profile: Perfil
+   content_summaries: Fichamento/Resumo
+   motivated: "Melhore como pessoa a todo momento, inspire-se:"
+
+ home:
+    index:
+     title: Bem vindo
+
+ users:
+    new:
+     title: Cadastrar Perfil
+     message: Realize seu cadastro.
+     already_signup: Já sou cadastrado
+     agree_terms: Concordo com os termos
+    edit:
+     title: Editar Perfil
+    show:
+     title: "Usuário"
+     profile: "Perfil: %{user_name}"
+     edit: 'Editar perfil'
+     location: "Localização: %{location}"
+     bio: "Bio: %{bio}"
+     success: Email confirmado com sucesso, obrigado!
+     confirmations:
+
+ subjects:
+   create:
+     success: 'Assunto criado com sucesso'
+   new:
+    title: Cadastrar Assunto
+    new: 'Novo'
+    index: 'Abrir'
+   edit:
+    title: Editar Assunto
+    show: 'Visualizar'
+    new: 'Novo'
+    index: 'Abrir'
+    submit: 'Gravar'
+   index:
+    title: 'Listar Assuntos'
+    search_results: 'Resultados da busca'
+    description: "Descrição"
+   search:
+    search_for: 'Buscar por...'
+    inactive: "Inativo?"
+    description: "Descrição"
+   show:
+    title: "Assunto"
+    description: "Descrição: %{description}"
+    edit: 'Editar'
+    new: 'Novo'
+    index: 'Abrir'
+   subject:
+    owner_html: '&mdash; %{owner} (%{when})'
+    edit: 'Editar'
+    destroy: 'Remover'
+
+ content_genres:
+   new:
+    title: Cadastrar Gênero
+   edit:
+    title: Editar Gênero
+    submit: 'Gravar'
+   index:
+    title: 'Listar Gêneros'
+    search_results: 'Resultados da busca'
+    description: "Descrição"
+   search:
+    search_for: 'Buscar por...'
+    inactive: "Inativo?"
+    description: "Descrição"
+   show:
+    title: "Gênero"
+    description: "Descrição: %{description}"
+
+ content_types:
+   new:
+    title: 'Cadastrar Tipo de Conteúdo'
+   edit:
+    title: 'Editar Tipo de Conteúdo'
+    submit: 'Gravar'
+   index:
+    title: 'Listar Tipos de Conteúdo'
+    search_results: 'Resultados da busca'
+    description: "Descrição"
+   search:
+    search_for: 'Buscar por...'
+    inactive: "Inativo?"
+    description: "Descrição"
+   show:
+    title: "Tipo de Conteúdo"
+    description: "Descrição: %{description}"
+   form:
+      printed: "Impresso"
+      audiovisual: "Audiovisual"
+      song: "Música/Audio"
+      play: "Apresentação"
+
+ contents:
+  new:
+   title: Cadastrar Conteúdo
+   content_people: Pessoa/Artista Relacionado
+   add_person: Adicionar Pessoa
+  edit:
+   title: Editar Conteúdo
+   add_person: Adicionar Pessoa
+  person:
+   name: Nome
+  index:
+   title: 'Listar Conteúdo'
+   search_results: 'Resultados da busca'
+   description: "Descrição"
+  search:
+   search_for: 'Buscar por...'
+   inactive: "Inativo?"
+   description: "Descrição"
+  show:
+   title: "Conteúdo"
+   description: "Descrição: %{description}"
+  content_person_fields:
+    remove_person: Remover Pessoa
+
+ people:
+  new:
+   title: Cadastrar Pessoa/Artista
+  edit:
+   title: Editar Pessoa/Artista
+   submit: 'Gravar'
+  index:
+   title: 'Listar Pessoa/Artista'
+   search_results: 'Resultados da busca'
+   name: "Nome"
+  search:
+   search_for: 'Buscar por...'
+   inactive: "Inativo?"
+   name: "Nome"
+  show:
+   title: "Pessoa/Artista"
+   name: "Nome: %{name}"
+
+ content_summaries:
+   new:
+    title: Cadastrar Fichamento/Resumo
+   edit:
+    title: Editar Fichamento/Resumo
+    submit: 'Gravar'
+   index:
+    title: 'Listar Fichamentos/Resumos'
+    search_results: 'Resultados da busca'
+    description: "Descrição"
+   search:
+    inactive: "Inativo?"
+    description: "Descrição"
+   show:
+    title: "Fichamento/Resumo"
+    description: "Descrição: %{description}"
+
+ user_sessions:
+   new:
+    title: 'Login'
+    sign_up: 'Cadastre-se'
+    message: "Realize o login para iniciar a sua sessão"
+    forgot: "Esqueci a minha senha"
+    remember: "Lembre-se de mim"
+
+ signup_mailer:
+   confirm_email:
+     subject: 'Lifeproject - Confirme seu email'
+     title: 'Seja bem vindo ao LifeProject!'
+     body: |
+          Seja bem vindo ao LifeProject, %{full_name}.
+          O LifeProject é o lugar ideal para você planejar, sonhar e executar as metas que você tem para sua vida.
+     confirm_link_html: 'Para você começar a usar o site, acesse o link: %{link}'
+     thanks_html: 'Obrigado por se cadastrar no %{link}.'
+
+ activerecord:
+  models:
+    user: Usuário
+    subject: Assunto
+    content_genre: Gênero
+    content_type: Tipo de Conteúdo
+    content: Conteúdo
+    person: Pessoa
+  attributes:
+    user:
+      bio: Biografia
+      email: Email
+      full_name: Nome completo
+      location: Localização
+      password: Senha
+      password_confirmation: Confirme sua senha
+      picture: Foto
+    subject:
+      description: Descrição
+    content_genre:
+        description: Descrição
+    content_type:
+        description: Descrição
+        feature: Característica
+    content:
+        description: Descrição
+        content_type_id: Tipo de Conteúdo
+        content_genre_id: Gênero
+        synopsis: Sinopse
+        book_publisher: Editora
+        book_date_published: Data Publicação
+        movie_company: Empresa (Produção)
+        movie_date_released: Data Estréia
+        movie_time: Duração (min)
+    content_person:
+        person: Nome
+        type_content_person: Tipo Pessoa
+    person:
+        name: Nome
+        biography: Biografia
+        type_person: Tipo
+        main_thoughts: Principais Pensamentos
+    content_summary:
+          description: Descrição
+          content_id: Conteúdo
+          type_content_summary: Tipo
+          text: Texto
+    user_session:
+      email: Email
+      password: Senha

@@ -1,0 +1,24 @@
+<%= form_tag contents_path, :method => :get, :class => 'search' do %>
+<%= hidden_field_tag :q, 'q' %>
+
+<div class="box-header">
+<%= button_index new_content_path %>
+</div>
+
+<div class="box box-default">
+  <div class="box-body">
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <%= t ".description" %> <br>
+        <%= text_field_tag "content[description]", @content["description"],:placeholder => t('.description'), :class => "form-control" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= t ".inactive" %> <br>
+        <%= hidden_field_tag "content[inactive]", "N" %>
+        <%= check_box_tag "content[inactive]", "Y",  ( @content["inactive"]=="Y")  %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

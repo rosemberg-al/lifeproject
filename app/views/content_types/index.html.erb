@@ -1,0 +1,39 @@
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+<% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<%= render "search"%>
+
+
+<div class="box box-primary">
+<div class="box box-default">
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 10px"></th>
+        <th><%= t '.description' %></th>
+      </tr>
+
+      <% @content_types.each do |content_type| %>
+      <tr onclick="location.href='<%= edit_content_type_path(content_type) %>'" style="cursor:pointer">
+        <td><%= content_type.id %></td>
+        <td><%= content_type.description %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+
+<% if @content_types.size > 0 %>
+<%= paginate @content_types %>
+<% end %>

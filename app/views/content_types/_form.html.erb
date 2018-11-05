@@ -1,0 +1,23 @@
+<div class="box-body">
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @content_type, :description %>">
+
+        <%= f.label :description %> <br>
+        <%= f.text_field :description,  :class => "form-control" %>
+        <%= error_tag @content_type, :description %>
+
+    </div>
+
+    <div class="col-md-3   <%= error_div @content_type, :feature %>">
+        <%= f.label :feature %> <br>
+        <%=
+        #f.select :feature, ContentType.features.keys.to_a
+        #f.select :feature, ContentType.features.keys.map { |w| [w.humanize, w] }, :class => "form-control"
+        f.select :feature, ContentType.features.keys.map { |key,_| [t(".#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+        #f.select :feature, ContentType.features.keys.to_a
+        %>
+        <%= error_tag @content_type, :feature %>
+    </div>
+
+  </div>
+</div>

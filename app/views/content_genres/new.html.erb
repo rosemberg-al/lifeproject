@@ -1,0 +1,23 @@
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+
+<% if @content_genre.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible">
+    <%= t 'general.form_error' %>
+  </div>
+<% end %>
+
+<%= form_for @content_genre do |f| %>
+<div class="box box-primary">
+<div class="box box-default">
+
+  <%= render 'form' , f: f %>
+  <div class="box-footer">
+  <%= button_save new_content_genre_path,content_genres_path,f %>
+  </div>
+
+</div>
+</div>
+<% end %>

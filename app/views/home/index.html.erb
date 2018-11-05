@@ -1,0 +1,31 @@
+<% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+
+<div class="row">
+      <div class="col-md-6">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <i class="fa fa-text-width"></i>
+
+            <h3 class="box-title"><%= t 'layout.motivated' %></h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <b><p><%= @author[@random] %></p></b>
+            <p>
+              “<%= @quotation[@random] %>”
+            </p>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+</div>

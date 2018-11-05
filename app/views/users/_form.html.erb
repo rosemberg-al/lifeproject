@@ -1,0 +1,89 @@
+
+
+
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible">
+    <%= t 'general.form_error' %>
+  </div>
+<% end %>
+
+<%= form_for @user do |f| %>
+<div class="box box-primary">
+<div class="box box-default">
+<div class="box-body">
+
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @user, :picture %>">
+
+      <%= f.label :picture %>
+      <%= f.file_field :picture %>
+      <%= error_tag @user, :picture %>
+
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @user, :full_name %>">
+
+        <%= f.label :full_name %> <br>
+        <%= f.text_field :full_name,  :class => "form-control" %>
+        <%= error_tag @user, :full_name %>
+
+    </div>
+
+    <div class="col-md-6  <%= error_div @user, :email %>">
+
+        <%= f.label :email %> <br>
+        <%= f.text_field :email,  :class => "form-control" %>
+        <%= error_tag @user, :email %>
+
+    </div>
+  </div>
+
+
+  <div class="row col-md-12">
+    <div class="col-md-6  <%= error_div @user, :password %>">
+
+        <%= f.label :password %> <br>
+        <%= f.text_field :password,  :class => "form-control" %>
+        <%= error_tag @user, :password %>
+
+    </div>
+
+    <div class="col-md-6  <%= error_div @user, :password_confirmation %>">
+
+        <%= f.label :password_confirmation %> <br>
+        <%= f.text_field :password_confirmation,  :class => "form-control" %>
+        <%= error_tag @user, :password_confirmation %>
+
+    </div>
+  </div>
+
+
+  <div class="row col-md-12">
+    <div class="col-md-6  <%= error_div @user, :bio %>">
+
+        <%= f.label :bio %> <br>
+        <%= f.text_area :bio,  :class => "form-control" %>
+        <%= error_tag @user, :bio %>
+
+    </div>
+  </div>
+
+
+
+
+</div>
+</div>
+<div class="box-footer">
+  <%= f.submit t('button.save'),:class=>"btn btn-primary",:id=>"btn_save"%>
+</div>
+</div>
+<% end %>
+
+
+<% content_for :javascript do %>
+  shortcut.add("F12",function(){
+    $("#btn_save").click();
+  });
+<% end %>

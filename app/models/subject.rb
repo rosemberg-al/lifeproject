@@ -1,0 +1,69 @@
+# LifeProject - project management software of your life
+# Copyright (C) 2018  Rosemberg de Oliveira
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+class Subject < ApplicationRecord
+
+  scope :most_recent, -> {
+     order 'created_at desc'
+  }
+
+  scope :active, -> {
+    where(inactivated_at: nil)
+  }
+
+  scope :inactive, -> {
+    where.not(inactivated_at: nil)
+  }
+
+  validates_presence_of :description
+  validates_length_of :description, :minimum => 3, :allow_blank => false
+
+  belongs_to :user
+
+  def self.search(query)
+    if query.present?
+      where(['description LIKE :query', :query => "%#{query}%"])
+    else
+      all
+    end
+  end
+
+  def self.index(options={})
+
+    #if (options.key? :description)
+    if (options.key?(:inactive) && options[:inactive]=="Y")
+       options[:current_user].subjects
+       .inactive
+       .where([" description ilike ? ","%#{options[:description]}%"])
+       .most_recent
+       .page(options[:page])
+       .per(options[:per_page])
+
+
+       #.where.not(inactivated_at: nil)
+    else
+      options[:current_user].subjects
+      .active
+      .where([" description ilike ? ","%#{options[:description]}%"])
+      .most_recent
+      .page(options[:page])
+      .per(options[:per_page])
+
+      #.where(inactivated_at: nil)
+    end
+  end
+end

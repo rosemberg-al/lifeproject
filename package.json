@@ -1,0 +1,29 @@
+{
+  "name": "lifeproject",
+  "private": true,
+  "dependencies": {
+    "admin-lte": "2.4.5"
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rosemberg-mcz@bitbucket.org/rosemberg-mcz/lifeproject_new.git"
+  },
+  "keywords": [
+    "lifeproject",
+    "personal",
+    "development",
+    "selfhelp"
+  ],
+  "author": "rosemberg.al@gmail.com",
+  "license": "GPL-2.0",
+  "homepage": "https://bitbucket.org/rosemberg-mcz/lifeproject_new#readme"
+}

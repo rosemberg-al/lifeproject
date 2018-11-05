@@ -1,0 +1,25 @@
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+<% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<div class="box box-primary">
+<div class="box box-default">
+  <div class="box-body">
+    <div class="row col-md-12">
+      <div class="col-md-6">
+          <%= t '.description', :description => @content_summary.description %>
+       </div>
+     </div>
+    </div>
+
+    <div class="box-footer">
+      <%= button_show new_content_summary_path,edit_content_summary_path(@content_summary),content_summaries_path %>
+    </div>
+  </div>
+</div>

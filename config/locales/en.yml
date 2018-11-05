@@ -1,0 +1,110 @@
+en:
+ views:
+   pagination:
+    first: "&laquo; First"
+    last: "Last &raquo;"
+    previous: "&lsaquo; Previous"
+    next: "Next &rsaquo;"
+    truncate: "..."
+ users:
+    new:
+     title: Cadastrar Perfil
+    edit:
+     title: Editar Perfil
+    show:
+     title: "Perfil: %{user_name}"
+     edit: 'Editar perfil'
+     location: "Localização: %{location}"
+     bio: "Bio: %{bio}"
+     success: Email confirmado com sucesso, obrigado!
+     confirmations:
+ subjects:
+   new:
+    title: Cadastrar Quarto
+   edit:
+    title: Editar Quarto
+   index:
+    title: 'Quartos disponíveis'
+    description: 'Descrição'
+    search_results: 'Resultados da busca'
+   search:
+    search_for: 'Buscar por...'
+   subject:
+    owner_html: '&mdash; %{owner} (%{when})'
+    edit: 'Editar'
+    destroy: 'Remover'
+   review:
+    login_to_review: 'Faça o login para avaliar quartos'
+    stats:
+      one: '(1 avaliação)'
+      other: '(%{count} avaliações)'
+ user_sessions:
+   new:
+    title: 'Login'
+    sign_up: 'Cadastre-se'
+    message: "Realize o login para iniciar a sua sessão"
+    forgot: "Esqueci a minha senha"
+    remember: "Lembre-se de mim"
+
+ dialogs:
+   destroy: 'Você tem certeza que quer remover?'
+
+ signup_mailer:
+   confirm_email:
+     subject: 'Colcho.net - Confirme seu email'
+     title: 'Seja bem vindo ao Colcho.net!'
+     body: |
+          Seja bem vindo ao Colcho.net, %{full_name}.
+          O Colcho.net é o lugar ideal para você alugar aquele quarto
+          sobrando na sua casa e ainda conhecer gente do mundo inteiro.
+     confirm_link_html: 'Para você começar a usar o site, acesse o link: %{link}'
+     thanks_html: 'Obrigado por se cadastrar no %{link}.'
+
+ links:
+   back: Voltar
+
+ layout:
+   subjects: Assuntos
+   signup: Cadastro
+   signup: Cadastro
+   signin: Login
+   my_profile: Meu perfil
+   signout: Logout
+
+ general:
+   form_error: Há erros no formulário, por favor verifique.
+
+
+ activerecord:
+  models:
+    user: Usuário
+    subject: Assunto
+    review: Avaliação
+  attributes:
+    user:
+      bio: Biografia
+      email: Email
+      full_name: Nome completo
+      location: Localização
+      password: Senha
+      password_confirmation: Confirme sua senha
+    subject:
+      description: Descrição
+    user_session:
+      email: Email
+      password: Senha
+
+
+ flash:
+  notice :
+   signed_in: Login efetuado com sucesso.
+   signed_out: Logout efetuado com sucesso. Até logo!.
+  alert :
+   needs_login: Para continuar, você precisa está logado.
+ errors:
+  messages:
+   invalid_login: 'User or Password are invalid'
+ helpers:
+  submit:
+   user_session:
+    create: 'Entrar'

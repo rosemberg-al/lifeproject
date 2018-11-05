@@ -1,0 +1,11 @@
+<div class="box-body">
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @content_genre, :description %>">
+
+        <%= f.label :description %> <br>
+        <%= f.text_field :description,  :class => "form-control" %>
+        <%= error_tag @content_genre, :description %>
+
+    </div>
+  </div>
+</div>

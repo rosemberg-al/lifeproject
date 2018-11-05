@@ -1,0 +1,24 @@
+<%= form_tag content_summaries_path, :method => :get, :class => 'search' do %>
+<%= hidden_field_tag :q, 'q' %>
+
+<div class="box-header">
+<%= button_index new_content_summary_path %>
+</div>
+
+<div class="box box-default">
+  <div class="box-body">
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <%= t ".description" %> <br>
+        <%= text_field_tag "content_summary[description]", @content_summary["description"],:placeholder => t('.description'), :class => "form-control" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= t ".inactive" %> <br>
+        <%= hidden_field_tag "content_summary[inactive]", "N" %>
+        <%= check_box_tag "content_summary[inactive]", "Y",  (@content_summary["inactive"]=="Y")  %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,14 @@
+
+<%= button_click  t('button.new'),"location.href='#{path_new}';" %>
+<%= submit_tag t('button.search'), :class=>"btn btn-primary",:id=>"btn_search" %>
+
+
+<% content_for :javascript do %>
+  shortcut.add("F7",function(){
+    location.href='<%=path_new%>';
+  });
+
+  shortcut.add("F9",function(){
+    $("#btn_search").click();
+  });
+<% end %>

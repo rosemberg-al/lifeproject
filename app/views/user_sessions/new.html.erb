@@ -1,0 +1,51 @@
+<div class="login-box">
+  <div class="login-logo">
+  <b>Life</b>Project
+  </div>
+
+  <div class="login-box-body">
+    <p class="login-box-msg">  <%= t '.message' %></p>
+
+    <%= form_for @session do |f| %>
+      <div class="form-group has-feedback">
+        <%= f.label :email %>
+        <%= f.text_field :email, :class=>"form-control" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <%= error_tag @session, :email %>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.label :password %>
+        <%= f.text_field :password,  :class=>"form-control",:type=>"password" %>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <%= error_tag @session, :password %>
+      </div>
+
+      <% if @session.errors.has_key? :base %>
+        <div id="error_explanation" class="has-error">
+          <%=content_tag :span, @session.errors[:base].join(', '),:class => 'help-block' %>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> <%=t '.remember' %>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-xs-4">
+          <%= f.submit :class =>"btn btn-primary btn-block btn-flat"%>
+        </div>
+
+      </div>
+    <% end  %>
+
+
+    <a href="#"><%=t '.forgot' %></a><br>
+    <%= link_to t('.sign_up'), new_user_path %>
+
+
+  </div>
+</div>
