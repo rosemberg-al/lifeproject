@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :contents
     resources :people
     resources :content_summaries
+    resources :quotations
 
     #resource :user_confirmation, :only => [:show]
     resource :confirmation, :only => [:show]

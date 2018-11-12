@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_144608) do
+ActiveRecord::Schema.define(version: 2018_11_11_174320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,20 @@ ActiveRecord::Schema.define(version: 2018_11_01_144608) do
 # Could not dump table "people" because of following StandardError
 #   Unknown type 'person_type' for column 'type_person'
 
+  create_table "quotations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "content_id"
+    t.string "quotation"
+    t.integer "page_initial"
+    t.integer "page_final"
+    t.integer "order"
+    t.datetime "inactivated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_quotations_on_content_id"
+    t.index ["user_id"], name: "index_quotations_on_user_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "description"
     t.integer "user_id"
@@ -87,5 +101,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_144608) do
   add_foreign_key "contents", "content_types"
   add_foreign_key "contents", "users"
   add_foreign_key "people", "users"
+  add_foreign_key "quotations", "contents"
+  add_foreign_key "quotations", "users"
   add_foreign_key "subjects", "users"
 end

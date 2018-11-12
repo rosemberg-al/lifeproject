@@ -76,6 +76,7 @@ pt-BR:
    signout: Logout
    profile: Perfil
    content_summaries: Fichamento/Resumo
+   quotations: Citações/Insights
    motivated: "Melhore como pessoa a todo momento, inspire-se:"
 
  home:
@@ -231,6 +232,24 @@ pt-BR:
     title: "Fichamento/Resumo"
     description: "Descrição: %{description}"
 
+
+ quotations:
+   new:
+    title: Cadastrar Citação/Insight
+   edit:
+    title: Editar Citação/Insight
+    submit: 'Gravar'
+   index:
+    title: 'Listar Citações/Insights'
+    search_results: 'Resultados da busca'
+    quotation: "Citação"
+   search:
+    inactive: "Inativo?"
+    quotation: "Citação"
+   show:
+    title: "Citação/Insight"
+    quotation: "Citação: %{quotation}"
+
  user_sessions:
    new:
     title: 'Login'
@@ -294,8 +313,13 @@ pt-BR:
     content_summary:
           description: Descrição
           content_id: Conteúdo
+          content: Conteúdo
           type_content_summary: Tipo
           text: Texto
+    quotation:
+          quotation: Citação
+          content_id: Conteúdo
+          content: Conteúdo
     user_session:
       email: Email
       password: Senha

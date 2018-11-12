@@ -20,7 +20,7 @@ default: &default
   encoding: unicode
   host: localhost
   username: postgres
-  password: key
+  password: senha!@#4
   #pool: 5
   timeout: 5000
   # For details on connection pooling, see Rails configuration guide

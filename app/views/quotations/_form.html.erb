@@ -1,0 +1,82 @@
+<div class="box-body">
+
+
+
+
+
+
+  <div class="row col-md-12">
+    <div class="col-md-9   <%= error_div @quotation, :quotation %>">
+        <%= f.label :quotation %> <br>
+        <%= f.text_area :quotation, cols: 20, rows: 10 ,:class => "form-control" %>
+        <%= error_tag @quotation, :quotation %>
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-4 ">
+
+        <%= f.label :content %><br>
+        <%= f.hidden_field :content_id %>
+        <%= f.text_field :content_description, :class => "form-control" %>
+        <%= error_tag @quotation, "content_id" %>
+    </div>
+  </div>
+
+
+</div>
+
+
+<% content_for :javascript do %>
+
+$(function () {
+
+   //bootstrap WYSIHTML5 - text editor
+   $('#quotation_quotation').wysihtml5()
+ })
+
+
+
+
+
+
+
+
+ $("#quotation_content_description").autocomplete({
+
+   source: function( request, response ) {
+     $.ajax({
+       url: "<%= content_json_path %>",
+       dataType: "json",
+       method : 'GET',
+       data: {
+         description: request.term
+       },
+       success: function( data ) {
+         response( data);
+       },
+       error : function(xhr, status) {
+         alert('It happened some error, please try again later...');
+         }
+     });
+   },
+   minLength: 3,
+   select: function( event, ui ) {
+
+     $("#quotation_content_id").val(ui.item.id);
+     $("#quotation_content_description").val(ui.item.label);
+   },
+   change: function( event, ui ) {
+     if(ui.item){
+
+     }else{
+       //caso nao selecione nenhuma linha, limpa tudo
+
+       $("#quotation_content_id").val('');
+       $("#quotation_content_description").val('');
+     }
+   }
+ });
+
+
+<% end %>
