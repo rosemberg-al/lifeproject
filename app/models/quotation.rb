@@ -35,7 +35,7 @@ class Quotation < ApplicationRecord
   validates_length_of :quotation, :minimum => 3, :allow_blank => false
 
   belongs_to :user
-  belongs_to :content
+  belongs_to :content, optional: true # this parameter is to allow null value
 
   #virtual attributes
   attr_accessor :content_description
