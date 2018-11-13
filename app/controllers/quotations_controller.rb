@@ -54,8 +54,17 @@ class QuotationsController < ApplicationController
 
   def create
     @quotation = current_user.quotations.build(quotation_params)
+
+    #if the user do not type the order and the quotation is from a content, we get the amount the quotation to
+    #that content and then we set the next value as the order of the quotations saved
+    if (@quotation.order.nil? && !@quotation.content_id.nil?)
+       amount=current_user.quotations.active.where(content_id: @quotation.content_id).count
+       @quotation.order=amount+1
+    end
+
+
     if @quotation.save
-      redirect_to @quotation, notice: t('flash.notice.save_success') #'Person was successfully created.'
+      redirect_to @quotation, notice: t('flash.notice.save_success') #'Quotation was successfully created.'
     else
       render :new
     end
@@ -66,7 +75,18 @@ class QuotationsController < ApplicationController
 
   def update
 
-    if @quotation.update(quotation_params)
+    #if the user do not type the order and the quotation is from a content, we get the amount the quotation to
+    #that content and then we set the next value as the order of the quotations saved
+    attributes = quotation_params.clone
+
+    if (attributes[:order].empty? && !attributes[:content_id].nil?)
+       amount=current_user.quotations.active.where(content_id: attributes[:content_id]).count
+       attributes[:order]=amount+1
+    end
+
+    
+
+    if @quotation.update(attributes)
       redirect_to @quotation, notice: t('flash.notice.save_success') #notice: 'Person was successfully updated.'
     else
       render :edit
