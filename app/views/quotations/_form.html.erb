@@ -1,12 +1,29 @@
 <div class="box-body">
 
 
+<div class="row col-md-12">
+  <div class="col-md-3   <%= error_div @quotation, :type_quote %>">
+      <%= f.label :type_quote %> <br>
+      <%=
+      f.select :type_quote, Quotation.quotation_types.keys.map { |key,_| [t("enums.quotation_type.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+      %>
+      <%= error_tag @quotation, :type_quote %>
+  </div>
 
+
+  <div class="col-md-3   <%= error_div @quotation, :indication %>">
+      <%= f.label :indication %> <br>
+      <%=
+      f.select :indication, Quotation.quotation_indications.keys.map { |key,_| [t("enums.quotation_indication.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+      %>
+      <%= error_tag @quotation, :indication %>
+  </div>
+</div>
 
 
 
   <div class="row col-md-12">
-    <div class="col-md-9   <%= error_div @quotation, :quotation %>">
+    <div class="col-md-12   <%= error_div @quotation, :quotation %>">
         <%= f.label :quotation %> <br>
         <%= f.text_area :quotation, cols: 20, rows: 10 ,:class => "form-control" %>
         <%= error_tag @quotation, :quotation %>
@@ -20,6 +37,32 @@
         <%= f.hidden_field :content_id %>
         <%= f.text_field :content_description, :class => "form-control" %>
         <%= error_tag @quotation, "content_id" %>
+    </div>
+
+    <div class="col-md-4   <%= error_div @quotation, :order %>">
+
+        <%= f.label :order %> <br>
+        <%= f.text_field :order, {:class => "form-control"} %>
+        <%= error_tag @quotation, :order %>
+
+    </div>
+  </div>
+
+
+  <div class="row col-md-12">
+    <div class="col-md-4   <%= error_div @quotation, :page_initial %>">
+
+        <%= f.label :page_initial %> <br>
+        <%= f.text_field :page_initial, {:class => "form-control"} %>
+        <%= error_tag @quotation, :page_initial %>
+
+    </div>
+    <div class="col-md-4   <%= error_div @quotation, :page_final %>">
+
+        <%= f.label :page_final %> <br>
+        <%= f.text_field :page_final, {:class => "form-control"} %>
+        <%= error_tag @quotation, :page_final %>
+
     </div>
   </div>
 
@@ -37,7 +80,9 @@ $(function () {
 
 
 
-
+$("#quotation_page_initial").change(function() {
+  $("#quotation_page_final").val( $("#quotation_page_initial").val() );
+});
 
 
 

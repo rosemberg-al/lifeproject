@@ -44,6 +44,12 @@ pt-BR:
     article: Artigo
     report: Relatório
     text: Texto
+   quotation_type:
+    insight: Insight
+    quote: Citação
+   quotation_indication:
+    avoid: A evitar
+    follow: A seguir
 
  errors:
   messages:
@@ -320,6 +326,11 @@ pt-BR:
           quotation: Citação
           content_id: Conteúdo
           content: Conteúdo
+          order: Ordem
+          page_initial: Página Inicial
+          page_final: Página Final
+          type_quote: Tipo
+          indication: Indicação
     user_session:
       email: Email
       password: Senha

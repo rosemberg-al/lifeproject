@@ -27,11 +27,12 @@ class QuotationsController < ApplicationController
 
   def new
     @quotation = current_user.quotations.build
+    @quotation.type_quote=:quote
   end
 
   def edit
 
-  #  @quotation.content_description=@quotation.content.description
+    @quotation.content_description=@quotation.content.description if @quotation.content.present?
 
   end
 
@@ -123,7 +124,7 @@ class QuotationsController < ApplicationController
     end
 
     def quotation_params
-      params.require(:quotation).permit(:quotation,:content_id,:page_initial,:page_final,:order)
+      params.require(:quotation).permit(:quotation,:content_id,:page_initial,:page_final,:order,:type_quote,:indication)
     end
 
     def quotation_params_index

@@ -17,7 +17,8 @@
 
 class Quotation < ApplicationRecord
 
-
+  enum quotation_type: { insight: "insight", quote: "quote"}
+  enum quotation_indication: { avoid: "avoid", follow: "follow"}
 
   scope :most_recent, -> {
      order 'created_at desc'
@@ -31,7 +32,7 @@ class Quotation < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
-  validates_presence_of :quotation
+  validates_presence_of :quotation, :type_quote
   validates_length_of :quotation, :minimum => 3, :allow_blank => false
 
   belongs_to :user

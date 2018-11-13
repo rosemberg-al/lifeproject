@@ -32,7 +32,7 @@
 
 
   <div class="row col-md-12">
-    <div class="col-md-9   <%= error_div @content_summary, :text %>">
+    <div class="col-md-12   <%= error_div @content_summary, :text %>">
         <%= f.label :text %> <br>
         <%= f.text_area :text, cols: 20, rows: 10 ,:class => "form-control" %>
         <%= error_tag @content_summary, :text %>
