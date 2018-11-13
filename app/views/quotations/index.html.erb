@@ -24,7 +24,7 @@
       <% @quotations.each do |quotation| %>
       <tr onclick="location.href='<%= edit_quotation_path(quotation) %>'" style="cursor:pointer">
         <td><%= quotation.id %></td>
-        <td><%= quotation.quotation %></td>
+        <td><%=raw quotation.quotation[0,50]+" <b>...<b>" %></td>
       </tr>
     <% end %>
     </table>
