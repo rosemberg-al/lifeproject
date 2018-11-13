@@ -38,6 +38,11 @@ class Quotation < ApplicationRecord
   belongs_to :user
   belongs_to :content, optional: true # this parameter is to allow null value
 
+  has_many :quotation_people
+  has_many :people, through: :quotation_people
+
+  accepts_nested_attributes_for :quotation_people, reject_if: :all_blank, allow_destroy: true
+
   #virtual attributes
   attr_accessor :content_description
 

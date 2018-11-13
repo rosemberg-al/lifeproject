@@ -14,10 +14,90 @@
 <div class="box box-default">
 
   <%= render 'form' , f: f %>
-  <div class="box-footer">
-  <%= button_save new_quotation_path,quotations_path,f %>
-  </div>
 
 </div>
 </div>
+
+
+
+
+<div class="box box-danger">
+<div class="box box-default">
+<div class="row col-md-12">
+<div class="row col-md-12">
+<h4><%= t '.quotation_people' %></h4>
+</div>
+</div>
+<div class="box-body">
+<div class="row">
+<%= f.fields_for :quotation_people do |cp| %>
+   <%= render 'quotation_person_fields', f: cp %>
+<% end %>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<div class="box-footer">
+<%= button_save new_quotation_path,quotations_path,f %>
+</div>
+<% end %>
+
+
+
+
+
+<% content_for :javascript do %>
+
+
+$(function() {
+  $("[id^=quotation_quotation_people_attributes_]").on("focus", function() {
+    $(this).autocomplete({
+
+      source: function( request, response ) {
+        $.ajax({
+          url: "<%= person_json_path %>",
+          dataType: "json",
+          method : 'GET',
+          data: {
+            name: request.term
+          },
+          success: function( data ) {
+            response( data);
+          },
+          error : function(xhr, status) {
+            alert('It happened some error, please try again later...');
+            }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+
+        $(this).val(ui.item.name);
+
+        var idAutoComplete=$(this).attr("id");
+        idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
+        idAutoComplete=idAutoComplete.replace("_person_name","");
+        console.log(idAutoComplete);
+
+        $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
+        console.log($("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val()+"A");
+      },
+      change: function( event, ui ) {
+        if(ui.item){
+
+        }else{
+          //caso nao selecione nenhuma linha, limpa tudo
+
+
+          $(this).val('');
+        }
+      }
+    });
+});
+});
+
+
 <% end %>

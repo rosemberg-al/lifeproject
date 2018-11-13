@@ -15,13 +15,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Person < ApplicationRecord
+class QuotationPerson < ApplicationRecord
 
-  enum type_person: { real: "real", fictional: "fictional"}
-
-  scope :most_recent, -> {
-     order 'created_at desc'
-  }
+  enum type_content_person: {author: "author",director: "director",writer: "writer",actor: "actor",speaker: "speaker"}
+  #enum type_artist: { author: "Author", director: "Director",writer: "Writer",actor: "Actor",speaker: "Speaker"}
 
   scope :active, -> {
     where(inactivated_at: nil)
@@ -31,15 +28,16 @@ class Person < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
-  validates_presence_of :name, :type_person
-  validates_length_of :name, :minimum => 2, :allow_blank => false
-
+  #validates_presence_of :content_id, :person_id
+  #não ser dever colocar o id do mestre na validação da tela de mestre detalhe
+  validates_presence_of  :person_id, :type_person
 
   belongs_to :user
-  has_many :content_people
-  has_many :contents, through: :content_people
+  belongs_to :person
+  belongs_to :quotation
 
-  has_many :quotation_people
-  has_many :quotations, through: :quotation_people
+
+  #virtual attributes
+  attr_accessor :person_name
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_134312) do
+ActiveRecord::Schema.define(version: 2018_11_13_220422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 2018_11_13_134312) do
 # Could not dump table "people" because of following StandardError
 #   Unknown type 'person_type' for column 'type_person'
 
+# Could not dump table "quotation_people" because of following StandardError
+#   Unknown type 'content_person_type' for column 'type_person'
+
 # Could not dump table "quotations" because of following StandardError
 #   Unknown type 'quotation_type' for column 'type_quote'
 
@@ -90,6 +93,9 @@ ActiveRecord::Schema.define(version: 2018_11_13_134312) do
   add_foreign_key "contents", "content_types"
   add_foreign_key "contents", "users"
   add_foreign_key "people", "users"
+  add_foreign_key "quotation_people", "people"
+  add_foreign_key "quotation_people", "quotations"
+  add_foreign_key "quotation_people", "users"
   add_foreign_key "quotations", "contents"
   add_foreign_key "quotations", "users"
   add_foreign_key "subjects", "users"

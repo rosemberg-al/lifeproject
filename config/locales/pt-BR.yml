@@ -186,6 +186,7 @@ pt-BR:
    add_person: Adicionar Pessoa
   edit:
    title: Editar Conteúdo
+   content_people: Pessoa/Artista Relacionado
    add_person: Adicionar Pessoa
   person:
    name: Nome
@@ -242,9 +243,12 @@ pt-BR:
  quotations:
    new:
     title: Cadastrar Citação/Insight
+    quotation_people: Pessoa/Artista Relacionado
+    add_person: Adicionar Pessoa
    edit:
     title: Editar Citação/Insight
-    submit: 'Gravar'
+    content_people: Pessoa/Artista Relacionado
+    add_person: Adicionar Pessoa
    index:
     title: 'Listar Citações/Insights'
     search_results: 'Resultados da busca'
@@ -330,7 +334,10 @@ pt-BR:
           page_initial: Página Inicial
           page_final: Página Final
           type_quote: Tipo
-          indication: Indicação
+          indication: Indicação Para Vida
+    quotation_person:
+        person: Nome
+        type_person: Tipo Pessoa
     user_session:
       email: Email
       password: Senha

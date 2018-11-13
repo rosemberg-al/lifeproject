@@ -27,12 +27,17 @@ class QuotationsController < ApplicationController
 
   def new
     @quotation = current_user.quotations.build
+    2.times do @quotation.quotation_people.build end
     @quotation.type_quote=:quote
   end
 
   def edit
 
     @quotation.content_description=@quotation.content.description if @quotation.content.present?
+
+    @quotation.quotation_people.map do |cp|
+      cp.person_name=cp.person.name
+    end
 
   end
 
@@ -54,6 +59,11 @@ class QuotationsController < ApplicationController
 
   def create
     @quotation = current_user.quotations.build(quotation_params)
+
+
+    @quotation.quotation_people.map do |cp|
+      cp.user_id=current_user.id
+    end
 
     #if the user do not type the order and the quotation is from a content, we get the amount the quotation to
     #that content and then we set the next value as the order of the quotations saved
@@ -84,7 +94,13 @@ class QuotationsController < ApplicationController
        attributes[:order]=amount+1
     end
 
-    
+
+    attributes[:quotation_people_attributes].each do |key,cp|
+      if (!cp[:person_id].empty? && cp[:id].nil?)
+        cp[:user_id]=current_user.id
+      end
+    end
+
 
     if @quotation.update(attributes)
       redirect_to @quotation, notice: t('flash.notice.save_success') #notice: 'Person was successfully updated.'
@@ -144,7 +160,8 @@ class QuotationsController < ApplicationController
     end
 
     def quotation_params
-      params.require(:quotation).permit(:quotation,:content_id,:page_initial,:page_final,:order,:type_quote,:indication)
+      params.require(:quotation).permit(:quotation,:content_id,:page_initial,:page_final,:order,:type_quote,:indication,
+      quotation_people_attributes: [:id,:person_id, :type_person, :_destroy, :person_name])
     end
 
     def quotation_params_index

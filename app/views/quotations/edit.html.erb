@@ -14,11 +14,36 @@
 
 
   <%= render 'form' , f: f %>
-  <div class="box-footer">
-    <%= button_save new_quotation_path,quotations_path,f %>
-    <%= button_inactivate(@quotation,quotation_url(@quotation,:activate =>:activate)) %>
 
-  </div>
 </div>
+</div>
+
+
+
+<div class="box box-danger">
+<div class="box box-default">
+<div class="row col-md-12">
+<div class="row col-md-12">
+<h4><%= t '.content_people' %></h>
+</div>
+</div>
+<div class="box-body">
+<div class="row">
+<%= f.fields_for :quotation_people do |cp| %>
+   <%= render 'quotation_person_fields', f: cp %>
+<% end %>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+
+<div class="box-footer">
+  <%= button_save new_quotation_path,quotations_path,f %>
+  <%= button_inactivate(@quotation,quotation_url(@quotation,:activate =>:activate)) %>
+
 </div>
 <% end %>
