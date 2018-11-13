@@ -153,7 +153,8 @@ class ContentsController < ApplicationController
 
     attributes = content_params.clone
     attributes[:content_people_attributes].each do |key,cp|
-      if !cp[:person_id].empty?
+      
+      if (!cp[:person_id].empty? && cp[:id].nil?)
         cp[:user_id]=current_user.id
       end
     end
