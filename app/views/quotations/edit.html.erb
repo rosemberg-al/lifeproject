@@ -28,11 +28,13 @@
 </div>
 </div>
 <div class="box-body">
-<div class="row">
+<div class="row" id="quotation_people_div">
 <%= f.fields_for :quotation_people do |cp| %>
    <%= render 'quotation_person_fields', f: cp %>
 <% end %>
 </div>
+<br>
+<%=   content_tag :button, t('.add_person'), :class => 'btn btn-primary', :onclick =>"addPerson()", :type => :button %>
 </div>
 
 
@@ -46,4 +48,62 @@
   <%= button_inactivate(@quotation,quotation_url(@quotation,:activate =>:activate)) %>
 
 </div>
+<% end %>
+
+
+
+
+<% content_for :javascript do %>
+
+
+
+
+
+
+function addPerson(){
+
+
+       $.ajax({
+            url: "<%=add_person_path%>",
+            dataType: 'html',
+            method : 'GET',
+            data: {
+              size_people: $('#quotation_size_people').val()
+            },
+
+            success: function( html ) {
+
+                     //console.log(html);
+                      $("#quotation_size_people").val( parseInt($("#quotation_size_people").val())+  1 );
+                      $("#quotation_people_div").append(  html );
+
+            },
+              error : function(xhr, status) {
+
+                //console.log(status);
+                //console.log("@@@@@@@");
+                //console.log(xhr.responseText);
+
+                alert('Erro na conexão, tente novamente...');
+              },
+              complete : function(xhr, status) {
+                // divBlock.hide();
+                //$("#exec_ajax").val('N');
+                //$("#executandoAjax").remove();
+
+              },
+              beforeSend: function(){
+                // $("#exec_ajax").val('S');
+                //  divBlock.show();
+
+              }
+          });
+
+
+
+}
+
+
+
+
 <% end %>
