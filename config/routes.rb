@@ -14,9 +14,10 @@ Rails.application.routes.draw do
     resources :content_summaries
     resources :quotations
 
+    get 'quotation/addperson', action: :addperson, controller: :quotations , as: :add_person
+
     #resource :user_confirmation, :only => [:show]
     resource :confirmation, :only => [:show]
-
     resource :user_sessions, :only => [:create, :new, :destroy]
 
 

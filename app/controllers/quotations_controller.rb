@@ -24,6 +24,13 @@ class QuotationsController < ApplicationController
   before_action :set_quotation_edit, only: [:edit, :update, :destroy]
 
 
+  def addperson
+
+   @size_people=params[:size_people];
+   @quotation=QuotationPerson.new
+   render partial: "quotation_person_fields_tag"
+
+  end
 
   def new
     @quotation = current_user.quotations.build

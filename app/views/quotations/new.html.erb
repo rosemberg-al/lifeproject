@@ -26,10 +26,12 @@
 <div class="row col-md-12">
 <div class="row col-md-12">
 <h4><%= t '.quotation_people' %></h4>
+<%=   content_tag :button, "Add", :class => 'btn btn-primary', :onclick =>"addPerson()", :type => :button %>
 </div>
 </div>
 <div class="box-body">
-<div class="row">
+<div class="row" id="quotation_people_div">
+<%= hidden_field_tag "quotation[size_people]", @quotation.quotation_people.size %>
 <%= f.fields_for :quotation_people do |cp| %>
    <%= render 'quotation_person_fields', f: cp %>
 <% end %>
@@ -52,52 +54,54 @@
 <% content_for :javascript do %>
 
 
-$(function() {
-  $("[id^=quotation_quotation_people_attributes_]").on("focus", function() {
-    $(this).autocomplete({
-
-      source: function( request, response ) {
-        $.ajax({
-          url: "<%= person_json_path %>",
-          dataType: "json",
-          method : 'GET',
-          data: {
-            name: request.term
-          },
-          success: function( data ) {
-            response( data);
-          },
-          error : function(xhr, status) {
-            alert('It happened some error, please try again later...');
-            }
-        });
-      },
-      minLength: 3,
-      select: function( event, ui ) {
-
-        $(this).val(ui.item.name);
-
-        var idAutoComplete=$(this).attr("id");
-        idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
-        idAutoComplete=idAutoComplete.replace("_person_name","");
-        console.log(idAutoComplete);
-
-        $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
-        console.log($("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val()+"A");
-      },
-      change: function( event, ui ) {
-        if(ui.item){
-
-        }else{
-          //caso nao selecione nenhuma linha, limpa tudo
 
 
-          $(this).val('');
-        }
-      }
-    });
-});
-});
+
+
+function addPerson(){
+
+
+       $.ajax({
+            url: "<%=add_person_path%>",
+            dataType: 'html',
+            method : 'GET',
+            data: {
+              size_people: $('#quotation_size_people').val()
+            },
+
+            success: function( html ) {
+
+                     console.log(html);
+                      $("#quotation_size_people").val( parseInt($("#quotation_size_people").val())+  1 );
+                      $("#quotation_people_div").append(  html );
+
+            },
+              error : function(xhr, status) {
+
+                <!-- console.log(status);
+                console.log("@@@@@@@");
+                console.log(xhr.responseText);
+                -->
+                alert('Erro na conexão, tente novamente...');
+              },
+              complete : function(xhr, status) {
+                <!-- divBlock.hide();
+                $("#exec_ajax").val('N');
+                $("#executandoAjax").remove();
+                -->
+              },
+              beforeSend: function(){
+                  <!-- $("#exec_ajax").val('S');
+                  divBlock.show();
+                  -->
+              }
+          });
+
+
+
+}
+
+
 
 
 <% end %>
