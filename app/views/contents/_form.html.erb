@@ -77,6 +77,8 @@
 
 <% content_for :javascript do %>
 
+$(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
+
 
 function change_type(){
 
@@ -112,7 +114,7 @@ function change_type(){
   $('#content_movie_date_released').val('');
 
   $('#content_book_publisher').val('');
-  $('#content_book_date_published').val('');  
+  $('#content_book_date_published').val('');
 
   if(feature=="printed"){
     $('#fields_book').css('display', 'block');
