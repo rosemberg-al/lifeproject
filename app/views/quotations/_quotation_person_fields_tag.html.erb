@@ -23,6 +23,11 @@
     </div>
 
 
+    <div class="col-md-4 ">
+    <br>
+    <%=link_to_remove_association t('.remove_person'), f,
+    {:wrapper_class=> 'row', :class=> 'btn btn-primary'} %>
+    </div>
 
   </div>
 
@@ -31,7 +36,7 @@
 
 
 
-      
+
       $("#quotation_quotation_people_attributes_<%=@size_people%>_person_name").autocomplete({
 
         source: function( request, response ) {

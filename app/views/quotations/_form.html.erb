@@ -72,6 +72,8 @@
 
 <% content_for :javascript do %>
 
+$(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
+
 $(function () {
 
    //bootstrap WYSIHTML5 - text editor
