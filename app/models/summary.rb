@@ -31,18 +31,18 @@ class Summary < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
-  validates_presence_of :description, :type_summary, :content_id,:content_description
+  validates_presence_of :description, :type_summary
   validates_length_of :description, :minimum => 3, :allow_blank => false
 
   belongs_to :user
-  belongs_to :content
+
 
   has_many :summary_contents
   has_many :contents, through: :summary_contents
   accepts_nested_attributes_for :summary_contents, reject_if: :all_blank, allow_destroy: true
 
 
-  #virtual attributes
-  attr_accessor :content_description
+  
+
 
 end

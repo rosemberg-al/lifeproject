@@ -32,7 +32,7 @@ class SummariesController < ApplicationController
 
   def edit
 
-    @summary.content_description=@summary.content.description
+    
 
     @summary.summary_contents.map do |s|
       s.content_description=s.content.description
@@ -143,7 +143,7 @@ class SummariesController < ApplicationController
     end
 
     def summary_params
-      params.require(:summary).permit(:description,:type_summary,:content_id,:text,:content_description,
+      params.require(:summary).permit(:description,:type_summary,:text,
       summary_contents_attributes: [:id,:content_id, :_destroy, :content_description])
     end
 

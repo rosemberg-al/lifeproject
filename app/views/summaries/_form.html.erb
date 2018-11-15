@@ -21,14 +21,7 @@
 
 
   <div class="row col-md-12">
-    <div class="col-md-4 ">
 
-        <%= f.label :content %><br>
-        <%= f.hidden_field :content_id %>
-        <%= f.text_field :content_description, :class => "form-control" %>
-        <%= error_tag @summary, "content_id" %>
-    </div>
-  </div>
 
 
   <div class="row col-md-12">
@@ -41,6 +34,7 @@
 
 
 
+  </div>
 </div>
 
 
@@ -53,55 +47,6 @@ $(function () {
    //bootstrap WYSIHTML5 - text editor
    $('#summary_text').wysihtml5()
  })
-
-
-
-
-
-
-
-
- $("#summary_content_description").autocomplete({
-
-   source: function( request, response ) {
-     $.ajax({
-       url: "<%= content_json_path %>",
-       dataType: "json",
-       method : 'GET',
-       data: {
-         description: request.term
-       },
-       success: function( data ) {
-         response( data);
-       },
-       error : function(xhr, status) {
-         alert('It happened some error, please try again later...');
-         }
-     });
-   },
-   minLength: 3,
-   select: function( event, ui ) {
-
-     $("#summary_content_id").val(ui.item.id);
-     $("#summary_content_description").val(ui.item.label);
-   },
-   change: function( event, ui ) {
-     if(ui.item){
-
-     }else{
-       //caso nao selecione nenhuma linha, limpa tudo
-
-       $("#summary_content_id").val('');
-       $("#summary_content_description").val('');
-     }
-   }
- });
-
-
-
-
-
-
 
 
 
