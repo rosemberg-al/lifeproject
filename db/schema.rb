@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_233652) do
+ActiveRecord::Schema.define(version: 2018_11_15_001101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,18 @@ ActiveRecord::Schema.define(version: 2018_11_14_233652) do
 # Could not dump table "summaries" because of following StandardError
 #   Unknown type 'content_summary_type' for column 'type_summary'
 
+  create_table "summary_contents", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "content_id"
+    t.bigint "summary_id"
+    t.datetime "inactivated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_summary_contents_on_content_id"
+    t.index ["summary_id"], name: "index_summary_contents_on_summary_id"
+    t.index ["user_id"], name: "index_summary_contents_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
@@ -99,4 +111,7 @@ ActiveRecord::Schema.define(version: 2018_11_14_233652) do
   add_foreign_key "subjects", "users"
   add_foreign_key "summaries", "contents"
   add_foreign_key "summaries", "users"
+  add_foreign_key "summary_contents", "contents"
+  add_foreign_key "summary_contents", "summaries"
+  add_foreign_key "summary_contents", "users"
 end

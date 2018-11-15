@@ -46,6 +46,8 @@
 
 <% content_for :javascript do %>
 
+$(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
+
 $(function () {
 
    //bootstrap WYSIHTML5 - text editor
@@ -94,6 +96,133 @@ $(function () {
      }
    }
  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
+
+   $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
+
+   $("[id^=summary_summary_contents_attributes_]").on("focus", function() {
+         $(this).autocomplete({
+
+
+
+           source: function( request, response ) {
+             $.ajax({
+               url: "<%= content_json_path %>",
+               dataType: "json",
+               method : 'GET',
+               data: {
+                 description: request.term
+               },
+               success: function( data ) {
+                 response( data);
+               },
+               error : function(xhr, status) {
+                 alert('It happened some error, please try again later...');
+                 }
+             });
+           },
+           minLength: 3,
+           select: function( event, ui ) {
+
+             $(this).val(ui.item.name);
+
+             var idAutoComplete=$(this).attr("id");
+             idAutoComplete=idAutoComplete.replace("summary_summary_contents_attributes_","");
+             idAutoComplete=idAutoComplete.replace("_content_description","");
+
+             $("#summary_summary_contents_attributes_"+idAutoComplete+"_content_id").val(ui.item.id);
+             console.log($("#summary_summary_contents_attributes_"+idAutoComplete+"_content_id").val()+"A");
+           },
+           change: function( event, ui ) {
+             if(ui.item){
+
+             }else{
+               //caso nao selecione nenhuma linha, limpa tudo
+
+               var idAutoComplete=$(this).attr("id");
+               idAutoComplete=idAutoComplete.replace("summary_summary_contents_attributes_","");
+               idAutoComplete=idAutoComplete.replace("_content_description","");
+
+               $("#summary_summary_contents_attributes_"+idAutoComplete+"_content_id").val("");
+               $(this).val('');
+             }
+           }
+         });
+     });
+ })
+
+
+
+
+
+   $("[id^=summary_summary_contents_attributes_]").on("focus", function() {
+     $(this).autocomplete({
+
+
+
+       source: function( request, response ) {
+         $.ajax({
+           url: "<%= content_json_path %>",
+           dataType: "json",
+           method : 'GET',
+           data: {
+             description: request.term
+           },
+           success: function( data ) {
+             response( data);
+           },
+           error : function(xhr, status) {
+             alert('It happened some error, please try again later...');
+             }
+         });
+       },
+       minLength: 3,
+       select: function( event, ui ) {
+
+         $(this).val(ui.item.name);
+
+         var idAutoComplete=$(this).attr("id");
+         idAutoComplete=idAutoComplete.replace("summary_summary_contents_attributes_","");
+         idAutoComplete=idAutoComplete.replace("_content_description","");
+
+         $("#summary_summary_contents_attributes_"+idAutoComplete+"_content_id").val(ui.item.id);
+         console.log($("#summary_summary_contents_attributes_"+idAutoComplete+"_content_id").val()+"A");
+       },
+       change: function( event, ui ) {
+         if(ui.item){
+
+         }else{
+           //caso nao selecione nenhuma linha, limpa tudo
+
+           var idAutoComplete=$(this).attr("id");
+           idAutoComplete=idAutoComplete.replace("summary_summary_contents_attributes_","");
+           idAutoComplete=idAutoComplete.replace("_content_description","");
+
+           $("#summary_summary_contents_attributes_"+idAutoComplete+"_content_id").val("");
+           $(this).val('');
+         }
+       }
+     });
+ });
+
+
+
 
 
 <% end %>

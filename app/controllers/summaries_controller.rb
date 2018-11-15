@@ -27,11 +27,16 @@ class SummariesController < ApplicationController
 
   def new
     @summary = current_user.summaries.build
+    2.times do @summary.summary_contents.build end
   end
 
   def edit
 
     @summary.content_description=@summary.content.description
+
+    @summary.summary_contents.map do |s|
+      s.content_description=s.content.description
+    end
 
   end
 
@@ -53,9 +58,16 @@ class SummariesController < ApplicationController
 
   def create
     @summary = current_user.summaries.build(summary_params)
+
+    @summary.summary_contents.map do |cp|
+      cp.user_id=current_user.id
+    end
+
     if @summary.save
       redirect_to @summary, notice: t('flash.notice.save_success') #'Person was successfully created.'
     else
+
+      logger.debug "ERROS: #{@summary.errors.inspect}"
       render :new
     end
   end
@@ -65,7 +77,15 @@ class SummariesController < ApplicationController
 
   def update
 
-    if @summary.update(summary_params)
+    attributes = summary_params.clone
+    attributes[:summary_contents_attributes].each do |key,cp|
+
+      if (!cp[:content_id].empty? && cp[:id].nil?)
+        cp[:user_id]=current_user.id
+      end
+    end
+
+    if @summary.update(attributes)
       redirect_to @summary, notice: t('flash.notice.save_success') #notice: 'Person was successfully updated.'
     else
       render :edit
@@ -123,7 +143,8 @@ class SummariesController < ApplicationController
     end
 
     def summary_params
-      params.require(:summary).permit(:description,:type_summary,:content_id,:text,:content_description)
+      params.require(:summary).permit(:description,:type_summary,:content_id,:text,:content_description,
+      summary_contents_attributes: [:id,:content_id, :_destroy, :content_description])
     end
 
     def summary_params_index

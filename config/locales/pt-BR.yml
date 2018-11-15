@@ -225,9 +225,12 @@ pt-BR:
  summaries:
    new:
     title: Cadastrar Fichamento/Resumo
+    summary_contents: Conteúdo Relacionado
+    add_content: Adicionar Conteúdo
    edit:
     title: Editar Fichamento/Resumo
-    submit: 'Gravar'
+    summary_contents: Conteúdo Relacionado
+    add_content: Adicionar Conteúdo
    index:
     title: 'Listar Fichamentos/Resumos'
     search_results: 'Resultados da busca'
@@ -238,6 +241,8 @@ pt-BR:
    show:
     title: "Fichamento/Resumo"
     description: "Descrição: %{description}"
+   summary_content_fields:
+     remove_content: Remover Conteúdo
 
 
  quotations:
@@ -326,6 +331,8 @@ pt-BR:
           content: Conteúdo
           type_summary: Tipo
           text: Texto
+    summary_content:
+        content: Conteúdo
     quotation:
           quotation: Citação
           content_id: Conteúdo

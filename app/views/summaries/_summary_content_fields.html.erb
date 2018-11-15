@@ -1,0 +1,66 @@
+
+  <div class="row col-md-12">
+    <div class="col-md-4 ">
+
+        <%= f.label :content %><br>
+        <%= f.hidden_field :content_id %>
+        <%= f.text_field :content_description, :class => "form-control" %>
+        <%= error_tag @summary, "summary_content.content_id" %>
+    </div>
+
+
+
+    <div class="col-md-4 ">
+    <br>
+    <%=link_to_remove_association t('.remove_content'), f,
+    {:wrapper_class=> 'row', :class=> 'btn btn-primary'} %>
+    </div>
+
+  </div>
+
+
+
+
+<% content_for :javascript do %>
+
+
+
+        $("#summary_summary_contents_attributes_<%=f.index%>_content_description").autocomplete({
+          source: function( request, response ) {
+            $.ajax({
+              url: "<%= content_json_path %>",
+              dataType: "json",
+              method : 'GET',
+              data: {
+                description: request.term
+              },
+              success: function( data ) {
+                response( data);
+              },
+              error : function(xhr, status) {
+                alert('It happened some error, please try again later...');
+                }
+            });
+          },
+          minLength: 3,
+          select: function( event, ui ) {
+
+            $(this).val(ui.item.description);
+            $("#summary_summary_contents_attributes_<%=f.index%>_content_id").val(ui.item.id);
+
+          },
+          change: function( event, ui ) {
+            if(ui.item){
+
+            }else{
+              //caso nao selecione nenhuma linha, limpa tudo
+              // f.options[:child_index] = f.index  -> it works the same way to get the child index form
+              $("#summary_summary_contents_attributes_<%=f.index%>_content_id").val('');
+              $(this).val('');
+
+            }
+          }
+        });
+
+
+<% end %>

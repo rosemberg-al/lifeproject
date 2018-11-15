@@ -37,6 +37,11 @@ class Summary < ApplicationRecord
   belongs_to :user
   belongs_to :content
 
+  has_many :summary_contents
+  has_many :contents, through: :summary_contents
+  accepts_nested_attributes_for :summary_contents, reject_if: :all_blank, allow_destroy: true
+
+
   #virtual attributes
   attr_accessor :content_description
 
