@@ -21,10 +21,10 @@
         <th><%= t '.description' %></th>
       </tr>
 
-      <% @content_summaries.each do |content_summary| %>
-      <tr onclick="location.href='<%= edit_content_summary_path(content_summary) %>'" style="cursor:pointer">
-        <td><%= content_summary.id %></td>
-        <td><%= content_summary.description %></td>
+      <% @summaries.each do |summary| %>
+      <tr onclick="location.href='<%= edit_summary_path(summary) %>'" style="cursor:pointer">
+        <td><%= summary.id %></td>
+        <td><%= summary.description %></td>
       </tr>
     <% end %>
     </table>
@@ -34,6 +34,6 @@
 <!-- /.box -->
 </div>
 
-<% if @content_summaries.size > 0 %>
-<%= paginate @content_summaries %>
+<% if @summaries.size > 0 %>
+<%= paginate @summaries %>
 <% end %>

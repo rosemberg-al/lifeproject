@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :content_types
     resources :contents
     resources :people
-    resources :content_summaries
+    resources :summaries
     resources :quotations
 
     get 'quotation/addperson', action: :addperson, controller: :quotations , as: :add_person

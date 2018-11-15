@@ -15,9 +15,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class ContentSummary < ApplicationRecord
+class Summary < ApplicationRecord
 
-  enum content_summary_type: { summary: "Summary", annotation: "Annotation", article: "Article", report: "Report", text: "Text"}
+  enum summary_type: { summary: "Summary", annotation: "Annotation", article: "Article", report: "Report", text: "Text"}
 
   scope :most_recent, -> {
      order 'created_at desc'
@@ -31,7 +31,7 @@ class ContentSummary < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
-  validates_presence_of :description, :type_content_summary, :content_id,:content_description
+  validates_presence_of :description, :type_summary, :content_id,:content_description
   validates_length_of :description, :minimum => 3, :allow_blank => false
 
   belongs_to :user

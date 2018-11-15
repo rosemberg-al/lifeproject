@@ -38,7 +38,7 @@ pt-BR:
     writer: Escritor
     actor: Ator
     speaker: Palestrante
-   content_summary_type:
+   summary_type:
     summary: Resumo
     annotation: Fichamento
     article: Artigo
@@ -81,7 +81,7 @@ pt-BR:
    my_profile: Meu perfil
    signout: Logout
    profile: Perfil
-   content_summaries: Fichamento/Resumo
+   summaries: Fichamento/Resumo
    quotations: Citações/Insights
    motivated: "Melhore como pessoa a todo momento, inspire-se:"
 
@@ -222,7 +222,7 @@ pt-BR:
    title: "Pessoa/Artista"
    name: "Nome: %{name}"
 
- content_summaries:
+ summaries:
    new:
     title: Cadastrar Fichamento/Resumo
    edit:
@@ -320,11 +320,11 @@ pt-BR:
         biography: Biografia
         type_person: Tipo
         main_thoughts: Principais Pensamentos
-    content_summary:
+    summary:
           description: Descrição
           content_id: Conteúdo
           content: Conteúdo
-          type_content_summary: Tipo
+          type_summary: Tipo
           text: Texto
     quotation:
           quotation: Citação

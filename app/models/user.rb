@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :contents , :dependent => :destroy
   has_many :people , :dependent => :destroy
   has_many :content_people , :dependent => :destroy
-  has_many :content_summaries , :dependent => :destroy
+  has_many :summaries , :dependent => :destroy
   has_many :quotations , :dependent => :destroy
 
 

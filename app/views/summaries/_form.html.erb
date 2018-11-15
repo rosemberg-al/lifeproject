@@ -1,20 +1,20 @@
 <div class="box-body">
   <div class="row col-md-12">
-    <div class="col-md-6   <%= error_div @content_summary, :description %>">
+    <div class="col-md-6   <%= error_div @summary, :description %>">
 
         <%= f.label :description %> <br>
         <%= f.text_field :description,  :class => "form-control" %>
-        <%= error_tag @content_summary, :description %>
+        <%= error_tag @summary, :description %>
 
     </div>
 
 
-    <div class="col-md-3   <%= error_div @content_summary, :type_content_summary %>">
-        <%= f.label :type_content_summary %> <br>
+    <div class="col-md-3   <%= error_div @summary, :type_summary %>">
+        <%= f.label :type_summary %> <br>
         <%=
-        f.select :type_content_summary, ContentSummary.content_summary_types.keys.map { |key,_| [t("enums.content_summary_type.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+        f.select :type_summary, Summary.summary_types.keys.map { |key,_| [t("enums.summary_type.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
         %>
-        <%= error_tag @content_summary, :type_content_summary %>
+        <%= error_tag @summary, :type_summary %>
     </div>
 
   </div>
@@ -26,16 +26,16 @@
         <%= f.label :content %><br>
         <%= f.hidden_field :content_id %>
         <%= f.text_field :content_description, :class => "form-control" %>
-        <%= error_tag @content_summary, "content_id" %>
+        <%= error_tag @summary, "content_id" %>
     </div>
   </div>
 
 
   <div class="row col-md-12">
-    <div class="col-md-12   <%= error_div @content_summary, :text %>">
+    <div class="col-md-12   <%= error_div @summary, :text %>">
         <%= f.label :text %> <br>
         <%= f.text_area :text, cols: 20, rows: 10 ,:class => "form-control" %>
-        <%= error_tag @content_summary, :text %>
+        <%= error_tag @summary, :text %>
     </div>
   </div>
 
@@ -49,7 +49,7 @@
 $(function () {
 
    //bootstrap WYSIHTML5 - text editor
-   $('#content_summary_text').wysihtml5()
+   $('#summary_text').wysihtml5()
  })
 
 
@@ -59,7 +59,7 @@ $(function () {
 
 
 
- $("#content_summary_content_description").autocomplete({
+ $("#summary_content_description").autocomplete({
 
    source: function( request, response ) {
      $.ajax({
@@ -80,8 +80,8 @@ $(function () {
    minLength: 3,
    select: function( event, ui ) {
 
-     $("#content_summary_content_id").val(ui.item.id);
-     $("#content_summary_content_description").val(ui.item.label);
+     $("#summary_content_id").val(ui.item.id);
+     $("#summary_content_description").val(ui.item.label);
    },
    change: function( event, ui ) {
      if(ui.item){
@@ -89,8 +89,8 @@ $(function () {
      }else{
        //caso nao selecione nenhuma linha, limpa tudo
 
-       $("#content_summary_content_id").val('');
-       $("#content_summary_content_description").val('');
+       $("#summary_content_id").val('');
+       $("#summary_content_description").val('');
      }
    }
  });

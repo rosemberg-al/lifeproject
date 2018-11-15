@@ -2,22 +2,23 @@
   <%= t '.title' %>
 <% end %>
 
-
-<% if @content_summary.errors.any? %>
+<% if @summary.errors.any? %>
   <div id="error_explanation" class="alert alert-danger alert-dismissible">
     <%= t 'general.form_error' %>
   </div>
 <% end %>
 
-<%= form_for @content_summary do |f| %>
+<%= form_for @summary do |f| %>
 <div class="box box-primary">
 <div class="box box-default">
 
+
   <%= render 'form' , f: f %>
   <div class="box-footer">
-  <%= button_save new_content_summary_path,content_summaries_path,f %>
-  </div>
+    <%= button_save new_summary_path,summaries_path,f %>
+    <%= button_inactivate(@summary,summary_url(@summary,:activate =>:activate)) %>
 
+  </div>
 </div>
 </div>
 <% end %>
