@@ -1,82 +1,114 @@
-<div class="box-body">
-  <div class="row col-md-12">
-    <div class="col-md-6   <%= error_div @content, :description %>">
+<div class="box box-primary">
+  <div class="box box-default">
+    <div class="box-body">
+      <div class="row col-md-12">
+        <div class="col-md-6   <%= error_div @content, :description %>">
 
-        <%= f.label :description %> <br>
-        <%= f.text_field :description, {:class => "form-control"} %>
-        <%= error_tag @content, :description %>
+            <%= f.label :description %> <br>
+            <%= f.text_field :description, {:class => "form-control"} %>
+            <%= error_tag @content, :description %>
+
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-6   <%= error_div @content, :content_type_id %>">
+            <%= f.hidden_field :type_feature %>
+            <%= f.label :content_type_id %> <br>
+            <%= f.select :content_type_id, @content_types.collect {|t| [ t.description, t.id ] },{ include_blank: true } ,{:class => "form-control",:onchange => "change_type()"} %>
+            <%= error_tag @content, :content_type_id %>
+        </div>
+
+        <div class="col-md-6   <%= error_div @content, :content_genre_id %>">
+            <%= f.label :content_genre_id %> <br>
+            <%= f.select :content_genre_id, @content_genres.collect {|t| [ t.description, t.id ] }, { include_blank: true } ,:class => "form-control" %>
+            <%= error_tag @content, :content_genre_id %>
+        </div>
+      </div>
+
+
+      <div class="row col-md-12" id="fields_book"
+      <% if (@content.nil? || @content.type_feature.nil? || @content.type_feature!="printed") %> style="display:none;" <%end%>
+      >
+        <div class="col-md-6   <%= error_div @content, :book_publisher %>">
+            <%= f.label :book_publisher %> <br>
+            <%= f.text_field :book_publisher, :class => "form-control" %>
+            <%= error_tag @content, :book_publisher %>
+        </div>
+
+        <div class="col-md-6   <%= error_div @content, :book_date_published %>">
+            <%= f.label :book_date_published %> <br>
+            <%= f.date_field :book_date_published, :class => "form-control" %>
+            <%= error_tag @content, :book_date_published %>
+        </div>
+      </div>
+
+
+      <div class="row col-md-12" id="fields_movie"
+      <% if (@content.nil? || @content.type_feature.nil? || @content.type_feature!="audiovisual") %> style="display:none;" <%end%>
+      >
+        <div class="col-md-4   <%= error_div @content, :movie_company %>">
+            <%= f.label :movie_company %> <br>
+            <%= f.text_field :movie_company, :class => "form-control" %>
+            <%= error_tag @content, :movie_company %>
+        </div>
+
+        <div class="col-md-4   <%= error_div @content, :movie_date_released %>">
+            <%= f.label :movie_date_released %> <br>
+            <%= f.date_field :movie_date_released, :class => "form-control" %>
+            <%= error_tag @content, :movie_date_released %>
+        </div>
+
+        <div class="col-md-4   <%= error_div @content, :movie_time %>">
+            <%= f.label :movie_time %> <br>
+            <%= f.number_field :movie_time, :class => "form-control" %>
+            <%= error_tag @content, :movie_time %>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-9   <%= error_div @content, :synopsis %>">
+            <%= f.label :synopsis %> <br>
+            <%= f.text_area :synopsis, cols: 20, rows: 10 ,:class => "form-control" %>
+            <%= error_tag @content, :synopsis %>
+        </div>
+      </div>
 
     </div>
   </div>
-
-  <div class="row col-md-12">
-    <div class="col-md-6   <%= error_div @content, :content_type_id %>">
-        <%= f.hidden_field :type_feature %>
-        <%= f.label :content_type_id %> <br>
-        <%= f.select :content_type_id, @content_types.collect {|t| [ t.description, t.id ] },{ include_blank: true } ,{:class => "form-control",:onchange => "change_type()"} %>
-        <%= error_tag @content, :content_type_id %>
-    </div>
-
-    <div class="col-md-6   <%= error_div @content, :content_genre_id %>">
-        <%= f.label :content_genre_id %> <br>
-        <%= f.select :content_genre_id, @content_genres.collect {|t| [ t.description, t.id ] }, { include_blank: true } ,:class => "form-control" %>
-        <%= error_tag @content, :content_genre_id %>
-    </div>
-  </div>
-
-
-  <div class="row col-md-12" id="fields_book"
-  <% if (@content.nil? || @content.type_feature.nil? || @content.type_feature!="printed") %> style="display:none;" <%end%>
-  >
-    <div class="col-md-6   <%= error_div @content, :book_publisher %>">
-        <%= f.label :book_publisher %> <br>
-        <%= f.text_field :book_publisher, :class => "form-control" %>
-        <%= error_tag @content, :book_publisher %>
-    </div>
-
-    <div class="col-md-6   <%= error_div @content, :book_date_published %>">
-        <%= f.label :book_date_published %> <br>
-        <%= f.date_field :book_date_published, :class => "form-control" %>
-        <%= error_tag @content, :book_date_published %>
-    </div>
-  </div>
-
-
-  <div class="row col-md-12" id="fields_movie"
-  <% if (@content.nil? || @content.type_feature.nil? || @content.type_feature!="audiovisual") %> style="display:none;" <%end%>
-  >
-    <div class="col-md-4   <%= error_div @content, :movie_company %>">
-        <%= f.label :movie_company %> <br>
-        <%= f.text_field :movie_company, :class => "form-control" %>
-        <%= error_tag @content, :movie_company %>
-    </div>
-
-    <div class="col-md-4   <%= error_div @content, :movie_date_released %>">
-        <%= f.label :movie_date_released %> <br>
-        <%= f.date_field :movie_date_released, :class => "form-control" %>
-        <%= error_tag @content, :movie_date_released %>
-    </div>
-
-    <div class="col-md-4   <%= error_div @content, :movie_time %>">
-        <%= f.label :movie_time %> <br>
-        <%= f.number_field :movie_time, :class => "form-control" %>
-        <%= error_tag @content, :movie_time %>
-    </div>
-  </div>
-
-  <div class="row col-md-12">
-    <div class="col-md-9   <%= error_div @content, :synopsis %>">
-        <%= f.label :synopsis %> <br>
-        <%= f.text_area :synopsis, cols: 20, rows: 10 ,:class => "form-control" %>
-        <%= error_tag @content, :synopsis %>
-    </div>
-  </div>
-
 </div>
+
+
+
+
+
+
+<div class="box box-danger">
+  <div class="box box-default">
+    <div class="row col-md-12">
+      <div class="row col-md-12">
+        <h4><%= t '.content_people' %></h4>
+      </div>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <%= f.fields_for :content_people do |cp| %>
+           <%= render 'content_person_fields', f: cp %>
+        <% end %>
+      </div>
+      <br>
+      <%= link_to_add_association t('.add_person'), f, :content_people, :class => 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <% content_for :javascript do %>
 
+//the option data-confirmation on the button was not working, so this workaround works.
 $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
 
 
@@ -124,4 +156,125 @@ function change_type(){
 
   //console.log($('#content_content_type_id').val());
 }
+
+
+
+
+
+
+
+$(function() {
+  $("[id^=content_content_people_attributes_]").on("focus", function() {
+    $(this).autocomplete({
+
+      source: function( request, response ) {
+        $.ajax({
+          url: "<%= person_json_path %>",
+          dataType: "json",
+          method : 'GET',
+          data: {
+            name: request.term
+          },
+          success: function( data ) {
+            response( data);
+          },
+          error : function(xhr, status) {
+            alert('It happened some error, please try again later...');
+            }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+
+        $(this).val(ui.item.name);
+
+        var idAutoComplete=$(this).attr("id");
+        idAutoComplete=idAutoComplete.replace("content_content_people_attributes_","");
+        idAutoComplete=idAutoComplete.replace("_person_name","");
+        console.log(idAutoComplete);
+
+        $("#content_content_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
+        console.log($("#content_content_people_attributes_"+idAutoComplete+"_person_id").val()+"A");
+      },
+      change: function( event, ui ) {
+        if(ui.item){
+
+        }else{
+          //caso nao selecione nenhuma linha, limpa tudo
+
+
+          $(this).val('');
+        }
+      }
+    });
+});
+});
+
+
+
+
+
+
+
+
+
+
+//it was added here to make the event focus works on the new itens added to the form
+//research if there is another better alternative
+$(document).on("cocoon:after-insert",   function(e, inserted_item) {
+
+    //var oi=inserted_item.find('input:hidden:eq(0)').attr("id");
+    //console.log("A");
+    //console.log(oi);
+    //inserted_item.replace('new_content_item','1000000000000000')
+
+    $(function() {
+      $("[id^=content_content_people_attributes_]").on("focus", function() {
+        $(this).autocomplete({
+
+          source: function( request, response ) {
+            $.ajax({
+              url: "<%= person_json_path %>",
+              dataType: "json",
+              method : 'GET',
+              data: {
+                name: request.term
+              },
+              success: function( data ) {
+                response( data);
+              },
+              error : function(xhr, status) {
+                alert('It happened some error, please try again later...');
+                }
+            });
+          },
+          minLength: 3,
+          select: function( event, ui ) {
+
+            $(this).val(ui.item.name);
+
+            var idAutoComplete=$(this).attr("id");
+            idAutoComplete=idAutoComplete.replace("content_content_people_attributes_","");
+            idAutoComplete=idAutoComplete.replace("_person_name","");
+            console.log(idAutoComplete);
+
+            $("#content_content_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
+            console.log($("#content_content_people_attributes_"+idAutoComplete+"_person_id").val()+"A");
+          },
+          change: function( event, ui ) {
+            if(ui.item){
+
+            }else{
+              //caso nao selecione nenhuma linha, limpa tudo
+
+
+              $(this).val('');
+              $("#content_content_people_attributes_"+idAutoComplete+"_person_id").val('');
+            }
+          }
+        });
+    });
+  });
+
+} )
 <% end %>

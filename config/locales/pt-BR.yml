@@ -182,12 +182,8 @@ pt-BR:
  contents:
   new:
    title: Cadastrar Conteúdo
-   content_people: Pessoa/Artista Relacionado
-   add_person: Adicionar Pessoa
   edit:
    title: Editar Conteúdo
-   content_people: Pessoa/Artista Relacionado
-   add_person: Adicionar Pessoa
   person:
    name: Nome
   index:
@@ -203,6 +199,9 @@ pt-BR:
    description: "Descrição: %{description}"
   content_person_fields:
     remove_person: Remover Pessoa
+  form:
+    content_people: Pessoa/Artista Relacionado
+    add_person: Adicionar Pessoa
 
  people:
   new:
