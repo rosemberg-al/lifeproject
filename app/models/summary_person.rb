@@ -15,13 +15,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Summary < ApplicationRecord
+class SummaryPerson < ApplicationRecord
 
-  enum summary_type: { summary: "Summary", annotation: "Annotation", article: "Article", report: "Report", text: "Text"}
-
-  scope :most_recent, -> {
-     order 'created_at desc'
-  }
+  enum type_content_person: {author: "author",director: "director",writer: "writer",actor: "actor",speaker: "speaker"}
+  #enum type_artist: { author: "Author", director: "Director",writer: "Writer",actor: "Actor",speaker: "Speaker"}
 
   scope :active, -> {
     where(inactivated_at: nil)
@@ -31,21 +28,16 @@ class Summary < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
-  validates_presence_of :description, :type_summary
-  validates_length_of :description, :minimum => 3, :allow_blank => false
+  #validates_presence_of :content_id, :person_id
+  #não ser dever colocar o id do mestre na validação da tela de mestre detalhe
+  validates_presence_of  :person_id, :type_person
 
   belongs_to :user
+  belongs_to :person
+  belongs_to :summary
 
 
-  has_many :summary_contents
-  has_many :contents, through: :summary_contents
-  accepts_nested_attributes_for :summary_contents, reject_if: :all_blank, allow_destroy: true
-
-
-  has_many :summary_people
-  has_many :people, through: :summary_people
-  accepts_nested_attributes_for :summary_people, reject_if: :all_blank, allow_destroy: true
-
-
+  #virtual attributes
+  attr_accessor :person_name
 
 end

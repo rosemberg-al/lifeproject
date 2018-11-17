@@ -241,8 +241,12 @@ pt-BR:
     title: "Fichamento/Resumo"
     description: "Descrição: %{description}"
    summary_content_fields:
-     remove_content: Remover Conteúdo
-
+    remove_content: Remover Conteúdo
+   form:
+    summary_contents: Conteúdo Relacionado
+    add_content: Adicionar Conteúdo
+    summary_people: Pessoa/Artista Relacionado
+    add_person: Adicionar Pessoa
 
  quotations:
    new:
@@ -332,6 +336,9 @@ pt-BR:
           text: Texto
     summary_content:
         content: Conteúdo
+    summary_person:
+        person: Nome
+        type_person: Tipo Pessoa
     quotation:
           quotation: Citação
           content_id: Conteúdo

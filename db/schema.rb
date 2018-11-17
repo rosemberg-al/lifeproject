@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_192534) do
+ActiveRecord::Schema.define(version: 2018_11_17_233448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(version: 2018_11_15_192534) do
     t.index ["user_id"], name: "index_summary_contents_on_user_id"
   end
 
+# Could not dump table "summary_people" because of following StandardError
+#   Unknown type 'content_person_type' for column 'type_person'
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
@@ -113,4 +116,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_192534) do
   add_foreign_key "summary_contents", "contents"
   add_foreign_key "summary_contents", "summaries"
   add_foreign_key "summary_contents", "users"
+  add_foreign_key "summary_people", "people"
+  add_foreign_key "summary_people", "summaries"
+  add_foreign_key "summary_people", "users"
 end

@@ -1,0 +1,74 @@
+
+  <div class="row col-md-12">
+    <div class="col-md-4 ">
+
+        <%= f.label :person %><br>
+        <%= f.hidden_field :person_id %>
+        <%= f.text_field :person_name, :class => "form-control" %>
+        <%= error_tag @summary, "summary_people.person_id" %>
+    </div>
+
+    <div class="col-md-4 ">
+        <%= f.label :type_person %><br>
+        <%=
+        f.select :type_person, SummaryPerson.type_content_people.map { |key,_| [t("enums.type_content_person.#{key}"), key] },
+        { include_blank: true } ,:class => "form-control"
+        %>
+        <%= error_tag @summary, "summary_people.type_person" %>
+
+    </div>
+
+    <div class="col-md-4 ">
+    <br>
+    <%=link_to_remove_association t('.remove_person'), f,
+    {:wrapper_class=> 'row', :class=> 'btn btn-primary'} %>
+    </div>
+
+  </div>
+
+
+
+
+<% content_for :javascript do %>
+
+
+
+        $("#summary_summary_people_attributes_<%=f.index%>_person_name").autocomplete({
+          source: function( request, response ) {
+            $.ajax({
+              url: "<%= person_json_path %>",
+              dataType: "json",
+              method : 'GET',
+              data: {
+                name: request.term
+              },
+              success: function( data ) {
+                response( data);
+              },
+              error : function(xhr, status) {
+                alert('It happened some error, please try again later...');
+                }
+            });
+          },
+          minLength: 3,
+          select: function( event, ui ) {
+
+            $(this).val(ui.item.name);
+            $("#summary_summary_people_attributes_<%=f.index%>_person_id").val(ui.item.id);
+
+          },
+          change: function( event, ui ) {
+            if(ui.item){
+
+            }else{
+              //caso nao selecione nenhuma linha, limpa tudo
+              // f.options[:child_index] = f.index  -> it works the same way to get the child index form
+              $("#summary_summary_people_attributes_<%=f.index%>_person_id").val('');
+              $(this).val('');
+
+            }
+          }
+        });
+
+
+<% end %>
