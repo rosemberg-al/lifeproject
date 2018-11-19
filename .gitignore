@@ -17,3 +17,5 @@
 /yarn-error.log
 /public/uploads/user/picture/*
 .byebug_history
+
+/config/application.yml
