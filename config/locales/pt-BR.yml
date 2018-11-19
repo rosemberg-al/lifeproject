@@ -1,16 +1,16 @@
 pt-BR:
  views:
-   pagination:
-    first: "&laquo; Primeira"
-    last: "Última &raquo;"
-    previous: "&lsaquo; Anterior"
-    next: "Próxima &rsaquo;"
-    truncate: "..."
+  pagination:
+   first: "&laquo; Primeira"
+   last: "Última &raquo;"
+   previous: "&lsaquo; Anterior"
+   next: "Próxima &rsaquo;"
+   truncate: "..."
 
  dialogs:
-   inactivate: 'Você tem certeza que quer inativar?'
-   activate: 'Você tem certeza que quer ativar?'
-   remove_confim: Você tem certeza que deseja remover o registro?
+  inactivate: 'Você tem certeza que quer inativar?'
+  activate: 'Você tem certeza que quer ativar?'
+  remove_confim: Você tem certeza que deseja remover o registro?
 
  flash:
   notice:
@@ -23,33 +23,33 @@ pt-BR:
    needs_login: Para continuar, você precisa está logado.
 
  button:
-   new: 'F7 - Novo'
-   search: 'F9 - Pesquisar'
-   index: 'F8 - Abrir'
-   save: 'F12 - Gravar'
-   edit: 'F10 - Editar'
-   inactivate: 'Inativar'
-   activate: 'Ativar'
+  new: 'F7 - Novo'
+  search: 'F9 - Pesquisar'
+  index: 'F8 - Abrir'
+  save: 'F12 - Gravar'
+  edit: 'F10 - Editar'
+  inactivate: 'Inativar'
+  activate: 'Ativar'
 
  enums:
-   type_content_person:
-    author: Autor
-    director: Diretor
-    writer: Escritor
-    actor: Ator
-    speaker: Palestrante
-   summary_type:
-    summary: Resumo
-    annotation: Fichamento
-    article: Artigo
-    report: Relatório
-    text: Texto
-   quotation_type:
-    insight: Insight
-    quote: Citação
-   quotation_indication:
-    avoid: A evitar
-    follow: A seguir
+  type_content_person:
+   author: Autor
+   director: Diretor
+   writer: Escritor
+   actor: Ator
+   speaker: Palestrante
+  summary_type:
+   summary: Resumo
+   annotation: Fichamento
+   article: Artigo
+   report: Relatório
+   text: Texto
+  quotation_type:
+   insight: Insight
+   quote: Citação
+  quotation_indication:
+   avoid: A evitar
+   follow: A seguir
 
  errors:
   messages:
@@ -64,120 +64,120 @@ pt-BR:
     update: "Gravar"
 
  links:
-   back: Voltar
+  back: Voltar
 
  general:
-   form_error: Há erros no formulário, por favor verifique.
+  form_error: Há erros no formulário, por favor verifique.
 
  layout:
-   subjects: Assunto
-   content_genres: Gênero
-   content_types: Tipo de Conteúdo
-   contents: Conteúdo
-   people: Pessoa/Artista
-   culture: Cultura
-   signup: Cadastro
-   signin: Login
-   my_profile: Meu perfil
-   signout: Logout
-   profile: Perfil
-   summaries: Fichamento/Resumo
-   quotations: Citações/Insights
-   motivated: "Melhore como pessoa a todo momento, inspire-se:"
+  subjects: Assunto
+  content_genres: Gênero
+  content_types: Tipo de Conteúdo
+  contents: Conteúdo
+  people: Pessoa/Artista
+  culture: Cultura
+  signup: Cadastro
+  signin: Login
+  my_profile: Meu perfil
+  signout: Logout
+  profile: Perfil
+  summaries: Fichamento/Resumo
+  quotations: Citações/Insights
+  motivated: "Melhore como pessoa a todo momento, inspire-se:"
 
  home:
-    index:
-     title: Bem vindo
+  index:
+  title: Bem vindo
 
  users:
-    new:
-     title: Cadastrar Perfil
-     message: Realize seu cadastro.
-     already_signup: Já sou cadastrado
-     agree_terms: Concordo com os termos
-    edit:
-     title: Editar Perfil
-    show:
-     title: "Usuário"
-     profile: "Perfil: %{user_name}"
-     edit: 'Editar perfil'
-     location: "Localização: %{location}"
-     bio: "Bio: %{bio}"
-     success: Email confirmado com sucesso, obrigado!
-     confirmations:
+  new:
+   title: Cadastrar Perfil
+   message: Realize seu cadastro.
+   already_signup: Já sou cadastrado
+   agree_terms: Concordo com os termos
+  edit:
+   title: Editar Perfil
+  show:
+   title: "Usuário"
+   profile: "Perfil: %{user_name}"
+   edit: 'Editar perfil'
+   location: "Localização: %{location}"
+   bio: "Bio: %{bio}"
+   success: Email confirmado com sucesso, obrigado!
+   confirmations:
 
  subjects:
-   create:
-     success: 'Assunto criado com sucesso'
-   new:
-    title: Cadastrar Assunto
-    new: 'Novo'
-    index: 'Abrir'
-   edit:
-    title: Editar Assunto
-    show: 'Visualizar'
-    new: 'Novo'
-    index: 'Abrir'
-    submit: 'Gravar'
-   index:
-    title: 'Listar Assuntos'
-    search_results: 'Resultados da busca'
-    description: "Descrição"
-   search:
-    search_for: 'Buscar por...'
-    inactive: "Inativo?"
-    description: "Descrição"
-   show:
-    title: "Assunto"
-    description: "Descrição: %{description}"
-    edit: 'Editar'
-    new: 'Novo'
-    index: 'Abrir'
-   subject:
-    owner_html: '&mdash; %{owner} (%{when})'
-    edit: 'Editar'
-    destroy: 'Remover'
+  create:
+   success: 'Assunto criado com sucesso'
+  new:
+   title: Cadastrar Assunto
+   new: 'Novo'
+   index: 'Abrir'
+  edit:
+   title: Editar Assunto
+   show: 'Visualizar'
+   new: 'Novo'
+   index: 'Abrir'
+   submit: 'Gravar'
+  index:
+   title: 'Listar Assuntos'
+   search_results: 'Resultados da busca'
+   description: "Descrição"
+  search:
+   search_for: 'Buscar por...'
+   inactive: "Inativo?"
+   description: "Descrição"
+  show:
+   title: "Assunto"
+   description: "Descrição: %{description}"
+   edit: 'Editar'
+   new: 'Novo'
+   index: 'Abrir'
+  subject:
+   owner_html: '&mdash; %{owner} (%{when})'
+   edit: 'Editar'
+   destroy: 'Remover'
 
  content_genres:
-   new:
-    title: Cadastrar Gênero
-   edit:
-    title: Editar Gênero
-    submit: 'Gravar'
-   index:
-    title: 'Listar Gêneros'
-    search_results: 'Resultados da busca'
-    description: "Descrição"
-   search:
-    search_for: 'Buscar por...'
-    inactive: "Inativo?"
-    description: "Descrição"
-   show:
-    title: "Gênero"
-    description: "Descrição: %{description}"
+  new:
+   title: Cadastrar Gênero
+  edit:
+   title: Editar Gênero
+   submit: 'Gravar'
+  index:
+   title: 'Listar Gêneros'
+   search_results: 'Resultados da busca'
+   description: "Descrição"
+  search:
+   search_for: 'Buscar por...'
+   inactive: "Inativo?"
+   description: "Descrição"
+  show:
+   title: "Gênero"
+   description: "Descrição: %{description}"
 
  content_types:
-   new:
-    title: 'Cadastrar Tipo de Conteúdo'
-   edit:
-    title: 'Editar Tipo de Conteúdo'
-    submit: 'Gravar'
-   index:
-    title: 'Listar Tipos de Conteúdo'
-    search_results: 'Resultados da busca'
-    description: "Descrição"
-   search:
-    search_for: 'Buscar por...'
-    inactive: "Inativo?"
-    description: "Descrição"
-   show:
-    title: "Tipo de Conteúdo"
-    description: "Descrição: %{description}"
-   form:
-      printed: "Impresso"
-      audiovisual: "Audiovisual"
-      song: "Música/Audio"
-      play: "Apresentação"
+  new:
+   title: 'Cadastrar Tipo de Conteúdo'
+  edit:
+   title: 'Editar Tipo de Conteúdo'
+   submit: 'Gravar'
+  index:
+   title: 'Listar Tipos de Conteúdo'
+   search_results: 'Resultados da busca'
+   description: "Descrição"
+  search:
+   search_for: 'Buscar por...'
+   inactive: "Inativo?"
+   description: "Descrição"
+  show:
+   title: "Tipo de Conteúdo"
+   description: "Descrição: %{description}"
+  form:
+   printed: "Impresso"
+   audiovisual: "Audiovisual"
+   song: "Música/Audio"
+   play: "Apresentação"
 
  contents:
   new:
@@ -198,10 +198,10 @@ pt-BR:
    title: "Conteúdo"
    description: "Descrição: %{description}"
   content_person_fields:
-    remove_person: Remover Pessoa
+   remove_person: Remover Pessoa
   form:
-    content_people: Pessoa/Artista Relacionado
-    add_person: Adicionar Pessoa
+   content_people: Pessoa/Artista Relacionado
+   add_person: Adicionar Pessoa
 
  people:
   new:
@@ -222,135 +222,135 @@ pt-BR:
    name: "Nome: %{name}"
 
  summaries:
-   new:
-    title: Cadastrar Fichamento/Resumo
-    summary_contents: Conteúdo Relacionado
-    add_content: Adicionar Conteúdo
-   edit:
-    title: Editar Fichamento/Resumo
-    summary_contents: Conteúdo Relacionado
-    add_content: Adicionar Conteúdo
-   index:
-    title: 'Listar Fichamentos/Resumos'
-    search_results: 'Resultados da busca'
-    description: "Descrição"
-   search:
-    inactive: "Inativo?"
-    description: "Descrição"
-   show:
-    title: "Fichamento/Resumo"
-    description: "Descrição: %{description}"
-   summary_content_fields:
-    remove_content: Remover Conteúdo
-   form:
-    summary_contents: Conteúdo Relacionado
-    add_content: Adicionar Conteúdo
-    summary_people: Pessoa/Artista Relacionado
-    add_person: Adicionar Pessoa
+  new:
+   title: Cadastrar Fichamento/Resumo
+   summary_contents: Conteúdo Relacionado
+   add_content: Adicionar Conteúdo
+  edit:
+   title: Editar Fichamento/Resumo
+   summary_contents: Conteúdo Relacionado
+   add_content: Adicionar Conteúdo
+  index:
+   title: 'Listar Fichamentos/Resumos'
+   search_results: 'Resultados da busca'
+   description: "Descrição"
+  search:
+   inactive: "Inativo?"
+   description: "Descrição"
+  show:
+   title: "Fichamento/Resumo"
+   description: "Descrição: %{description}"
+  summary_content_fields:
+   remove_content: Remover Conteúdo
+  form:
+   summary_contents: Conteúdo Relacionado
+   add_content: Adicionar Conteúdo
+   summary_people: Pessoa/Artista Relacionado
+   add_person: Adicionar Pessoa
 
  quotations:
-   new:
-    title: Cadastrar Citação/Insight
-    quotation_people: Pessoa/Artista Relacionado
-    add_person: Adicionar Pessoa
-   edit:
-    title: Editar Citação/Insight
-    content_people: Pessoa/Artista Relacionado
-    add_person: Adicionar Pessoa
-   index:
-    title: 'Listar Citações/Insights'
-    search_results: 'Resultados da busca'
-    quotation: "Citação"
-   search:
-    inactive: "Inativo?"
-    quotation: "Citação"
-   show:
-    title: "Citação/Insight"
-    quotation: "Citação: %{quotation}"
+  new:
+   title: Cadastrar Citação/Insight
+   quotation_people: Pessoa/Artista Relacionado
+   add_person: Adicionar Pessoa
+  edit:
+   title: Editar Citação/Insight
+   content_people: Pessoa/Artista Relacionado
+   add_person: Adicionar Pessoa
+  index:
+   title: 'Listar Citações/Insights'
+   search_results: 'Resultados da busca'
+   quotation: "Citação"
+  search:
+   inactive: "Inativo?"
+   quotation: "Citação"
+  show:
+   title: "Citação/Insight"
+   quotation: "Citação: %{quotation}"
 
  user_sessions:
-   new:
-    title: 'Login'
-    sign_up: 'Cadastre-se'
-    message: "Realize o login para iniciar a sua sessão"
-    forgot: "Esqueci a minha senha"
-    remember: "Lembre-se de mim"
+  new:
+   title: 'Login'
+   sign_up: 'Cadastre-se'
+   message: "Realize o login para iniciar a sua sessão"
+   forgot: "Esqueci a minha senha"
+   remember: "Lembre-se de mim"
 
  signup_mailer:
-   confirm_email:
-     subject: 'Lifeproject - Confirme seu email'
-     title: 'Seja bem vindo ao LifeProject!'
-     body: |
+  confirm_email:
+   subject: 'Lifeproject - Confirme seu email'
+   title: 'Seja bem vindo ao LifeProject!'
+   body: |
           Seja bem vindo ao LifeProject, %{full_name}.
           O LifeProject é o lugar ideal para você planejar, sonhar e executar as metas que você tem para sua vida.
-     confirm_link_html: 'Para você começar a usar o site, acesse o link: %{link}'
-     thanks_html: 'Obrigado por se cadastrar no %{link}.'
+   confirm_link_html: 'Para você começar a usar o site, acesse o link: %{link}'
+   thanks_html: 'Obrigado por se cadastrar no %{link}.'
 
  activerecord:
   models:
-    user: Usuário
-    subject: Assunto
-    content_genre: Gênero
-    content_type: Tipo de Conteúdo
-    content: Conteúdo
-    person: Pessoa
+   user: Usuário
+   subject: Assunto
+   content_genre: Gênero
+   content_type: Tipo de Conteúdo
+   content: Conteúdo
+   person: Pessoa
   attributes:
-    user:
-      bio: Biografia
-      email: Email
-      full_name: Nome completo
-      location: Localização
-      password: Senha
-      password_confirmation: Confirme sua senha
-      picture: Foto
-    subject:
-      description: Descrição
-    content_genre:
-        description: Descrição
-    content_type:
-        description: Descrição
-        feature: Característica
-    content:
-        description: Descrição
-        content_type_id: Tipo de Conteúdo
-        content_genre_id: Gênero
-        synopsis: Sinopse
-        book_publisher: Editora
-        book_date_published: Data Publicação
-        movie_company: Empresa (Produção)
-        movie_date_released: Data Estréia
-        movie_time: Duração (min)
-    content_person:
-        person: Nome
-        type_content_person: Tipo Pessoa
-    person:
-        name: Nome
-        biography: Biografia
-        type_person: Tipo
-        main_thoughts: Principais Pensamentos
-    summary:
-          description: Descrição
-          content_id: Conteúdo
-          content: Conteúdo
-          type_summary: Tipo
-          text: Texto
-    summary_content:
-        content: Conteúdo
-    summary_person:
-        person: Nome
-        type_person: Tipo Pessoa
-    quotation:
-          quotation: Citação
-          content_id: Conteúdo
-          content: Conteúdo
-          order: Ordem
-          page_initial: Página Inicial
-          page_final: Página Final
-          type_quote: Tipo
-          indication: Indicação Para Vida
-    quotation_person:
-        person: Nome
-        type_person: Tipo Pessoa
-    user_session:
-      email: Email
-      password: Senha
+   user:
+    bio: Biografia
+    email: Email
+    full_name: Nome completo
+    location: Localização
+    password: Senha
+    password_confirmation: Confirme sua senha
+    picture: Foto
+   subject:
+    description: Descrição
+   content_genre:
+    description: Descrição
+   content_type:
+    description: Descrição
+    feature: Característica
+   content:
+    description: Descrição
+    content_type_id: Tipo de Conteúdo
+    content_genre_id: Gênero
+    synopsis: Sinopse
+    book_publisher: Editora
+    book_date_published: Data Publicação
+    movie_company: Empresa (Produção)
+    movie_date_released: Data Estréia
+    movie_time: Duração (min)
+   content_person:
+    person: Nome
+    type_content_person: Tipo Pessoa
+   person:
+    name: Nome
+    biography: Biografia
+    type_person: Tipo
+    main_thoughts: Principais Pensamentos
+   summary:
+    description: Descrição
+    content_id: Conteúdo
+    content: Conteúdo
+    type_summary: Tipo
+    text: Texto
+   summary_content:
+    content: Conteúdo
+   summary_person:
+    person: Nome
+    type_person: Tipo Pessoa
+   quotation:
+    quotation: Citação
+    content_id: Conteúdo
+    content: Conteúdo
+    order: Ordem
+    page_initial: Página Inicial
+    page_final: Página Final
+    type_quote: Tipo
+    indication: Indicação Para Vida
+   quotation_person:
+    person: Nome
+    type_person: Tipo Pessoa
+   user_session:
+    email: Email
+    password: Senha
