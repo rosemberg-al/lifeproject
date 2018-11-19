@@ -22,6 +22,7 @@ module Lifeproject
     config.time_zone = 'Brasilia'
     config.i18n.available_locales = ["en", "pt-BR"]
 
+  
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

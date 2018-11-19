@@ -16,14 +16,17 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class SignupMailer < ActionMailer::Base
-  default :from => 'no-reply@lifeproject.io'
+  #default :from => 'no-reply@lifeproject.io'
+  #:bcc => ['sign ups <signups@lifeproject.io>'],
+
+  default :from => DATA_MAIL[:main_mail]
 
   def confirm_email(user)
     @user = user
     @confirmation_link = confirmation_url({:token => @user.confirmation_token ,:locale => I18n.locale })
     mail({
       :to => user.email,
-      :bcc => ['sign ups <signups@lifeproject.io>'],
+      :bcc => ['sign ups <'+DATA_MAIL[:main_mail]+'>'],
       :subject => I18n.t('signup_mailer.confirm_email.subject')
       })
   end
