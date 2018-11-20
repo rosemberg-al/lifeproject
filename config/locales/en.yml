@@ -18,9 +18,9 @@ en:
    signed_out: Logout done successfully. See you soon!.
    save_success: Register saved with sucess.
    inactivate_success: Register inactivated with sucess.
-   activate_success: Registro activated with sucess.
+   activate_success: Register activated with sucess.
   alert:
-   needs_login: To continue, you need to be logged.
+   needs_login: You need to signin to see this page.
 
  button:
   new: 'F7 - New'
@@ -87,7 +87,7 @@ en:
 
  home:
   index:
-   title: Bem vindo
+   title: Welcome
 
  users:
   new:
@@ -318,7 +318,7 @@ en:
     book_publisher: Publisher
     book_date_published: Date Published
     movie_company: Company (Production)
-    movie_date_released: Date Releases
+    movie_date_released: Date Released
     movie_time: Length (min)
    content_person:
     person: Name
