@@ -6,105 +6,351 @@ en:
     previous: "&lsaquo; Previous"
     next: "Next &rsaquo;"
     truncate: "..."
- users:
-    new:
-     title: Cadastrar Perfil
-    edit:
-     title: Editar Perfil
-    show:
-     title: "Perfil: %{user_name}"
-     edit: 'Editar perfil'
-     location: "Localização: %{location}"
-     bio: "Bio: %{bio}"
-     success: Email confirmado com sucesso, obrigado!
-     confirmations:
- subjects:
-   new:
-    title: Cadastrar Quarto
-   edit:
-    title: Editar Quarto
-   index:
-    title: 'Quartos disponíveis'
-    description: 'Descrição'
-    search_results: 'Resultados da busca'
-   search:
-    search_for: 'Buscar por...'
-   subject:
-    owner_html: '&mdash; %{owner} (%{when})'
-    edit: 'Editar'
-    destroy: 'Remover'
-   review:
-    login_to_review: 'Faça o login para avaliar quartos'
-    stats:
-      one: '(1 avaliação)'
-      other: '(%{count} avaliações)'
- user_sessions:
-   new:
-    title: 'Login'
-    sign_up: 'Cadastre-se'
-    message: "Realize o login para iniciar a sua sessão"
-    forgot: "Esqueci a minha senha"
-    remember: "Lembre-se de mim"
 
  dialogs:
-   destroy: 'Você tem certeza que quer remover?'
-
- signup_mailer:
-   confirm_email:
-     subject: 'Colcho.net - Confirme seu email'
-     title: 'Seja bem vindo ao Colcho.net!'
-     body: |
-          Seja bem vindo ao Colcho.net, %{full_name}.
-          O Colcho.net é o lugar ideal para você alugar aquele quarto
-          sobrando na sua casa e ainda conhecer gente do mundo inteiro.
-     confirm_link_html: 'Para você começar a usar o site, acesse o link: %{link}'
-     thanks_html: 'Obrigado por se cadastrar no %{link}.'
-
- links:
-   back: Voltar
-
- layout:
-   subjects: Assuntos
-   signup: Cadastro
-   signup: Cadastro
-   signin: Login
-   my_profile: Meu perfil
-   signout: Logout
-
- general:
-   form_error: Há erros no formulário, por favor verifique.
-
-
- activerecord:
-  models:
-    user: Usuário
-    subject: Assunto
-    review: Avaliação
-  attributes:
-    user:
-      bio: Biografia
-      email: Email
-      full_name: Nome completo
-      location: Localização
-      password: Senha
-      password_confirmation: Confirme sua senha
-    subject:
-      description: Descrição
-    user_session:
-      email: Email
-      password: Senha
-
+  inactivate: 'Are you sure you want to inactivate?'
+  activate: 'Are you sure you want to activate?'
+  remove_confim: 'Are you sure you want to remove the register?'
 
  flash:
-  notice :
-   signed_in: Login efetuado com sucesso.
-   signed_out: Logout efetuado com sucesso. Até logo!.
-  alert :
-   needs_login: Para continuar, você precisa está logado.
+  notice:
+   signed_in: Login done successfully.
+   signed_out: Logout done successfully. See you soon!.
+   save_success: Register saved with sucess.
+   inactivate_success: Register inactivated with sucess.
+   activate_success: Registro activated with sucess.
+  alert:
+   needs_login: To continue, you need to be logged.
+
+ button:
+  new: 'F7 - New'
+  search: 'F9 - Search'
+  index: 'F8 - Open'
+  save: 'F12 - Save'
+  edit: 'F10 - Edit'
+  inactivate: 'Inactivate'
+  activate: 'Activate'
+
+ enums:
+  type_content_person:
+   author: Author
+   director: Director
+   writer: Writer
+   actor: Actor
+   speaker: Speaker
+  summary_type:
+   summary: Summary
+   annotation: Annotation
+   article: Article
+   report: Report
+   text: Text
+  quotation_type:
+   insight: Insight
+   quote: Quotation
+  quotation_indication:
+   avoid: To Avoid
+   follow: To Follow
+
  errors:
   messages:
-   invalid_login: 'User or Password are invalid'
+   invalid_login: 'User or password invalid'
+
  helpers:
   submit:
    user_session:
-    create: 'Entrar'
+    create: 'Save'
+   subject:
+    create: "Save"
+    update: "Save"
+
+ links:
+  back: Return
+
+ general:
+  form_error: There are erros in the form, please check it.
+
+ layout:
+  subjects: Subject
+  content_genres: Content Genre
+  content_types:  Content Type
+  contents: Content
+  people: Person/Artist
+  culture: Culture
+  signup: Sign up
+  signin: Sign in
+  my_profile: My profile
+  signout: Logout
+  profile: Profile
+  summaries: Annotation/Summary
+  quotations: Quotation/Insight
+  motivated: "Improve yourself as a person every moment, get yourself inspired:"
+
+ home:
+  index:
+   title: Bem vindo
+
+ users:
+  new:
+   title: Add Profile
+   message: Make your registration.
+   already_signup: I am already registered.
+   agree_terms: I agree with the terms.
+  edit:
+   title: Edit Profile
+  show:
+   title: User
+   profile: "Profile: %{user_name}"
+   edit: 'Edit profile'
+   location: "Location: %{location}"
+   bio: "Bio: %{bio}"
+   success: Email confirmed with sucess, thanks!
+   confirmations:
+
+ subjects:
+  create:
+   success: 'Subject created with sucess'
+  new:
+   title: Add Subject
+   new: 'New'
+   index: 'Open'
+  edit:
+   title: Edit Subject
+   show: 'Show'
+   new: 'New'
+   index: 'Open'
+   submit: 'Save'
+  index:
+   title: 'List Subjects'
+   search_results: 'Search results'
+   description: "Description"
+  search:
+   search_for: 'Search for...'
+   inactive: "Inactive?"
+   description: "Description"
+  show:
+   title: "Subject"
+   description: "Description: %{description}"
+   edit: 'Edit'
+   new: 'New'
+   index: 'Open'
+  subject:
+   owner_html: '&mdash; %{owner} (%{when})'
+   edit: 'Edit'
+   destroy: 'Remove'
+
+ content_genres:
+  new:
+   title: Add Content Genre
+  edit:
+   title: Edit Content Genre
+   submit: 'Save'
+  index:
+   title: 'List Content Genres'
+   search_results: 'Search results'
+   description: "Description"
+  search:
+   search_for: 'Search for...'
+   inactive: "Inactive?"
+   description: "Description"
+  show:
+   title: "Content Genre"
+   description: "Description: %{description}"
+
+ content_types:
+  new:
+   title: 'Add Content Type'
+  edit:
+   title: 'Edit Content Type'
+   submit: 'Save'
+  index:
+   title: 'List Content Types'
+   search_results: 'Search results'
+   description: "Description"
+  search:
+   search_for: 'Search for...'
+   inactive: "Inactive?"
+   description: "Description"
+  show:
+   title: " Content Type"
+   description: "Description: %{description}"
+  form:
+   printed: "Press"
+   audiovisual: "Audiovisual"
+   song: "Music/Song"
+   play: "Presentation"
+
+ contents:
+  new:
+   title: Add Content
+  edit:
+   title: Edit Content
+  person:
+   name: Name
+  index:
+   title: 'List Content'
+   search_results: 'Search results'
+   description: "Description"
+  search:
+   search_for: 'Search for...'
+   inactive: "Inactive?"
+   description: "Description"
+  show:
+   title: "Content"
+   description: "Description: %{description}"
+  content_person_fields:
+   remove_person: Remove Person
+  form:
+   content_people: Related Person/Artist
+   add_person: Add Person
+
+ people:
+  new:
+   title: Add Person/Artist
+  edit:
+   title: Editar Person/Artist
+   submit: 'Save'
+  index:
+   title: 'List Person/Artist'
+   search_results: 'Search results'
+   name: "Name"
+  search:
+   search_for: 'Search for...'
+   inactive: "Inactive?"
+   name: "Name"
+  show:
+   title: "Person/Artist"
+   name: "Name: %{name}"
+
+ summaries:
+  new:
+   title: Add Annotation/Summary
+   summary_contents: Related Content
+   add_content: Add Content
+  edit:
+   title: Edit Annotation/Summary
+   summary_contents: Related Content
+   add_content: Add Content
+  index:
+   title: 'List Annotations/Summaries'
+   search_results: 'Search results'
+   description: "Description"
+  search:
+   inactive: "Inactive?"
+   description: "Description"
+  show:
+   title: "Annotation/Summary"
+   description: "Description: %{description}"
+  summary_content_fields:
+   remove_content: Remove Content
+  form:
+   summary_contents: Related Content
+   add_content: Add Content
+   summary_people: Related Person/Artist
+   add_person: Add Person
+
+ quotations:
+  new:
+   title: Add Quotation/Insight
+   quotation_people: Related Person/Artist
+   add_person: Add Person
+  edit:
+   title: Edit Quotation/Insight
+   quotation_people: Related Person/Artist
+   add_person: Add Person
+  index:
+   title: 'List Quotations/Insights'
+   search_results: 'Search results'
+   quotation: "Quotation"
+  search:
+   inactive: "Inactive?"
+   quotation: "Quotation"
+  show:
+   title: "Quotation/Insight"
+   quotation: "Quotation: %{quotation}"
+
+ user_sessions:
+  new:
+   title: 'Sign in'
+   sign_up: 'Sign up'
+   message: "Sign in to initialize your session."
+   forgot: "Forgot my password"
+   remember: "Remember me"
+
+ signup_mailer:
+  confirm_email:
+   subject: 'Lifeproject - Confirm your email'
+   title: 'Welcome to the LifeProject!'
+   body: |
+          Welcome to the LifeProject, %{full_name}.
+          The LifeProject it the ideal place for you planner, dream and execute the goals that you have for your life.
+   confirm_link_html: 'To start to use the site, access the link: %{link}'
+   thanks_html: 'Thank you to sign up in the %{link}.'
+
+ activerecord:
+  models:
+   user: User
+   subject: Subject
+   content_genre: Content Genre
+   content_type: Content Type
+   content: Content
+   person: Person
+  attributes:
+   user:
+    bio: Biography
+    email: Email
+    full_name: Full Name
+    location: Location
+    password: Password
+    password_confirmation: Password Confirmation
+    picture: Picture
+   subject:
+    description: Description
+   content_genre:
+    description: Description
+   content_type:
+    description: Description
+    feature: Feature
+   content:
+    description: Description
+    content_type_id: Type
+    content_genre_id: Genre
+    synopsis: Synopsis
+    book_publisher: Publisher
+    book_date_published: Date Published
+    movie_company: Company (Production)
+    movie_date_released: Date Releases
+    movie_time: Length (min)
+   content_person:
+    person: Name
+    type_content_person: Person Type
+   person:
+    name: Name
+    biography: Biography
+    type_person: Type
+    main_thoughts: Main Thoughts
+   summary:
+    description: Description
+    content_id: Content
+    content: Content
+    type_summary: Type
+    text: Text
+   summary_content:
+    content: Content
+   summary_person:
+    person: Name
+    type_person: Person Type
+   quotation:
+    quotation: Quotation
+    content_id: Content
+    content: Content
+    order: Order
+    page_initial: Initial Page
+    page_final: Final Page
+    type_quote: Type
+    indication: Indication for Life
+   quotation_person:
+    person: Name
+    type_person: Person Type
+   user_session:
+    email: Email
+    password: Password

@@ -87,7 +87,7 @@ pt-BR:
 
  home:
   index:
-  title: Bem vindo
+   title: Bem vindo
 
  users:
   new:
@@ -255,7 +255,7 @@ pt-BR:
    add_person: Adicionar Pessoa
   edit:
    title: Editar Citação/Insight
-   content_people: Pessoa/Artista Relacionado
+   quotation_people: Pessoa/Artista Relacionado
    add_person: Adicionar Pessoa
   index:
    title: 'Listar Citações/Insights'
