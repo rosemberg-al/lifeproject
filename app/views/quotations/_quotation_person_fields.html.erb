@@ -33,42 +33,5 @@
 
 
 
-        $("#quotation_quotation_people_attributes_<%=f.index%>_person_name").autocomplete({
-          source: function( request, response ) {
-            $.ajax({
-              url: "<%= person_json_path %>",
-              dataType: "json",
-              method : 'GET',
-              data: {
-                name: request.term
-              },
-              success: function( data ) {
-                response( data);
-              },
-              error : function(xhr, status) {
-                alert('It happened some error, please try again later...');
-                }
-            });
-          },
-          minLength: 3,
-          select: function( event, ui ) {
-
-            $(this).val(ui.item.name);
-            $("#quotation_quotation_people_attributes_<%=f.index%>_person_id").val(ui.item.id);
-
-          },
-          change: function( event, ui ) {
-            if(ui.item){
-
-            }else{
-              //caso nao selecione nenhuma linha, limpa tudo
-              // f.options[:child_index] = f.index  -> it works the same way to get the child index form
-              $("#quotation_quotation_people_attributes_<%=f.index%>_person_id").val('');
-              $(this).val('');
-
-            }
-          }
-        });
-
 
 <% end %>

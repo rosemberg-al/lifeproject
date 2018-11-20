@@ -223,6 +223,8 @@ $(function() {
 //research if there is another better alternative
 $(document).on("cocoon:after-insert",   function(e, inserted_item) {
 
+
+  $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
     //var oi=inserted_item.find('input:hidden:eq(0)').attr("id");
     //console.log("A");
     //console.log(oi);
