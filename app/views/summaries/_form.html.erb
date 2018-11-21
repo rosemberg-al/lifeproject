@@ -109,8 +109,14 @@ $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remov
 
 $(function () {
 
+  // Replace the textarea  with a CKEditor
+  // instance, using default configuration.
+  
+   CKEDITOR.replace('summary_text');
+
+
    //bootstrap WYSIHTML5 - text editor
-   $('#summary_text').wysihtml5()
+   //$('#summary_text').wysihtml5()
  })
 
 

@@ -360,6 +360,8 @@
 
 
 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<!-- added here because it had some conflicts when it was set in the asset pipeline -->
+<script src="/js/ckeditor/ckeditor.js"></script>
 <script>
 <%= yield :javascript %>
 </script>
