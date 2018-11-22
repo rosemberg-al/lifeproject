@@ -111,8 +111,13 @@ $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remov
 
 $(function () {
 
+  // Replace the textarea  with a CKEditor
+  // instance, using default configuration.
+
+   CKEDITOR.replace('quotation_quotation');
+
    //bootstrap WYSIHTML5 - text editor
-   $('#quotation_quotation').wysihtml5()
+  // $('#quotation_quotation').wysihtml5()
  })
 
 
