@@ -242,10 +242,12 @@ pt-BR:
    description: "Descrição: %{description}"
   summary_content_fields:
    remove_content: Remover Conteúdo
+  summary_person_fields:
+   remove_person: Remover Pessoa
   form:
    summary_contents: Conteúdo Relacionado
+   summary_people: Pessoa Relacionada
    add_content: Adicionar Conteúdo
-   summary_people: Pessoa/Artista Relacionado
    add_person: Adicionar Pessoa
 
  quotations:

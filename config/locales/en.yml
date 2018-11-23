@@ -242,11 +242,13 @@ en:
    description: "Description: %{description}"
   summary_content_fields:
    remove_content: Remove Content
+  summary_person_fields:
+   remove_person: Remove Person
   form:
    summary_contents: Related Content
+   summary_people: Related Person
    add_content: Add Content
-   summary_people: Related Person/Artist
-   add_person: Add Person
+   add_person: Adicionar Person
 
  quotations:
   new:
