@@ -253,12 +253,8 @@ pt-BR:
  quotations:
   new:
    title: Cadastrar Citação/Insight
-   quotation_people: Pessoa/Artista Relacionado
-   add_person: Adicionar Pessoa
   edit:
    title: Editar Citação/Insight
-   quotation_people: Pessoa/Artista Relacionado
-   add_person: Adicionar Pessoa
   index:
    title: 'Listar Citações/Insights'
    search_results: 'Resultados da busca'
@@ -269,6 +265,11 @@ pt-BR:
   show:
    title: "Citação/Insight"
    quotation: "Citação: %{quotation}"
+  quotation_person_fields:
+   remove_person: Remover Pessoa
+  form:
+    quotation_people: Pessoa/Artista Relacionado
+    add_person: Adicionar Pessoa
 
  user_sessions:
   new:

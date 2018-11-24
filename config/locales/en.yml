@@ -253,12 +253,8 @@ en:
  quotations:
   new:
    title: Add Quotation/Insight
-   quotation_people: Related Person/Artist
-   add_person: Add Person
   edit:
    title: Edit Quotation/Insight
-   quotation_people: Related Person/Artist
-   add_person: Add Person
   index:
    title: 'List Quotations/Insights'
    search_results: 'Search results'
@@ -269,6 +265,11 @@ en:
   show:
    title: "Quotation/Insight"
    quotation: "Quotation: %{quotation}"
+  quotation_person_fields:
+   remove_person: Remove Person
+  form:
+   quotation_people: Related Person/Artist
+   add_person: Add Person
 
  user_sessions:
   new:
