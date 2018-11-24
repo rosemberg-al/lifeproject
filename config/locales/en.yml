@@ -44,6 +44,8 @@ en:
    article: Article
    report: Report
    text: Text
+   script: Script
+   tutorial: Tutorial
   quotation_type:
    insight: Insight
    quote: Quotation

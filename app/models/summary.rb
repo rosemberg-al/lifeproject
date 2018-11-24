@@ -17,7 +17,8 @@
 
 class Summary < ApplicationRecord
 
-  enum summary_type: { summary: "Summary", annotation: "Annotation", article: "Article", report: "Report", text: "Text"}
+  enum summary_type: { summary: "Summary", annotation: "Annotation", article: "Article", report: "Report",
+    text: "Text", script: "Script", tutorial: "Tutorial"}
 
   scope :most_recent, -> {
      order 'created_at desc'

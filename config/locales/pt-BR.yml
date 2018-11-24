@@ -44,6 +44,8 @@ pt-BR:
    article: Artigo
    report: Relatório
    text: Texto
+   script: Script
+   tutorial: Tutorial
   quotation_type:
    insight: Insight
    quote: Citação
