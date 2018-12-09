@@ -101,10 +101,11 @@ class QuotationsController < ApplicationController
        attributes[:order]=amount+1
     end
 
-
-    attributes[:quotation_people_attributes].each do |key,cp|
-      if (!cp[:person_id].empty? && cp[:id].nil?)
-        cp[:user_id]=current_user.id
+    unless attributes[:quotation_people_attributes].nil? 
+      attributes[:quotation_people_attributes].each do |key,cp|
+        if (!cp[:person_id].empty? && cp[:id].nil?)
+          cp[:user_id]=current_user.id
+        end
       end
     end
 

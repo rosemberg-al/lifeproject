@@ -85,15 +85,19 @@ class SummariesController < ApplicationController
   def update
 
     attributes = summary_params.clone
-    attributes[:summary_contents_attributes].each do |key,cp|
-      if (!cp[:content_id].empty? && cp[:id].nil?)
-        cp[:user_id]=current_user.id
+    unless attributes[:summary_contents_attributes].nil?
+      attributes[:summary_contents_attributes].each do |key,cp|
+        if (!cp[:content_id].empty? && cp[:id].nil?)
+          cp[:user_id]=current_user.id
+        end
       end
     end
 
-    attributes[:summary_people_attributes].each do |key,cp|
-      if (!cp[:person_id].empty? && cp[:id].nil?)
-        cp[:user_id]=current_user.id
+    unless attributes[:summary_people_attributes].nil?
+      attributes[:summary_people_attributes].each do |key,cp|
+        if (!cp[:person_id].empty? && cp[:id].nil?)
+          cp[:user_id]=current_user.id
+        end
       end
     end
 
