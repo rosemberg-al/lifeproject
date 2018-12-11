@@ -15,11 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-class Content < ApplicationRecord
-
-  scope :most_recent, -> {
-     order 'created_at desc'
-  }
+class ContentSubject < ApplicationRecord
 
   scope :active, -> {
     where(inactivated_at: nil)
@@ -29,31 +25,16 @@ class Content < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
-  validates_presence_of :description, :synopsis, :content_type_id, :content_genre_id
-  validates_length_of :description, :minimum => 3, :allow_blank => false
-  validates_length_of :synopsis, :minimum => 3, :allow_blank => false
+  #validates_presence_of :content_id, :person_id
+  #não ser dever colocar o id do mestre na validação da tela de mestre detalhe
+  validates_presence_of  :subject_id
 
   belongs_to :user
-
-  has_many :content_people
-  has_many :people, through: :content_people
-  #belongs_to :content_type
-
-
-  has_many :summary_contents
-  has_many :summaries, through: :summary_contents
-
-  has_many :content_subjects
-  has_many :subjects, through: :content_subjects
-
-
-
-  accepts_nested_attributes_for :content_people, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :content_subjects, reject_if: :all_blank, allow_destroy: true
-
+  belongs_to :subject
+  belongs_to :content
 
 
   #virtual attributes
-  attr_accessor :type_feature
+  attr_accessor :subject_description
 
 end

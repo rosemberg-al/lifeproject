@@ -1,0 +1,18 @@
+
+  <div class="row col-md-12">
+    <div class="col-md-4 ">
+
+        <%= f.label :subject %><br>
+        <%= f.hidden_field :subject_id %>
+        <%= f.text_field :subject_description, :class => "form-control" %>
+        <%= error_tag @content, "content_subjects.subject_id" %>
+    </div>
+
+
+
+  <div class="col-md-4 ">
+  <br>
+  <%=link_to_remove_association t('.remove_subject'), f,
+  {:wrapper_class=> 'row', :class=> 'btn btn-primary'} %>
+  </div>
+  </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_24_003608) do
+ActiveRecord::Schema.define(version: 2018_12_11_160750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(version: 2018_11_24_003608) do
 
 # Could not dump table "content_people" because of following StandardError
 #   Unknown type 'content_person_type' for column 'type_content_person'
+
+  create_table "content_subjects", force: :cascade do |t|
+    t.bigint "content_id"
+    t.bigint "user_id"
+    t.bigint "subject_id"
+    t.datetime "inactivated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_subjects_on_content_id"
+    t.index ["subject_id"], name: "index_content_subjects_on_subject_id"
+    t.index ["user_id"], name: "index_content_subjects_on_user_id"
+  end
 
 # Could not dump table "content_types" because of following StandardError
 #   Unknown type 'content_type_features' for column 'feature'
@@ -101,6 +113,9 @@ ActiveRecord::Schema.define(version: 2018_11_24_003608) do
   add_foreign_key "content_people", "contents"
   add_foreign_key "content_people", "people"
   add_foreign_key "content_people", "users"
+  add_foreign_key "content_subjects", "contents"
+  add_foreign_key "content_subjects", "subjects"
+  add_foreign_key "content_subjects", "users"
   add_foreign_key "content_types", "users"
   add_foreign_key "contents", "content_genres"
   add_foreign_key "contents", "content_types"

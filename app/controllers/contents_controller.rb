@@ -47,6 +47,7 @@ class ContentsController < ApplicationController
   def new
     @content = current_user.contents.build
     2.times do @content.content_people.build end
+    2.times do @content.content_subjects.build end
 
 
     #logger.debug "type: #{@content.content_type.inspect}"
@@ -76,6 +77,10 @@ class ContentsController < ApplicationController
 
     @content.content_people.map do |cp|
       cp.person_name=cp.person.name
+    end
+
+    @content.content_subjects.map do |cs|
+      cs.subject_description=cs.subject.description
     end
 
     ##logger.debug "@@@@: #{t.inspect}"
@@ -119,6 +124,10 @@ class ContentsController < ApplicationController
     @content.content_people.map do |cp|
       cp.user_id=current_user.id
     end
+
+    @content.content_subjects.map do |cs|
+      cs.user_id=current_user.id
+    end
    logger.debug "OBJECTTTT: #{@content.content_people.inspect}"
     #@content = Content.new(content_params)
     #@content.user_id = current_user.id
@@ -152,10 +161,19 @@ class ContentsController < ApplicationController
   def update
 
     attributes = content_params.clone
-    attributes[:content_people_attributes].each do |key,cp|
-      
-      if (!cp[:person_id].empty? && cp[:id].nil?)
-        cp[:user_id]=current_user.id
+    if attributes[:content_people_attributes]
+      attributes[:content_people_attributes].each do |key,cp|
+        if (!cp[:person_id].empty? && cp[:id].nil?)
+          cp[:user_id]=current_user.id
+        end
+      end
+    end
+
+    if attributes[:content_subjects_attributes]
+      attributes[:content_subjects_attributes].each do |key,cs|
+        if (!cs[:subject_id].empty? && cs[:id].nil?)
+          cs[:user_id]=current_user.id
+        end
       end
     end
 
@@ -226,7 +244,8 @@ class ContentsController < ApplicationController
       :book_publisher,:book_date_published,
       :movie_company,:movie_date_released,:movie_time,
       :type_feature,
-      content_people_attributes: [:id,:person_id, :type_content_person, :_destroy, :person_name])
+      content_people_attributes: [:id,:person_id, :type_content_person, :_destroy, :person_name],
+      content_subjects_attributes: [:id,:subject_id, :_destroy, :subject_description])
     end
 
     def content_types_list

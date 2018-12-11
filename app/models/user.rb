@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :content_people , :dependent => :destroy
   has_many :summaries , :dependent => :destroy
   has_many :quotations , :dependent => :destroy
+  has_many :content_subjects , :dependent => :destroy
 
 
   def self.authenticate(email, password)

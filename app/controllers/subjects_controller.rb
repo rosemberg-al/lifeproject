@@ -24,6 +24,22 @@ class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show]
   before_action :set_subject_edit, only: [:edit, :update, :destroy]
 
+  def json
+
+   if params.has_key?(:description) && !params[:description].nil?
+     description=params[:description]
+     #@people=Person.active.select("id, name").where("name like '%#{name}%'").limit(30)
+
+     @subjects=current_user.subjects.active.select("id, description as label").where("description ilike '%#{description}%'").limit(30)
+     logger.debug "LISTA: #{@subjects.inspect}"
+     #head :ok
+     render :json => @subjects
+   else
+     head :ok
+   end
+
+  end
+
   def new
     @subject = current_user.subjects.build
     #@subject = Subject.new

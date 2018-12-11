@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   scope '/json' do
     get :person, action: :json, controller: :people , as: :person_json
     get :content, action: :json, controller: :contents , as: :content_json
+    get :subject, action: :json, controller: :subjects , as: :subject_json
   end
 
   get '/:locale' => 'home#index', :locale => LOCALES

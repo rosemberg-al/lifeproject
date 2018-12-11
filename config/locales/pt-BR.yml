@@ -201,9 +201,13 @@ pt-BR:
    description: "Descrição: %{description}"
   content_person_fields:
    remove_person: Remover Pessoa
+  content_subject_fields:
+   remove_subject: Remover Assunto
   form:
    content_people: Pessoa/Artista Relacionado
    add_person: Adicionar Pessoa
+   content_subjects: Assuntos Relacionados
+   add_subject: Adicionar Assunto
 
  people:
   new:
@@ -328,6 +332,8 @@ pt-BR:
    content_person:
     person: Nome
     type_content_person: Tipo Pessoa
+   content_subject:
+    subject: Assunto
    person:
     name: Nome
     biography: Biografia

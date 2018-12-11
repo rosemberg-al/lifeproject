@@ -102,6 +102,24 @@
   </div>
 </div>
 
+<div class="box box-danger">
+  <div class="box box-default">
+    <div class="row col-md-12">
+      <div class="row col-md-12">
+        <h4><%= t '.content_subjects' %></h4>
+      </div>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <%= f.fields_for :content_subjects do |cp| %>
+           <%= render 'content_subject_fields', f: cp %>
+        <% end %>
+      </div>
+      <br>
+      <%= link_to_add_association t('.add_subject'), f, :content_subjects, :class => 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
 
 
 
@@ -164,7 +182,7 @@ function change_type(){
 
 
 $(function() {
-  $("[id^=content_content_people_attributes_]").on("focus", function() {
+  $("[id$=_person_name]").on("focus", function() {
     $(this).autocomplete({
 
       source: function( request, response ) {
@@ -203,13 +221,77 @@ $(function() {
           //caso nao selecione nenhuma linha, limpa tudo
 
 
+
           $(this).val('');
+
+
+          var idAutoComplete=$(this).attr("id");
+          idAutoComplete=idAutoComplete.replace("content_content_people_attributes_","");
+          idAutoComplete=idAutoComplete.replace("_person_name","");
+          console.log(idAutoComplete);
+
+          $("#content_content_people_attributes_"+idAutoComplete+"_person_id").val("");
         }
       }
     });
 });
 });
 
+
+
+
+$(function() {
+  $("[id$=_subject_description]").on("focus", function() {
+    $(this).autocomplete({
+
+      source: function( request, response ) {
+        $.ajax({
+          url: "<%= subject_json_path %>",
+          dataType: "json",
+          method : 'GET',
+          data: {
+            description: request.term
+          },
+          success: function( data ) {
+            response( data);
+          },
+          error : function(xhr, status) {
+            alert('It happened some error, please try again later...');
+            }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+
+        $(this).val(ui.item.label);
+
+        var idAutoComplete=$(this).attr("id");
+        idAutoComplete=idAutoComplete.replace("content_content_subjects_attributes_","");
+        idAutoComplete=idAutoComplete.replace("_subject_description","");
+        console.log(idAutoComplete);
+
+        $("#content_content_subjects_attributes_"+idAutoComplete+"_subject_id").val(ui.item.id);
+        console.log($("#content_content_subjects_attributes_"+idAutoComplete+"_subject_id").val()+"A");
+      },
+      change: function( event, ui ) {
+        if(ui.item){
+
+        }else{
+          //caso nao selecione nenhuma linha, limpa tudo
+
+
+          $(this).val('');
+
+          var idAutoComplete=$(this).attr("id");
+          idAutoComplete=idAutoComplete.replace("content_content_subjects_attributes_","");
+          idAutoComplete=idAutoComplete.replace("_subject_description","");
+          $("#content_content_subjects_attributes_"+idAutoComplete+"_subject_id").val("");
+
+        }
+      }
+    });
+});
+});
 
 
 
@@ -231,7 +313,7 @@ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
     //inserted_item.replace('new_content_item','1000000000000000')
 
     $(function() {
-      $("[id^=content_content_people_attributes_]").on("focus", function() {
+      $("[id$=_person_name]").on("focus", function() {
         $(this).autocomplete({
 
           source: function( request, response ) {
@@ -277,6 +359,71 @@ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
         });
     });
   });
+
+
+
+
+
+
+
+
+
+
+  $(function() {
+    $("[id$=_subject_description]").on("focus", function() {
+      $(this).autocomplete({
+
+        source: function( request, response ) {
+          $.ajax({
+            url: "<%= subject_json_path %>",
+            dataType: "json",
+            method : 'GET',
+            data: {
+              description: request.term
+            },
+            success: function( data ) {
+              response( data);
+            },
+            error : function(xhr, status) {
+              alert('It happened some error, please try again later...');
+              }
+          });
+        },
+        minLength: 3,
+        select: function( event, ui ) {
+
+          $(this).val(ui.item.label);
+
+          var idAutoComplete=$(this).attr("id");
+          idAutoComplete=idAutoComplete.replace("content_content_subjects_attributes_","");
+          idAutoComplete=idAutoComplete.replace("_subject_description","");
+          console.log(idAutoComplete);
+
+          $("#content_content_subjects_attributes_"+idAutoComplete+"_subject_id").val(ui.item.id);
+          console.log($("#content_content_subjects_attributes_"+idAutoComplete+"_subject_id").val()+"A");
+        },
+        change: function( event, ui ) {
+          if(ui.item){
+
+          }else{
+            //caso nao selecione nenhuma linha, limpa tudo
+
+
+            $(this).val('');
+
+            var idAutoComplete=$(this).attr("id");
+            idAutoComplete=idAutoComplete.replace("content_content_subjects_attributes_","");
+            idAutoComplete=idAutoComplete.replace("_subject_description","");
+            $("#content_content_subjects_attributes_"+idAutoComplete+"_subject_id").val("");
+
+          }
+        }
+      });
+  });
+  });
+
+
+
 
 } )
 <% end %>
