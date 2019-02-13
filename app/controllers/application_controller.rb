@@ -79,4 +79,65 @@ class ApplicationController < ActionController::Base
   def require_no_authentication
     redirect_to root_path if user_signed_in?
   end
+
+  def mount_argument(arguments)
+
+    name=arguments[:name]
+    args=arguments[:arg]
+    values=arguments[:values]
+    condition=""
+    value={}
+    data={}
+
+  #  @person={"name"=>'',"inactive"=>'N'}
+    if values.has_key? :q
+      session[name]=values
+    elsif session.has_key? name
+          values=session[name]
+          #values[:page]=@person["page"]
+          params[:q]="q"
+
+    end
+
+
+    if values.has_key? :q
+
+      args.each do |arg|
+
+        logger.debug "UHUU #{arg[:argument]} ->#{values[name][arg[:argument]]}-> #{values.inspect}"
+        data[arg[:argument]]=values[name][arg[:argument]]
+
+       unless values[name][arg[:argument]].empty?
+          if(condition.empty?)
+            condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+
+            if(arg[:type]=="like" || arg[:type]=="ilike")
+              value[arg[:argument]]="%#{values[name][arg[:argument]]}%"
+            else
+              value[arg[:argument]]=values[name][arg[:argument]]
+            end
+
+          else
+            condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+
+            if(arg[:type]=="like" || arg[:type]=="ilike")
+              value[arg[:argument]]="%#{values[name][arg[:argument]]}%"
+            else
+              value[arg[:argument]]=values[name][arg[:argument]]
+            end
+
+          end
+        end
+      end
+    else
+      args.each do |arg|
+        data[arg[:argument]]=""
+      end
+    end
+
+    return {condition: condition, value: value, data: data}
+
+  end
+
+
 end

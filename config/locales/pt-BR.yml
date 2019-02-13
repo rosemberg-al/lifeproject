@@ -52,6 +52,9 @@ pt-BR:
   quotation_indication:
    avoid: A evitar
    follow: A seguir
+  type_person:
+    real: Real
+    fictional: Ficcional
 
  errors:
   messages:
@@ -223,6 +226,7 @@ pt-BR:
    search_for: 'Buscar por...'
    inactive: "Inativo?"
    name: "Nome"
+   type_person: "Tipo Pessoa"
   show:
    title: "Pessoa/Artista"
    name: "Nome: %{name}"

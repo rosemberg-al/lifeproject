@@ -89,10 +89,23 @@ class PeopleController < ApplicationController
 
   def index
 
+    argument={}
+    argument[:name]=:person
+    argument[:arg]=[]
+    argument[:arg]<<{argument: :name, type: "ilike"}
+    argument[:arg]<<{argument: :type_person, type: "="}
+    argument[:values]=params
+    result=mount_argument(argument)
+    condition=result[:condition]
+    value=result[:value]
+    @person=result[:data]
+    @person[:inactive]=params[:person][:inactive]
+    logger.debug "LISTAAA: #{result.inspect} #{argument.inspect} #{params.inspect}"
+=begin
     @person={"name"=>'',"inactive"=>'N'}
     if params.has_key? :q
       @person=person_params_index
-      @person["page"]=params[:page]
+      #@person["page"]=params[:page]
       session[:person]=@person
     else
         if session.has_key? :person
@@ -104,17 +117,34 @@ class PeopleController < ApplicationController
 
 
     if params.has_key? :q
-      if @person["inactive"]=="Y"
+
+      condition=""
+      value={}
+      if(@person["name"] &&  !@person["name"].empty?)
+        condition=" name ilike :name "
+        value[:name]="%#{@person["name"]}%"
+        if (@person["type_person"] && !@person["type_person"].empty?)
+          condition+=" and type_person = :type_person "
+          value[:type_person]=@person["type_person"]
+        end
+      elsif(@person["type_person"] && !@person["type_person"].empty?)
+        condition="  type_person = :type_person "
+        value[:type_person]=@person["type_person"]
+      end
+
+=end
+   if params.has_key? :q
+      if params["inactive"]=="Y"
         @people = current_user.people
         .inactive
-        .where([" name ilike ? ","%#{@person["name"]}%"])
+        .where(condition,value)
         .most_recent
         .page(params[:page])
         .per(PER_PAGE)
       else
         @people = current_user.people
         .active
-        .where([" name ilike ? ","%#{@person["name"]}%"])
+        .where(condition,value)
         .most_recent
         .page(params[:page])
         .per(PER_PAGE)
@@ -144,7 +174,7 @@ class PeopleController < ApplicationController
     end
 
     def person_params_index
-      params.require(:person).permit(:name,:inactive)
+      params.require(:person).permit(:name,:inactive,:page,:type_person)
     end
 
 end
