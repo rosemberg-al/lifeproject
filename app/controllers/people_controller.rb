@@ -17,7 +17,7 @@
 
 class PeopleController < ApplicationController
 
-  PER_PAGE = 50
+  PER_PAGE = 1
 
   before_action :require_authentication
   before_action :set_person, only: [:show]
@@ -89,18 +89,24 @@ class PeopleController < ApplicationController
 
   def index
 
-    argument={}
-    argument[:name]=:person
-    argument[:arg]=[]
-    argument[:arg]<<{argument: :name, type: "ilike"}
-    argument[:arg]<<{argument: :type_person, type: "="}
-    argument[:values]=params
+
+
+    argument={name: :person,
+              arg:[{argument: "name", type: "ilike"},{argument: "type_person", type: "="}],
+              values: person_params_index,
+              page: params[:page]}
+    # argument[:name]=:person
+    # argument[:arg]=[]
+    # argument[:arg]<<{argument: :name, type: "ilike"}
+    # argument[:arg]<<{argument: :type_person, type: "="}
+    # argument[:values]=params
     result=mount_argument(argument)
-    condition=result[:condition]
-    value=result[:value]
-    @person=result[:data]
-    @person[:inactive]=params[:person][:inactive]
-    logger.debug "LISTAAA: #{result.inspect} #{argument.inspect} #{params.inspect}"
+  #  condition=result[:condition]
+    #value=result[:value]
+    @person=params=result[:params]
+    #@person=params #result[:data]
+    #@person[:inactive]=params[:inactive]
+    logger.debug "LISTAAA: #{result.inspect} #{argument.inspect} #{params.inspect} -----#{@person.inspect}"
 =begin
     @person={"name"=>'',"inactive"=>'N'}
     if params.has_key? :q
@@ -133,18 +139,22 @@ class PeopleController < ApplicationController
       end
 
 =end
-   if params.has_key? :q
+
+   logger.debug "PAGE: #{params[:page]} #{PER_PAGE} "
+   if (params.has_key?(:q))
       if params["inactive"]=="Y"
+        #p "YYYYYYYYY-#{params[:person][:inactive]}"
         @people = current_user.people
         .inactive
-        .where(condition,value)
+        .where(result[:condition],result[:value])
         .most_recent
         .page(params[:page])
         .per(PER_PAGE)
       else
+        #p "NNNNNNNNN-#{params[:inactive]}"
         @people = current_user.people
         .active
-        .where(condition,value)
+        .where(result[:condition],result[:value])
         .most_recent
         .page(params[:page])
         .per(PER_PAGE)
@@ -173,8 +183,13 @@ class PeopleController < ApplicationController
       params.require(:person).permit(:name,:type_person,:biography,:main_thoughts)
     end
 
-    def person_params_index
-      params.require(:person).permit(:name,:inactive,:page,:type_person)
-    end
+     def person_params_index
+      params.require(:person).permit(:name,:inactive,:type_person).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :person
+
+      # params.permit(:q) #if params.has_key? :person
+       #a.merge(params.permit(:q))
+
+       #par<<params.permit(:q)
+     end
 
 end

@@ -82,6 +82,7 @@ class ApplicationController < ActionController::Base
 
   def mount_argument(arguments)
 
+
     name=arguments[:name]
     args=arguments[:arg]
     values=arguments[:values]
@@ -89,14 +90,12 @@ class ApplicationController < ActionController::Base
     value={}
     data={}
 
-  #  @person={"name"=>'',"inactive"=>'N'}
-    if values.has_key? :q
+    if (values && values.has_key?(:q))
       session[name]=values
     elsif session.has_key? name
           values=session[name]
-          #values[:page]=@person["page"]
-          params[:q]="q"
-
+          values[:page]= arguments[:page]? arguments[:page]:0
+          values[:q]="q"
     end
 
 
@@ -104,26 +103,25 @@ class ApplicationController < ActionController::Base
 
       args.each do |arg|
 
-        logger.debug "UHUU #{arg[:argument]} ->#{values[name][arg[:argument]]}-> #{values.inspect}"
-        data[arg[:argument]]=values[name][arg[:argument]]
+       data[arg[:argument]]=values[arg[:argument]]
 
-       unless values[name][arg[:argument]].empty?
+       if (not values.nil? and not values[arg[:argument]].nil? and not values[arg[:argument]].empty?)
           if(condition.empty?)
             condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
 
             if(arg[:type]=="like" || arg[:type]=="ilike")
-              value[arg[:argument]]="%#{values[name][arg[:argument]]}%"
+              value[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
             else
-              value[arg[:argument]]=values[name][arg[:argument]]
+              value[arg[:argument].to_sym]=values[arg[:argument]]
             end
 
           else
             condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
 
             if(arg[:type]=="like" || arg[:type]=="ilike")
-              value[arg[:argument]]="%#{values[name][arg[:argument]]}%"
+              value[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
             else
-              value[arg[:argument]]=values[name][arg[:argument]]
+              value[arg[:argument].to_sym]=values[arg[:argument]]
             end
 
           end
@@ -135,7 +133,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    return {condition: condition, value: value, data: data}
+    {condition: condition, value: value, data: data,params: values}
 
   end
 
