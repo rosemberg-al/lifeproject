@@ -107,20 +107,39 @@ class ApplicationController < ActionController::Base
 
        if (not values.nil? and not values[arg[:argument]].nil? and not values[arg[:argument]].empty?)
           if(condition.empty?)
-            condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
 
-            if(arg[:type]=="like" || arg[:type]=="ilike")
+
+
+            if(arg[:type]=="inactive" )
+              if(values[arg[:argument]]=="Y")
+                condition=" inactivated_at is not null "
+
+              else
+                condition=" inactivated_at is null "
+
+              end
+            elsif(arg[:type]=="like" || arg[:type]=="ilike")
+              condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
             else
+              condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value[arg[:argument].to_sym]=values[arg[:argument]]
             end
 
           else
-            condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+            if(arg[:type]=="inactive" )
+              if(values[arg[:argument]]=="Y")
+                condition+=" and inactivated_at is not null "
 
-            if(arg[:type]=="like" || arg[:type]=="ilike")
+              else
+                condition+=" and inactivated_at is null "
+
+              end
+            elsif(arg[:type]=="like" || arg[:type]=="ilike")
+              condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
             else
+              condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value[arg[:argument].to_sym]=values[arg[:argument]]
             end
 

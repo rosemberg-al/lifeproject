@@ -89,77 +89,22 @@ class PeopleController < ApplicationController
 
   def index
 
-
-
     argument={name: :person,
-              arg:[{argument: "name", type: "ilike"},{argument: "type_person", type: "="}],
+              arg:[{argument: "name", type: "ilike"},{argument: "type_person", type: "="},{argument: "inactive", type: "inactive"}],
               values: person_params_index,
               page: params[:page]}
-    # argument[:name]=:person
-    # argument[:arg]=[]
-    # argument[:arg]<<{argument: :name, type: "ilike"}
-    # argument[:arg]<<{argument: :type_person, type: "="}
-    # argument[:values]=params
+
     result=mount_argument(argument)
-  #  condition=result[:condition]
-    #value=result[:value]
-    @person=params=result[:params]
-    #@person=params #result[:data]
-    #@person[:inactive]=params[:inactive]
-    logger.debug "LISTAAA: #{result.inspect} #{argument.inspect} #{params.inspect} -----#{@person.inspect}"
-=begin
-    @person={"name"=>'',"inactive"=>'N'}
-    if params.has_key? :q
-      @person=person_params_index
-      #@person["page"]=params[:page]
-      session[:person]=@person
-    else
-        if session.has_key? :person
-          @person=session[:person]
-          params[:page]=@person["page"]
-          params[:q]="q"
-        end
-    end
 
+    @person=result[:params]
 
-    if params.has_key? :q
+   if (@person.has_key?(:q))
 
-      condition=""
-      value={}
-      if(@person["name"] &&  !@person["name"].empty?)
-        condition=" name ilike :name "
-        value[:name]="%#{@person["name"]}%"
-        if (@person["type_person"] && !@person["type_person"].empty?)
-          condition+=" and type_person = :type_person "
-          value[:type_person]=@person["type_person"]
-        end
-      elsif(@person["type_person"] && !@person["type_person"].empty?)
-        condition="  type_person = :type_person "
-        value[:type_person]=@person["type_person"]
-      end
-
-=end
-
-   logger.debug "PAGE: #{params[:page]} #{PER_PAGE} "
-   if (params.has_key?(:q))
-      if params["inactive"]=="Y"
-        #p "YYYYYYYYY-#{params[:person][:inactive]}"
         @people = current_user.people
-        .inactive
         .where(result[:condition],result[:value])
         .most_recent
-        .page(params[:page])
+        .page(@person[:page])
         .per(PER_PAGE)
-      else
-        #p "NNNNNNNNN-#{params[:inactive]}"
-        @people = current_user.people
-        .active
-        .where(result[:condition],result[:value])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-
 
     else
         @people = {}
