@@ -80,7 +80,91 @@ class ApplicationController < ActionController::Base
     redirect_to root_path if user_signed_in?
   end
 
+
+  def define_argument(arg)
+    @arguments||=[]
+    @arguments<<arg
+  end
+
+  def define_argument_values(name)
+    # logger.debug "$$$$$$$$$++ #{params.inspect}"
+    p=params_index
+    condition=""
+    value_condition={}
+
+    if (p && p.has_key?(:q))
+      values={q: "q",page: p[:page]}
+      @arguments.each do |arg|
+        values[arg[:argument]]=p[arg[:argument]]
+      end
+      session[name]=values
+      # logger.debug "CCCCCCCCCC #{values.inspect}"
+    elsif session.has_key? name
+           values=session[name]
+
+           values[:q]="q"
+           values[:page]=(p && p[:page])? p[:page]:0
+           # logger.debug "DDDDDDDDDDDDD #{values.inspect}"
+    else
+
+      # logger.debug "EEEEEEE #{values.inspect}"
+      @arguments.each do |arg|
+        values[arg[:argument]]=""
+      end
+    end
+
+
+    if values.has_key? :q
+
+      @arguments.each do |arg|
+
+       unless values[arg[:argument]].empty?
+          if condition.empty?
+
+            if(arg[:type]=="inactive" )
+              if(values[arg[:argument]]=="Y")
+                condition=" inactivated_at is not null "
+              else
+                condition=" inactivated_at is null "
+              end
+            elsif(arg[:type]=="like" || arg[:type]=="ilike")
+              condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              value_condition[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
+            else
+              condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              value_condition[arg[:argument].to_sym]=values[arg[:argument]]
+            end
+
+          else
+
+            if(arg[:type]=="inactive" )
+              if(values[arg[:argument]]=="Y")
+                condition+=" and inactivated_at is not null "
+              else
+                condition+=" and inactivated_at is null "
+              end
+            elsif(arg[:type]=="like" || arg[:type]=="ilike")
+              condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              value_condition[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
+            else
+              condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              value_condition[arg[:argument].to_sym]=values[arg[:argument]]
+            end
+
+          end
+        end
+      end
+    end
+
+    instance_variable_set "@#{name}",values
+    instance_variable_set "@condition",condition
+    instance_variable_set "@value_condition",value_condition
+
+  end
+
   def mount_argument(arguments)
+
+    @teste=:ALOHAAAAAAAAAAA
 
 
     name=arguments[:name]
@@ -88,7 +172,7 @@ class ApplicationController < ActionController::Base
     values=arguments[:values]
     condition=""
     value={}
-    data={}
+
 
     if (values && values.has_key?(:q))
       session[name]=values
@@ -99,11 +183,13 @@ class ApplicationController < ActionController::Base
     end
 
 
-    if values.has_key? :q
+
+
+    if (values && values.has_key?(:q))
 
       args.each do |arg|
 
-       data[arg[:argument]]=values[arg[:argument]]
+
 
        if (not values.nil? and not values[arg[:argument]].nil? and not values[arg[:argument]].empty?)
           if(condition.empty?)
@@ -147,12 +233,14 @@ class ApplicationController < ActionController::Base
         end
       end
     else
+      values={}
       args.each do |arg|
-        data[arg[:argument]]=""
+
+        values[arg[:argument]]=""
       end
     end
 
-    {condition: condition, value: value, data: data,params: values}
+    {condition: condition, value: value, params: values}
 
   end
 

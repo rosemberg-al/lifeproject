@@ -89,12 +89,38 @@ class PeopleController < ApplicationController
 
   def index
 
+    define_argument argument: "name", type: "ilike"
+    define_argument argument: "type_person", type: "="
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:person)
+    # logger.debug "@@@@@@ #{@arguments}"
+    # logger.debug "++++++ #{@pessoas}"
+    # logger.debug "++++++ #{@condition}"
+    # logger.debug "++++++ #{@value_condition}"
+
+    #@person=@pessoas
+
+   if @person.has_key? :q
+
+         @people = current_user.people
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@person[:page])
+         .per(PER_PAGE)
+
+     else
+         @people = {}
+     end
+=begin
     argument={name: :person,
               arg:[{argument: "name", type: "ilike"},{argument: "type_person", type: "="},{argument: "inactive", type: "inactive"}],
               values: person_params_index,
               page: params[:page]}
 
     result=mount_argument(argument)
+
+    logger.debug "!!!!! #{@teste}"
+    logger.debug "!!!!!!!!! #{result.inspect}"
 
     @person=result[:params]
 
@@ -109,7 +135,7 @@ class PeopleController < ApplicationController
     else
         @people = {}
     end
-
+=end
   end
 
   private
@@ -130,6 +156,16 @@ class PeopleController < ApplicationController
 
      def person_params_index
       params.require(:person).permit(:name,:inactive,:type_person).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :person
+
+      # params.permit(:q) #if params.has_key? :person
+       #a.merge(params.permit(:q))
+
+       #par<<params.permit(:q)
+     end
+
+     def params_index
+      return params.require(:person).permit(:name,:inactive,:type_person).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :person
+      params.permit(:page)
 
       # params.permit(:q) #if params.has_key? :person
        #a.merge(params.permit(:q))
