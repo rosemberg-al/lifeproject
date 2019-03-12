@@ -187,38 +187,16 @@ class ContentsController < ApplicationController
 
   def index
 
-    @content={"description"=>'',"inactive"=>'N'}
-    if params.has_key? :q
-      @content=content_params_index
-      @content["page"]=params[:page]
-      session[:content]=@content
-    else
-      if session.has_key? :content
-        @content=session[:content]
-        params[:page]=@content["page"]
-        params[:q]="q"
-      end
-    end
+    define_argument argument: "description", type: "ilike"
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:content,params_index)
 
-
-    if params.has_key? :q
-      if @content["inactive"]=="Y"
-        @contents = current_user.contents
-        .inactive
-        .where([" description ilike ? ","%#{@content["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      else
-        @contents = current_user.contents
-        .active
-        .where([" description ilike ? ","%#{@content["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-
-
+    if @content.has_key? :q
+         @contents = current_user.contents
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@content[:page])
+         .per(PER_PAGE)
     else
         @contents = {}
     end
@@ -249,21 +227,19 @@ class ContentsController < ApplicationController
     end
 
     def content_types_list
-      #@content_types=ContentType.active.select("id, description, feature")
       @content_types=current_user.content_types.active.select("id, description, feature")
     end
 
     def content_genres_list
-      #@content_genres=ContentGenre.active.select("id, description")
       @content_genres=current_user.content_genres.active.select("id, description")
     end
 
-    def people_list
-      #@people=Person.active.select("id, name")
+    def people_list      
       @people=current_user.people.active.select("id, name")
     end
 
-    def content_params_index
-      params.require(:content).permit(:description,:inactive)
+    def params_index
+      return params.require(:content).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content
+      params.permit(:page)
     end
 end

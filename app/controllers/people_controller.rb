@@ -17,7 +17,7 @@
 
 class PeopleController < ApplicationController
 
-  PER_PAGE = 1
+  PER_PAGE = 50
 
   before_action :require_authentication
   before_action :set_person, only: [:show]
@@ -27,12 +27,11 @@ class PeopleController < ApplicationController
 
    if params.has_key?(:name) && !params[:name].nil?
      name=params[:name]
-     #@people=Person.active.select("id, name").where("name like '%#{name}%'").limit(30)
 
      @people=current_user.people.active.select("id, name as label").where("name ilike '%#{name}%'").limit(30)
-     logger.debug "LISTA: #{@people.inspect}"
-     #head :ok
+
      render :json => @people
+
    else
      head :ok
    end
@@ -75,7 +74,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-  #  @person = Person.find params[:id]
+  
   end
 
   def update
@@ -92,61 +91,30 @@ class PeopleController < ApplicationController
     define_argument argument: "name", type: "ilike"
     define_argument argument: "type_person", type: "="
     define_argument argument: "inactive", type: "inactive"
-    define_argument_values(:person)
-    # logger.debug "@@@@@@ #{@arguments}"
-    # logger.debug "++++++ #{@pessoas}"
-    # logger.debug "++++++ #{@condition}"
-    # logger.debug "++++++ #{@value_condition}"
+    define_argument_values(:person,params_index)
 
-    #@person=@pessoas
 
-   if @person.has_key? :q
-
+    if @person.has_key? :q
          @people = current_user.people
          .where(@condition,@value_condition)
          .most_recent
          .page(@person[:page])
          .per(PER_PAGE)
-
-     else
-         @people = {}
-     end
-=begin
-    argument={name: :person,
-              arg:[{argument: "name", type: "ilike"},{argument: "type_person", type: "="},{argument: "inactive", type: "inactive"}],
-              values: person_params_index,
-              page: params[:page]}
-
-    result=mount_argument(argument)
-
-    logger.debug "!!!!! #{@teste}"
-    logger.debug "!!!!!!!!! #{result.inspect}"
-
-    @person=result[:params]
-
-   if (@person.has_key?(:q))
-
-        @people = current_user.people
-        .where(result[:condition],result[:value])
-        .most_recent
-        .page(@person[:page])
-        .per(PER_PAGE)
-
     else
         @people = {}
     end
-=end
+
   end
 
   private
 
     def set_person_edit
       @person = current_user.people.find(params[:id])
-      #@person = Person.find(params[:id])
+
     end
 
     def set_person
-      #@person = Person.find(params[:id])
+
       @person = current_user.people.find(params[:id])
     end
 
@@ -154,23 +122,9 @@ class PeopleController < ApplicationController
       params.require(:person).permit(:name,:type_person,:biography,:main_thoughts)
     end
 
-     def person_params_index
-      params.require(:person).permit(:name,:inactive,:type_person).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :person
-
-      # params.permit(:q) #if params.has_key? :person
-       #a.merge(params.permit(:q))
-
-       #par<<params.permit(:q)
-     end
-
-     def params_index
+    def params_index
       return params.require(:person).permit(:name,:inactive,:type_person).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :person
       params.permit(:page)
-
-      # params.permit(:q) #if params.has_key? :person
-       #a.merge(params.permit(:q))
-
-       #par<<params.permit(:q)
-     end
+    end
 
 end

@@ -59,7 +59,7 @@ class ContentGenresController < ApplicationController
   end
 
   def show
-    #@content_genre = ContentGenre.find params[:id]
+    
   end
 
   def update
@@ -73,37 +73,16 @@ class ContentGenresController < ApplicationController
 
   def index
 
-    @content_genre={"description"=>'',"inactive"=>'N'}
-    if params.has_key? :q
-      @content_genre=content_genre_params_index
-      @content_genre["page"]=params[:page]
-      session[:content_genre]=@content_genre
-    else
-        if session.has_key? :content_genre
-          @content_genre=session[:content_genre]
-          params[:page]=@content_genre["page"]
-          params[:q]="q"
-        end
-    end
+    define_argument argument: "description", type: "ilike"
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:content_genre,params_index)
 
-
-    if params.has_key? :q
-      if @content_genre["inactive"]=="Y"
-        @content_genres = current_user.content_genres
-        .inactive
-        .where([" description ilike ? ","%#{@content_genre["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      else
-        @content_genres = current_user.content_genres
-        .active
-        .where([" description ilike ? ","%#{@content_genre["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-
+    if @content_genre.has_key? :q
+         @content_genres = current_user.content_genres
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@content_genre[:page])
+         .per(PER_PAGE)
     else
         @content_genres = {}
     end
@@ -117,7 +96,6 @@ class ContentGenresController < ApplicationController
     end
 
     def set_content_genre
-      #@content_genre = ContentGenre.find(params[:id])
       @content_genre = current_user.content_genres.find(params[:id])
     end
 
@@ -125,7 +103,8 @@ class ContentGenresController < ApplicationController
       params.require(:content_genre).permit(:description)
     end
 
-    def content_genre_params_index
-      params.require(:content_genre).permit(:description,:inactive)
+    def params_index
+      return params.require(:content_genre).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content_genre
+      params.permit(:page)
     end
 end

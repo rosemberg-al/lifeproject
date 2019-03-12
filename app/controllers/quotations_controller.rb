@@ -101,7 +101,7 @@ class QuotationsController < ApplicationController
        attributes[:order]=amount+1
     end
 
-    unless attributes[:quotation_people_attributes].nil? 
+    unless attributes[:quotation_people_attributes].nil?
       attributes[:quotation_people_attributes].each do |key,cp|
         if (!cp[:person_id].empty? && cp[:id].nil?)
           cp[:user_id]=current_user.id
@@ -119,41 +119,21 @@ class QuotationsController < ApplicationController
 
   def index
 
-    @quotation={"quotation"=>'',"inactive"=>'N'}
-    if params.has_key? :q
-      @quotation=quotation_params_index
-      @quotation["page"]=params[:page]
-      session[:quotation]=@quotation
-    else
-        if session.has_key? :quotation
-          @quotation=session[:quotation]
-          params[:page]=@quotation["page"]
-          params[:q]="q"
-        end
-    end
+    define_argument argument: "quotation", type: "ilike"
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:quotation,params_index)
 
 
-    if params.has_key? :q
-      if @quotation["inactive"]=="Y"
-        @quotations = current_user.quotations
-        .inactive
-        .where([" quotation ilike ? ","%#{@quotation["quotation"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      else
-        @quotations = current_user.quotations
-        .active
-        .where([" quotation ilike ? ","%#{@quotation["quotation"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-
-
+    if @quotation.has_key? :q
+         @quotations = current_user.quotations
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@quotation[:page])
+         .per(PER_PAGE)
     else
         @quotations = {}
     end
+
 
   end
 
@@ -172,8 +152,9 @@ class QuotationsController < ApplicationController
       quotation_people_attributes: [:id,:person_id, :type_person, :_destroy, :person_name])
     end
 
-    def quotation_params_index
-      params.require(:quotation).permit(:quotation,:inactive)
+    def params_index
+      return params.require(:quotation).permit(:quotation,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :quotation
+      params.permit(:page)
     end
 
 end

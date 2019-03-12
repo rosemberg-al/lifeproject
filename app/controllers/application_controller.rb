@@ -86,28 +86,27 @@ class ApplicationController < ActionController::Base
     @arguments<<arg
   end
 
-  def define_argument_values(name)
-    # logger.debug "$$$$$$$$$++ #{params.inspect}"
-    p=params_index
+  def define_argument_values(name,p)
+
     condition=""
     value_condition={}
-
+    values={}
     if (p && p.has_key?(:q))
       values={q: "q",page: p[:page]}
       @arguments.each do |arg|
         values[arg[:argument]]=p[arg[:argument]]
       end
       session[name]=values
-      # logger.debug "CCCCCCCCCC #{values.inspect}"
+
     elsif session.has_key? name
            values=session[name]
 
            values[:q]="q"
            values[:page]=(p && p[:page])? p[:page]:0
-           # logger.debug "DDDDDDDDDDDDD #{values.inspect}"
+
     else
 
-      # logger.debug "EEEEEEE #{values.inspect}"
+
       @arguments.each do |arg|
         values[arg[:argument]]=""
       end
@@ -163,8 +162,6 @@ class ApplicationController < ActionController::Base
   end
 
   def mount_argument(arguments)
-
-    @teste=:ALOHAAAAAAAAAAA
 
 
     name=arguments[:name]

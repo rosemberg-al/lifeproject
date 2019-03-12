@@ -59,7 +59,7 @@ class ContentTypesController < ApplicationController
   end
 
   def show
-  #  @content_type = ContentType.find params[:id]
+
   end
 
   def update
@@ -73,38 +73,16 @@ class ContentTypesController < ApplicationController
 
   def index
 
+    define_argument argument: "description", type: "ilike"
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:content_type,params_index)
 
-    @content_type={"description"=>'',"inactive"=>'N'}
-    if params.has_key? :q
-      @content_type=content_type_params_index
-      @content_type["page"]=params[:page]
-      session[:content_type]=@content_type
-    else
-        if session.has_key? :content_type
-          @content_type=session[:content_type]
-          params[:page]=@content_type["page"]
-          params[:q]="q"
-        end
-    end
-
-
-    if params.has_key? :q
-      if @content_type["inactive"]=="Y"
-        @content_types = current_user.content_types
-        .inactive
-        .where([" description ilike ? ","%#{@content_type["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      else
-        @content_types = current_user.content_types
-        .active
-        .where([" description ilike ? ","%#{@content_type["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-
+    if @content_type.has_key? :q
+         @content_types = current_user.content_genres
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@content_type[:page])
+         .per(PER_PAGE)
     else
         @content_types = {}
     end
@@ -118,7 +96,6 @@ class ContentTypesController < ApplicationController
     end
 
     def set_content_type
-      #@content_type = ContentType.find(params[:id])
       @content_type = current_user.content_types.find(params[:id])
     end
 
@@ -126,8 +103,8 @@ class ContentTypesController < ApplicationController
       params.require(:content_type).permit(:description,:feature)
     end
 
-
-    def content_type_params_index
-      params.require(:content_type).permit(:description,:inactive)
+    def params_index
+      return params.require(:content_type).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content_type
+      params.permit(:page)
     end
 end
