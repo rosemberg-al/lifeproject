@@ -111,38 +111,16 @@ class SummariesController < ApplicationController
 
   def index
 
-    @summary={"description"=>'',"inactive"=>'N'}
-    if params.has_key? :q
-      @summary=summary_params_index
-      @summary["page"]=params[:page]
-      session[:summary]=@summary
-    else
-        if session.has_key? :summary
-          @summary=session[:summary]
-          params[:page]=@summary["page"]
-          params[:q]="q"
-        end
-    end
+    define_argument argument: "description", type: "ilike"
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:summary,params_index)
 
-
-    if params.has_key? :q
-      if @summary["inactive"]=="Y"
-        @summaries = current_user.summaries
-        .inactive
-        .where([" description ilike ? ","%#{@summary["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      else
-        @summaries = current_user.summaries
-        .active
-        .where([" description ilike ? ","%#{@summary["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-
-
+    if @summary.has_key? :q
+         @summaries = current_user.summaries
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@summary[:page])
+         .per(PER_PAGE)
     else
         @summaries = {}
     end
@@ -165,8 +143,9 @@ class SummariesController < ApplicationController
       summary_contents_attributes: [:id,:content_id, :_destroy, :content_description])
     end
 
-    def summary_params_index
-      params.require(:summary).permit(:description,:inactive)
+    def params_index
+      return params.require(:summary).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :summary
+      params.permit(:page)
     end
 
 end

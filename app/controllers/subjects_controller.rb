@@ -92,60 +92,22 @@ class SubjectsController < ApplicationController
 
   def index
 
-    @subject={"description"=>'',"inactive"=>'N'}
 
-    if params.has_key? :q
-      @subject=subject_params_index
-      @subject["page"]=params[:page]
-      session[:subject]=@subject
+    define_argument argument: "description", type: "ilike"
+    define_argument argument: "inactive", type: "inactive"
+    define_argument_values(:subject,params_index)
+
+    if @subject.has_key? :q
+         @subjects = current_user.subjects
+         .where(@condition,@value_condition)
+         .most_recent
+         .page(@subject[:page])
+         .per(PER_PAGE)
     else
-
-
-        if session.has_key? :subject
-          # logger.debug "@@@@: #{session[:subject].inspect}"
-          # logger.debug "****: #{session[:subject]["description"]}"
-
-          @subject=session[:subject]
-          #params[:inactive]=@inactive
-          #params[:description]=@description
-          params[:page]=@subject["page"]
-          params[:q]="q"
-        end
+        @contents = {}
     end
 
 
-    if params.has_key? :q
-      if @subject["inactive"]=="Y"
-        @subjects = current_user.subjects
-        .inactive
-        .where([" description ilike ? ","%#{@subject["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      else
-        @subjects = current_user.subjects
-        .active
-        .where([" description ilike ? ","%#{@subject["description"]}%"])
-        .most_recent
-        .page(params[:page])
-        .per(PER_PAGE)
-      end
-        #@subjects = Subject.index(
-        #  {:current_user=>current_user,
-        #    :description=>@description,
-        #    :inactive=>@inactive,
-        #    :page=>params[:page],
-        #    :per_page=>PER_PAGE}
-        #)
-        #@subjects = current_user.subjects.where([" description ilike ? ","%#{@description}%"])
-        #.where(inactivated_at: nil)
-        #.most_recent
-        #.page(params[:page])
-        #.per(PER_PAGE)
-
-    else
-        @subjects = {}
-    end
 
   end
 
@@ -165,7 +127,8 @@ class SubjectsController < ApplicationController
       params.require(:subject).permit(:description)
     end
 
-    def subject_params_index
-      params.require(:subject).permit(:description,:inactive)
+    def params_index
+      return params.require(:subject).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :subject
+      params.permit(:page)
     end
 end
