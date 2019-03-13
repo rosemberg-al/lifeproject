@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_160750) do
+ActiveRecord::Schema.define(version: 2019_03_13_181503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 2018_12_11_160750) do
 # Could not dump table "quotations" because of following StandardError
 #   Unknown type 'quotation_type' for column 'type_quote'
 
+# Could not dump table "reviews" because of following StandardError
+#   Unknown type 'review_type' for column 'type_review'
+
   create_table "subjects", force: :cascade do |t|
     t.string "description"
     t.integer "user_id"
@@ -126,6 +129,8 @@ ActiveRecord::Schema.define(version: 2018_12_11_160750) do
   add_foreign_key "quotation_people", "users"
   add_foreign_key "quotations", "contents"
   add_foreign_key "quotations", "users"
+  add_foreign_key "reviews", "contents"
+  add_foreign_key "reviews", "users"
   add_foreign_key "subjects", "users"
   add_foreign_key "summaries", "users"
   add_foreign_key "summary_contents", "contents"
