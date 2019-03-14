@@ -1,0 +1,39 @@
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+<% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<%= render "search"%>
+
+
+<div class="box box-primary">
+<div class="box box-default">
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 10px"></th>
+        <th><%= t '.description' %></th>
+      </tr>
+
+      <% @reviews.each do |review| %>
+      <tr onclick="location.href='<%= edit_review_path(review) %>'" style="cursor:pointer">
+        <td><%= review.id %></td>
+        <td><%= review.description %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+
+<% if @reviews.size > 0 %>
+<%= paginate @reviews %>
+<% end %>

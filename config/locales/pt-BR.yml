@@ -53,8 +53,12 @@ pt-BR:
    avoid: A evitar
    follow: A seguir
   type_person:
-    real: Real
-    fictional: Ficcional
+   real: Real
+   fictional: Ficcional
+  review_type:
+   negative: Negativa
+   neutral: Neutra
+   positive: Positiva
 
  errors:
   messages:
@@ -88,6 +92,7 @@ pt-BR:
   profile: Perfil
   summaries: Fichamento/Resumo
   quotations: Citações/Insights
+  reviews: "Críticas/Análises"
   motivated: "Melhore como pessoa a todo momento, inspire-se:"
 
  home:
@@ -281,6 +286,22 @@ pt-BR:
     quotation_people: Pessoa/Artista Relacionado
     add_person: Adicionar Pessoa
 
+ reviews:
+  new:
+   title: Cadastrar Crítiva/Análise
+  edit:
+   title: Editar Crítiva/Análise
+  index:
+   title: 'Listar Crítivas/Análises'
+   search_results: 'Resultados da busca'
+   description: "Descrição"
+  search:
+   inactive: "Inativo?"
+   description: "Descrição"
+  show:
+   title: "Crítiva/Análise"
+   review: "Crítica: %{review}"
+
  user_sessions:
   new:
    title: 'Login'
@@ -307,6 +328,7 @@ pt-BR:
    content_type: Tipo de Conteúdo
    content: Conteúdo
    person: Pessoa
+   review: Crítica
   attributes:
    user:
     bio: Biografia
@@ -366,6 +388,12 @@ pt-BR:
    quotation_person:
     person: Nome
     type_person: Tipo Pessoa
+   review:
+    description: Descrição
+    content_id: Conteúdo
+    content: Conteúdo
+    type_review: Tipo
+    review: Crítica
    user_session:
     email: Email
     password: Senha

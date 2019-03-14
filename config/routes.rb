@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :people
     resources :summaries
     resources :quotations
+    resources :reviews
 
     get 'quotation/addperson', action: :addperson, controller: :quotations , as: :add_person
 

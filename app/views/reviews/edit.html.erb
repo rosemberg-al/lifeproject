@@ -1,0 +1,23 @@
+<% content_for :head do %>
+  <%= t '.title' %>
+<% end %>
+
+<% if @review.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissible">
+    <%= t 'general.form_error' %>
+  </div>
+<% end %>
+
+<%= form_for @review do |f| %>
+
+<%= render 'form' , f: f %>
+
+
+
+
+<div class="box-footer">
+  <%= button_save new_review_path,reviews_path,f %>
+  <%= button_inactivate(@review,review_url(@review,:activate =>:activate)) %>
+
+</div>
+<% end %>

@@ -1,0 +1,116 @@
+<div class="box box-primary">
+<div class="box box-default">
+<div class="box-body">
+
+
+
+  <div class="row col-md-12">
+    <div class="col-md-6   <%= error_div @review, :description %>">
+
+        <%= f.label :description %> <br>
+        <%= f.text_field :description, {:class => "form-control"} %>
+        <%= error_tag @review, :description %>
+
+    </div>
+  </div>
+
+<div class="row col-md-12">
+  <div class="col-md-3   <%= error_div @review, :type_quote %>">
+      <%= f.label :type_review %> <br>
+      <%=
+      f.select :type_review, Review.review_types.keys.map { |key,_| [t("enums.review_type.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+      %>
+      <%= error_tag @review, :type_quote %>
+  </div>
+
+
+  <div class="col-md-4 ">
+
+      <%= f.label :content %><br>
+      <%= f.hidden_field :content_id %>
+      <%= f.text_field :content_description, :class => "form-control" %>
+      <%= error_tag @review, "content_id" %>
+  </div>
+</div>
+
+
+
+  <div class="row col-md-12">
+    <div class="col-md-12   <%= error_div @review, :review %>">
+        <%= f.label :review %> <br>
+        <%= f.text_area :review, cols: 20, rows: 10 ,:class => "form-control" %>
+        <%= error_tag @review, :review %>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<% content_for :javascript do %>
+
+$(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
+
+$(function () {
+
+   CKEDITOR.replace('review_review');
+
+ })
+
+
+
+ $("#review_content_description").autocomplete({
+
+   source: function( request, response ) {
+     $.ajax({
+       url: "<%= content_json_path %>",
+       dataType: "json",
+       method : 'GET',
+       data: {
+         description: request.term
+       },
+       success: function( data ) {
+         response( data);
+       },
+       error : function(xhr, status) {
+         alert('It happened some error, please try again later...');
+         }
+     });
+   },
+   minLength: 3,
+   select: function( event, ui ) {
+
+     $("#review_content_id").val(ui.item.id);
+     $("#review_content_description").val(ui.item.label);
+   },
+   change: function( event, ui ) {
+     if(ui.item){
+
+     }else{
+       //caso nao selecione nenhuma linha, limpa tudo
+
+       $("#review_content_id").val('');
+       $("#review_content_description").val('');
+     }
+   }
+ });
+
+
+
+
+
+<% end %>
