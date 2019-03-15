@@ -15,12 +15,20 @@
   </div>
 
 <div class="row col-md-12">
-  <div class="col-md-3   <%= error_div @review, :type_quote %>">
+  <div class="col-md-3   <%= error_div @review, :rating %>">
+      <%= f.label :rating %> <br>
+      <%=
+      f.select :rating, Review.review_rates.keys.map { |key,_| [key, key] },{ include_blank: true } ,:class => "form-control"
+      %>
+      <%= error_tag @review, :rating %>
+  </div>
+
+  <div class="col-md-3   <%= error_div @review, :type_review %>">
       <%= f.label :type_review %> <br>
       <%=
       f.select :type_review, Review.review_types.keys.map { |key,_| [t("enums.review_type.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
       %>
-      <%= error_tag @review, :type_quote %>
+      <%= error_tag @review, :type_review %>
   </div>
 
 

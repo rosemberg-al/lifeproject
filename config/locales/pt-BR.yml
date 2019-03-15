@@ -298,6 +298,8 @@ pt-BR:
   search:
    inactive: "Inativo?"
    description: "Descrição"
+   content: "Conteúdo"
+   content_description: "Conteúdo"
   show:
    title: "Crítiva/Análise"
    review: "Crítica: %{review}"
@@ -394,6 +396,7 @@ pt-BR:
     content: Conteúdo
     type_review: Tipo
     review: Crítica
+    rating: Nota
    user_session:
     email: Email
     password: Senha

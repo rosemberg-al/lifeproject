@@ -81,6 +81,8 @@ class ReviewsController < ApplicationController
 
     define_argument argument: "description", type: "ilike"
     define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "content_id", type: "="
+    define_argument argument: "content_description", type: "auxiliary"
     define_argument_values(:review,params_index)
 
     if @review.has_key? :q
@@ -110,7 +112,7 @@ class ReviewsController < ApplicationController
     end
 
     def params_index
-      return params.require(:review).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :review
+      return params.require(:review).permit(:description,:content_id,:content_description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :review
       params.permit(:page)
     end
 

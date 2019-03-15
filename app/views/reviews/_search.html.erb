@@ -19,6 +19,62 @@
         <%= check_box_tag "review[inactive]", "Y",  (@review["inactive"]=="Y")  %>
       </div>
     </div>
+
+    <div class="row col-md-12">
+      <div class="col-md-4 ">
+          <%= t ".content" %> <br>
+          <%= hidden_field_tag "review[content_id]", @review["content_id"] %>
+          <%= text_field_tag "review[content_description]", @review["content_description"],:placeholder => t('.content_description'), :class => "form-control" %>
+      </div>
+    </div>
   </div>
 </div>
+<% end %>
+
+
+
+
+<% content_for :javascript do %>
+
+
+ $("#review_content_description").autocomplete({
+
+   source: function( request, response ) {
+     $.ajax({
+       url: "<%= content_json_path %>",
+       dataType: "json",
+       method : 'GET',
+       data: {
+         description: request.term
+       },
+       success: function( data ) {
+         response( data);
+       },
+       error : function(xhr, status) {
+         alert('It happened some error, please try again later...');
+         }
+     });
+   },
+   minLength: 3,
+   select: function( event, ui ) {
+
+     $("#review_content_id").val(ui.item.id);
+     $("#review_content_description").val(ui.item.label);
+   },
+   change: function( event, ui ) {
+     if(ui.item){
+
+     }else{
+       //caso nao selecione nenhuma linha, limpa tudo
+
+       $("#review_content_id").val('');
+       $("#review_content_description").val('');
+     }
+   }
+ });
+
+
+
+
+
 <% end %>

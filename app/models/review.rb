@@ -18,6 +18,7 @@
 class Review < ApplicationRecord
 
   enum review_type: { negative: "negative", neutral: "neutral", positive: "positive"}
+  enum review_rate: { "1"=> "1", "2"=>  "2", "3"=>  "3", "4"=>  "4", "5"=>  "5"}
 
   scope :most_recent, -> {
      order 'created_at desc'

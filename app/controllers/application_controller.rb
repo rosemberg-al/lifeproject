@@ -91,6 +91,7 @@ class ApplicationController < ActionController::Base
     condition=""
     value_condition={}
     values={}
+    #session.delete(name)
     if (p && p.has_key?(:q))
       values={q: "q",page: p[:page]}
       @arguments.each do |arg|
@@ -112,6 +113,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    
 
     if values.has_key? :q
 
@@ -129,7 +131,7 @@ class ApplicationController < ActionController::Base
             elsif(arg[:type]=="like" || arg[:type]=="ilike")
               condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
-            else
+            elsif(arg[:type]!="auxiliary")
               condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]=values[arg[:argument]]
             end
@@ -145,7 +147,7 @@ class ApplicationController < ActionController::Base
             elsif(arg[:type]=="like" || arg[:type]=="ilike")
               condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
-            else
+            elsif(arg[:type]!="auxiliary")
               condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]=values[arg[:argument]]
             end
