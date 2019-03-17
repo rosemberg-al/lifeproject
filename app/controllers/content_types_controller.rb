@@ -78,7 +78,7 @@ class ContentTypesController < ApplicationController
     define_argument_values(:content_type,params_index)
 
     if @content_type.has_key? :q
-         @content_types = current_user.content_genres
+         @content_types = current_user.content_types
          .where(@condition,@value_condition)
          .most_recent
          .page(@content_type[:page])

@@ -235,6 +235,9 @@ pt-BR:
   show:
    title: "Pessoa/Artista"
    name: "Nome: %{name}"
+  form:
+   fictional: "Ficcional"
+   real: "Real"
 
  summaries:
   new:
