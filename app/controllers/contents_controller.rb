@@ -83,7 +83,13 @@ class ContentsController < ApplicationController
       cs.subject_description=cs.subject.description
     end
 
-    ##logger.debug "@@@@: #{t.inspect}"
+    @summaries = current_user.summaries
+    .select("summaries.id,summaries.description, summaries.type_summary")
+    .joins(:contents)
+    .where("contents.id = ?", params[:id])
+
+
+    logger.debug "@@@@: #{@summaries.inspect}"
     ##puts "%%%%% #{@content.type_desc}"
 
 

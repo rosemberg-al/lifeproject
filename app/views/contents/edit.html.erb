@@ -8,12 +8,38 @@
   </div>
 <% end %>
 
-<%= form_for @content do |f| %>
 
-<%= render 'form' , f: f %>
 
-<div class="box-footer">
-  <%= button_save new_content_path,contents_path,f %>
-  <%= button_inactivate(@content,content_url(@content,:activate =>:activate)) %>
-</div>
-<% end %>
+
+<!-- Custom Tabs -->
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab"><%= t(".content")%></a></li>
+        <li><a href="#tab_2" data-toggle="tab"><%= t(".summary") %></a></li>
+        <li><a href="#tab_3" data-toggle="tab"><%= t(".quotation") %></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <%= form_for @content do |f| %>
+
+          <%= render 'form' , f: f %>
+
+          <div class="box-footer">
+            <%= button_save new_content_path,contents_path,f %>
+            <%= button_inactivate(@content,content_url(@content,:activate =>:activate)) %>
+          </div>
+          <% end %>
+        </div>
+        <!-- /.tab-pane -->
+        <div class="tab-pane" id="tab_2">
+            <%= render 'summaries'  %>
+        </div>
+        <!-- /.tab-pane -->
+        <div class="tab-pane" id="tab_3">
+
+        </div>
+        <!-- /.tab-pane -->
+      </div>
+      <!-- /.tab-content -->
+    </div>
+    <!-- nav-tabs-custom -->

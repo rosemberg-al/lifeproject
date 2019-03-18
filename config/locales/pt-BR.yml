@@ -194,6 +194,9 @@ pt-BR:
    title: Cadastrar Conteúdo
   edit:
    title: Editar Conteúdo
+   content: Conteúdo
+   summary: Fichamentos/Resumos
+   quotation: Citações/Insights
   person:
    name: Nome
   index:
@@ -216,6 +219,9 @@ pt-BR:
    add_person: Adicionar Pessoa
    content_subjects: Assuntos Relacionados
    add_subject: Adicionar Assunto
+  summaries:
+   description: "Descrição"
+   type_summary: "Tipo de Resumo"
 
  people:
   new:
