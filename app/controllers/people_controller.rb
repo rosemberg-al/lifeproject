@@ -74,7 +74,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-  
+
   end
 
   def update
@@ -88,9 +88,9 @@ class PeopleController < ApplicationController
 
   def index
 
-    define_argument argument: "name", type: "ilike"
-    define_argument argument: "type_person", type: "="
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "name", type: "ilike", table: "people"
+    define_argument argument: "type_person", type: "=", table: "people"
+    define_argument argument: "inactive", type: "inactive", table: "people"
     define_argument_values(:person,params_index)
 
 

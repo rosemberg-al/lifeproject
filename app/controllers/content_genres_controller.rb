@@ -59,7 +59,7 @@ class ContentGenresController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def update
@@ -73,8 +73,8 @@ class ContentGenresController < ApplicationController
 
   def index
 
-    define_argument argument: "description", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "description", type: "ilike", table: "content_genres"
+    define_argument argument: "inactive", type: "inactive", table: "content_genres"
     define_argument_values(:content_genre,params_index)
 
     if @content_genre.has_key? :q

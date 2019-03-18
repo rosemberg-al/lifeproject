@@ -119,8 +119,8 @@ class QuotationsController < ApplicationController
 
   def index
 
-    define_argument argument: "quotation", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "quotation", type: "ilike", table: "quotations"
+    define_argument argument: "inactive", type: "inactive", table: "quotations"
     define_argument_values(:quotation,params_index)
 
 

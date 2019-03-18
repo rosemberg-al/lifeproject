@@ -73,8 +73,8 @@ class ContentTypesController < ApplicationController
 
   def index
 
-    define_argument argument: "description", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "description", type: "ilike", table: "content_types"
+    define_argument argument: "inactive", type: "inactive", table: "content_types"
     define_argument_values(:content_type,params_index)
 
     if @content_type.has_key? :q

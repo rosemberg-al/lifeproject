@@ -79,9 +79,9 @@ class ReviewsController < ApplicationController
 
   def index
 
-    define_argument argument: "description", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
-    define_argument argument: "content_id", type: "="
+    define_argument argument: "description", type: "ilike", table: "reviews"
+    define_argument argument: "inactive", type: "inactive", table: "reviews"
+    define_argument argument: "content_id", type: "=", table: "reviews"
     define_argument argument: "content_description", type: "auxiliary"
     define_argument_values(:review,params_index)
 

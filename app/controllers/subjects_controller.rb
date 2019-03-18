@@ -93,8 +93,8 @@ class SubjectsController < ApplicationController
   def index
 
 
-    define_argument argument: "description", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "description", type: "ilike", table: "subjects"
+    define_argument argument: "inactive", type: "inactive", table: "subjects"
     define_argument_values(:subject,params_index)
 
     if @subject.has_key? :q

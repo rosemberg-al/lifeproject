@@ -187,8 +187,8 @@ class ContentsController < ApplicationController
 
   def index
 
-    define_argument argument: "description", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "description", type: "ilike", table: "contents"
+    define_argument argument: "inactive", type: "inactive", table: "contents"
     define_argument_values(:content,params_index)
 
     if @content.has_key? :q
@@ -234,7 +234,7 @@ class ContentsController < ApplicationController
       @content_genres=current_user.content_genres.active.select("id, description")
     end
 
-    def people_list      
+    def people_list
       @people=current_user.people.active.select("id, name")
     end
 

@@ -111,8 +111,8 @@ class SummariesController < ApplicationController
 
   def index
 
-    define_argument argument: "description", type: "ilike"
-    define_argument argument: "inactive", type: "inactive"
+    define_argument argument: "description", type: "ilike", table: "summaries"
+    define_argument argument: "inactive", type: "inactive", table: "summaries"
     define_argument_values(:summary,params_index)
 
     if @summary.has_key? :q

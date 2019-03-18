@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    
+
 
     if values.has_key? :q
 
@@ -124,15 +124,15 @@ class ApplicationController < ActionController::Base
 
             if(arg[:type]=="inactive" )
               if(values[arg[:argument]]=="Y")
-                condition=" inactivated_at is not null "
+                condition=" #{arg[:table]}.inactivated_at is not null "
               else
-                condition=" inactivated_at is null "
+                condition=" #{arg[:table]}.inactivated_at is null "
               end
             elsif(arg[:type]=="like" || arg[:type]=="ilike")
-              condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              condition=" #{arg[:table]}.#{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
             elsif(arg[:type]!="auxiliary")
-              condition=" #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              condition=" #{arg[:table]}.#{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]=values[arg[:argument]]
             end
 
@@ -140,15 +140,15 @@ class ApplicationController < ActionController::Base
 
             if(arg[:type]=="inactive" )
               if(values[arg[:argument]]=="Y")
-                condition+=" and inactivated_at is not null "
+                condition+=" and #{arg[:table]}.inactivated_at is not null "
               else
-                condition+=" and inactivated_at is null "
+                condition+=" and #{arg[:table]}.inactivated_at is null "
               end
             elsif(arg[:type]=="like" || arg[:type]=="ilike")
-              condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              condition+=" and #{arg[:table]}.#{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]="%#{values[arg[:argument]]}%"
             elsif(arg[:type]!="auxiliary")
-              condition+=" and #{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
+              condition+=" and #{arg[:table]}.#{arg[:argument]} #{arg[:type]} :#{arg[:argument]} "
               value_condition[arg[:argument].to_sym]=values[arg[:argument]]
             end
 
