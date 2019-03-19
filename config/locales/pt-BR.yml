@@ -222,6 +222,10 @@ pt-BR:
   summaries:
    description: "Descrição"
    type_summary: "Tipo de Resumo"
+  quotations:
+   quotation: "Citação"
+   indication: "Indicação"
+   type_quote: "Tipo Citação"
 
  people:
   new:

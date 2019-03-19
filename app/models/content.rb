@@ -46,6 +46,7 @@ class Content < ApplicationRecord
   has_many :content_subjects
   has_many :subjects, through: :content_subjects
 
+  has_many :quotations
 
 
   accepts_nested_attributes_for :content_people, reject_if: :all_blank, allow_destroy: true

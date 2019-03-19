@@ -1,0 +1,26 @@
+<div class="box box-primary">
+<div class="box box-default">
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 10px"></th>
+        <th><%= t '.quotation' %></th>
+        <th><%= t '.indication' %></th>
+        <th><%= t '.type_quote' %></th>
+      </tr>
+
+      <% @quotations.each do |quotation| %>
+      <tr  >
+        <td><%= quotation.id %></td>
+        <td><%=raw quotation.quotation %></td>
+        <td><%= quotation.indication==''? "---":t("enums.quotation_indication.#{quotation.indication}") %></td>
+        <td><%= quotation.type_quote.nil? ? "---":t("enums.quotation_type.#{quotation.type_quote}") %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>

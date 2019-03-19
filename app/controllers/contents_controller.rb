@@ -87,9 +87,15 @@ class ContentsController < ApplicationController
     .select("summaries.id,summaries.description, summaries.type_summary")
     .joins(:contents)
     .where("contents.id = ?", params[:id])
+    .active
 
 
-    logger.debug "@@@@: #{@summaries.inspect}"
+    @quotations =   @content.quotations
+    .select("quotations.id,quotations.indication, quotations.type_quote,quotations.quotation ")
+    .active
+
+
+    #logger.debug "@@@@: #{@summaries.inspect}"
     ##puts "%%%%% #{@content.type_desc}"
 
 
@@ -134,7 +140,7 @@ class ContentsController < ApplicationController
     @content.content_subjects.map do |cs|
       cs.user_id=current_user.id
     end
-   logger.debug "OBJECTTTT: #{@content.content_people.inspect}"
+   #logger.debug "OBJECTTTT: #{@content.content_people.inspect}"
     #@content = Content.new(content_params)
     #@content.user_id = current_user.id
     if @content.save
