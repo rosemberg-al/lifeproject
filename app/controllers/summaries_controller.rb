@@ -82,6 +82,10 @@ class SummariesController < ApplicationController
   def show
   end
 
+  def save_text
+    logger.debug "TEXTOOO #{params["text"]}"
+  end
+
   def update
 
     attributes = summary_params.clone

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :reviews
 
     get 'quotation/addperson', action: :addperson, controller: :quotations , as: :add_person
+    post 'summary/save_text', action: :save_text, controller: :summaries , as: :summary_save_text
 
     #resource :user_confirmation, :only => [:show]
     resource :confirmation, :only => [:show]
