@@ -21,4 +21,75 @@
   <%= button_inactivate(@summary,summary_url(@summary,:activate =>:activate)) %>
 
 </div>
+
+<%=   content_tag :button, "TESTE", :class => 'btn btn-primary', :onclick =>"save_text()", :type => :button  %>
+
+<% end %>
+<%= hidden_field_tag "text_temp", @summary.text %>
+
+
+
+
+
+<% content_for :javascript do %>
+
+$(document).ready(function(){
+  setInterval(save_text, 30000);
+})
+
+function save_text(){
+
+    var sum= CKEDITOR.instances.summary_text.getData(); // $('#summary_text').val();
+    var sum_temp=$('#text_temp').val();
+    if( sum != sum_temp ){
+       $.ajax({
+            url: "<%=summary_save_text_path%>",
+            dataType: 'json',
+            method : 'POST',
+            data: {
+              text: sum,
+              id: "<%= @summary.id %>"
+            },
+
+            success: function( json ) {
+
+                     console.log(json);
+                     if(json.status =="success"){
+                        console.log("Gravado com sucesso..");
+                        $('#text_alert').show();
+                        setTimeout( "$('#text_alert').hide();" , 3000);
+                     }else{
+                        console.log("Ocorreu algum problema..");
+                     }
+
+
+                      //$("#quotation_size_people").val( parseInt($("#quotation_size_people").val())+  1 );
+                      //$("#quotation_people_div").append(  html );
+
+                      $('#text_temp').val(sum)
+
+            },
+              error : function(xhr, status) {
+                alert('Erro na conexão, tente novamente...');
+              },
+              complete : function(xhr, status) {
+
+              },
+              beforeSend: function(){
+
+              }
+          });
+
+      }else{
+        //console.log(sum)
+        //console.log("Igual...")
+        //console.log(sum_temp)
+        //console.log("############")
+      }
+
+}
+
+
+
+
 <% end %>

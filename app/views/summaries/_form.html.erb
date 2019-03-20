@@ -23,10 +23,6 @@
 
 
   <div class="row col-md-12">
-
-
-
-  <div class="row col-md-12">
     <div class="col-md-12   <%= error_div @summary, :text %>">
         <%= f.label :text %> <br>
         <%= f.text_area :text, cols: 20, rows: 10 ,:class => "form-control" %>
@@ -35,7 +31,13 @@
   </div>
 
 
-
+  <div class="row col-md-12" style="display: none;" id="text_alert">
+    <br>
+    <div class="row col-md-3">
+      <div class="callout callout-info">
+        <p>Text was saved...</p>
+      </div>
+    </div
   </div>
 </div>
 </div>
@@ -111,7 +113,7 @@ $(function () {
 
   // Replace the textarea  with a CKEditor
   // instance, using default configuration.
-  
+
    CKEDITOR.replace('summary_text');
 
 

@@ -83,7 +83,16 @@ class SummariesController < ApplicationController
   end
 
   def save_text
-    logger.debug "TEXTOOO #{params["text"]}"
+    #logger.debug "TEXTOOO #{params["text"]} - #{params["id"]}"
+
+    summary = current_user.summaries.find(params[:id])
+    summary.text=params["text"]
+
+    if(summary.save)
+      render json: { status: "success" }
+    else
+      render json: { status: "error" }
+    end
   end
 
   def update
