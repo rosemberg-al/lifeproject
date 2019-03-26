@@ -19,12 +19,16 @@
       <tr>
         <th style="width: 10px"></th>
         <th><%= t '.quotation' %></th>
+        <th><%= t '.type_quote' %></th>
+        <th><%= t '.content' %></th>
       </tr>
 
       <% @quotations.each do |quotation| %>
       <tr onclick="location.href='<%= edit_quotation_path(quotation) %>'" style="cursor:pointer">
         <td><%= quotation.id %></td>
         <td><%=raw quotation.quotation[0,50]+" <b>...<b>" %></td>
+        <td><%= t("enums.quotation_type.#{quotation.type_quote}")  %></td>
+        <td><%= quotation.c_description %></td>
       </tr>
     <% end %>
     </table>

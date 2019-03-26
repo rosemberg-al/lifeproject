@@ -87,10 +87,13 @@ class ReviewsController < ApplicationController
 
     if @review.has_key? :q
          @reviews = current_user.reviews
+         .joins(:content)
+         .select("reviews.id,reviews.description, reviews.type_review,reviews.content_id,contents.description as c_description ")
          .where(@condition,@value_condition)
          .most_recent
          .page(@review[:page])
          .per(PER_PAGE)
+
     else
         @reviews = {}
     end

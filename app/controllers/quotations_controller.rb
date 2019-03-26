@@ -121,11 +121,15 @@ class QuotationsController < ApplicationController
 
     define_argument argument: "quotation", type: "ilike", table: "quotations"
     define_argument argument: "inactive", type: "inactive", table: "quotations"
+    define_argument argument: "content_id", type: "=", table: "quotations"
+    define_argument argument: "content_description", type: "auxiliary"
     define_argument_values(:quotation,params_index)
 
 
     if @quotation.has_key? :q
          @quotations = current_user.quotations
+         .left_joins(:content)
+         .select("quotations.id,quotations.quotation, quotations.type_quote,quotations.content_id,contents.description as c_description ")
          .where(@condition,@value_condition)
          .most_recent
          .page(@quotation[:page])
@@ -153,7 +157,7 @@ class QuotationsController < ApplicationController
     end
 
     def params_index
-      return params.require(:quotation).permit(:quotation,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :quotation
+      return params.require(:quotation).permit(:quotation,:inactive,:content_id,:content_description).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :quotation
       params.permit(:page)
     end
 

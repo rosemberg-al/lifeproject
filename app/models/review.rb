@@ -21,7 +21,7 @@ class Review < ApplicationRecord
   enum review_rate: { "1"=> "1", "2"=>  "2", "3"=>  "3", "4"=>  "4", "5"=>  "5"}
 
   scope :most_recent, -> {
-     order 'created_at desc'
+     order 'reviews.created_at desc'
   }
 
   scope :active, -> {

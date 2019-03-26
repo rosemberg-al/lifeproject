@@ -21,7 +21,7 @@ class Quotation < ApplicationRecord
   enum quotation_indication: { avoid: "avoid", follow: "follow"}
 
   scope :most_recent, -> {
-     order 'created_at desc'
+     order ' quotations.created_at desc'
   }
 
   scope :active, -> {

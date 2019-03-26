@@ -19,6 +19,63 @@
         <%= check_box_tag "quotation[inactive]", "Y",  (@quotation["inactive"]=="Y")  %>
       </div>
     </div>
+
+
+    <div class="row col-md-12">
+      <div class="col-md-4 ">
+          <%= t ".content" %> <br>
+          <%= hidden_field_tag "quotation[content_id]", @quotation["content_id"] %>
+          <%= text_field_tag "quotation[content_description]", @quotation["content_description"],:placeholder => t('.content_description'), :class => "form-control" %>
+      </div>
+    </div>
   </div>
 </div>
+<% end %>
+
+
+
+
+<% content_for :javascript do %>
+
+
+ $("#quotation_content_description").autocomplete({
+
+   source: function( request, response ) {
+     $.ajax({
+       url: "<%= content_json_path %>",
+       dataType: "json",
+       method : 'GET',
+       data: {
+         description: request.term
+       },
+       success: function( data ) {
+         response( data);
+       },
+       error : function(xhr, status) {
+         alert('It happened some error, please try again later...');
+         }
+     });
+   },
+   minLength: 3,
+   select: function( event, ui ) {
+
+     $("#quotation_content_id").val(ui.item.id);
+     $("#quotation_content_description").val(ui.item.label);
+   },
+   change: function( event, ui ) {
+     if(ui.item){
+
+     }else{
+       //caso nao selecione nenhuma linha, limpa tudo
+
+       $("#quotation_content_id").val('');
+       $("#quotation_content_description").val('');
+     }
+   }
+ });
+
+
+
+
+
 <% end %>

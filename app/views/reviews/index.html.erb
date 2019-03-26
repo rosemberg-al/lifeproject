@@ -19,12 +19,14 @@
       <tr>
         <th style="width: 10px"></th>
         <th><%= t '.description' %></th>
+        <th><%= t '.content' %></th>
       </tr>
 
       <% @reviews.each do |review| %>
       <tr onclick="location.href='<%= edit_review_path(review) %>'" style="cursor:pointer">
         <td><%= review.id %></td>
         <td><%= review.description %></td>
+        <td><%= review.c_description %></td>
       </tr>
     <% end %>
     </table>

@@ -287,9 +287,13 @@ pt-BR:
    title: 'Listar Citações/Insights'
    search_results: 'Resultados da busca'
    quotation: "Citação"
+   content: "Conteúdo"
+   type_quote: "Tipo"
   search:
    inactive: "Inativo?"
    quotation: "Citação"
+   content: "Conteúdo"
+   content_description: "Conteúdo"
   show:
    title: "Citação/Insight"
    quotation: "Citação: %{quotation}"
@@ -308,6 +312,7 @@ pt-BR:
    title: 'Listar Crítivas/Análises'
    search_results: 'Resultados da busca'
    description: "Descrição"
+   content: "Conteúdo"
   search:
    inactive: "Inativo?"
    description: "Descrição"
