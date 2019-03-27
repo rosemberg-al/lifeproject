@@ -19,12 +19,14 @@
       <tr>
         <th style="width: 10px"></th>
         <th><%= t '.description' %></th>
+        <th><%= t '.feature' %></th>
       </tr>
 
       <% @content_types.each do |content_type| %>
       <tr onclick="location.href='<%= edit_content_type_path(content_type) %>'" style="cursor:pointer">
         <td><%= content_type.id %></td>
-        <td><%= content_type.description %></td>
+        <td><%= content_type.description %></td>        
+        <td><%= t("enums.content_type_feature.#{content_type.feature}")  %></td>
       </tr>
     <% end %>
     </table>

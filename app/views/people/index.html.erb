@@ -19,12 +19,14 @@
       <tr>
         <th style="width: 10px"></th>
         <th><%= t '.name' %></th>
+        <th><%= t '.type_person' %></th>
       </tr>
 
       <% @people.each do |person| %>
       <tr onclick="location.href='<%= edit_person_path(person) %>'" style="cursor:pointer">
         <td><%= person.id %></td>
         <td><%= person.name %></td>
+        <td><%= t("enums.type_person.#{person.type_person}")  %></td>
       </tr>
     <% end %>
     </table>

@@ -75,10 +75,12 @@ class ContentTypesController < ApplicationController
 
     define_argument argument: "description", type: "ilike", table: "content_types"
     define_argument argument: "inactive", type: "inactive", table: "content_types"
+    define_argument argument: "feature", type: "=", table: "content_types"
     define_argument_values(:content_type,params_index)
 
     if @content_type.has_key? :q
          @content_types = current_user.content_types
+         .select("content_types.id,content_types.description, content_types.feature ")
          .where(@condition,@value_condition)
          .most_recent
          .page(@content_type[:page])
@@ -104,7 +106,7 @@ class ContentTypesController < ApplicationController
     end
 
     def params_index
-      return params.require(:content_type).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content_type
+      return params.require(:content_type).permit(:description,:inactive,:feature).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content_type
       params.permit(:page)
     end
 end

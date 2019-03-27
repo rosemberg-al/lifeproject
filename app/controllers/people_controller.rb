@@ -97,6 +97,7 @@ class PeopleController < ApplicationController
     if @person.has_key? :q
          @people = current_user.people
          .where(@condition,@value_condition)
+         .select("people.id,people.name,people.type_person")
          .most_recent
          .page(@person[:page])
          .per(PER_PAGE)

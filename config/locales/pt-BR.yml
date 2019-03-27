@@ -59,6 +59,12 @@ pt-BR:
    negative: Negativa
    neutral: Neutra
    positive: Positiva
+  content_type_feature:
+   printed: "Impresso"
+   audiovisual: "Audiovisual"
+   song: "Música/Audio"
+   play: "Apresentação"
+
 
  errors:
   messages:
@@ -176,18 +182,15 @@ pt-BR:
    title: 'Listar Tipos de Conteúdo'
    search_results: 'Resultados da busca'
    description: "Descrição"
+   feature: "Característica"
   search:
    search_for: 'Buscar por...'
    inactive: "Inativo?"
    description: "Descrição"
+   feature: "Característica"
   show:
    title: "Tipo de Conteúdo"
    description: "Descrição: %{description}"
-  form:
-   printed: "Impresso"
-   audiovisual: "Audiovisual"
-   song: "Música/Audio"
-   play: "Apresentação"
 
  contents:
   new:
@@ -237,6 +240,7 @@ pt-BR:
    title: 'Listar Pessoa/Artista'
    search_results: 'Resultados da busca'
    name: "Nome"
+   type_person: "Tipo Pessoa"
   search:
    search_for: 'Buscar por...'
    inactive: "Inativo?"
@@ -245,9 +249,6 @@ pt-BR:
   show:
    title: "Pessoa/Artista"
    name: "Nome: %{name}"
-  form:
-   fictional: "Ficcional"
-   real: "Real"
 
  summaries:
   new:

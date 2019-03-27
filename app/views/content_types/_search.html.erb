@@ -19,6 +19,18 @@
         <%= check_box_tag "content_type[inactive]", "Y",  (@content_type["inactive"]=="Y")  %>
       </div>
     </div>
+
+    <div class="row col-md-12">
+      <div class="col-md-4 ">
+          <%= t ".feature" %> <br>
+          <%=
+          select_tag "content_type[feature]",
+          options_for_select(ContentType.features.keys.map { |key,_| [t("enums.content_type_feature.#{key}"), key] },@content_type["feature"]),
+          { include_blank: true ,:class => "form-control"}
+          %>
+
+      </div>
+    </div>
   </div>
 </div>
 <% end %>
