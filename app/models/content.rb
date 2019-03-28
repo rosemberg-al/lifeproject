@@ -18,7 +18,7 @@
 class Content < ApplicationRecord
 
   scope :most_recent, -> {
-     order 'created_at desc'
+     order ' contents.created_at desc'
   }
 
   scope :active, -> {
@@ -34,6 +34,8 @@ class Content < ApplicationRecord
   validates_length_of :synopsis, :minimum => 3, :allow_blank => false
 
   belongs_to :user
+  belongs_to :content_type
+  belongs_to :content_genre
 
   has_many :content_people
   has_many :people, through: :content_people
@@ -47,6 +49,7 @@ class Content < ApplicationRecord
   has_many :subjects, through: :content_subjects
 
   has_many :quotations
+  has_many :reviews
 
 
   accepts_nested_attributes_for :content_people, reject_if: :all_blank, allow_destroy: true

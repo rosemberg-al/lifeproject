@@ -1,0 +1,27 @@
+
+<div class="box box-primary">
+<div class="box box-default">
+  <!-- /.box-header -->
+  <div class="box-body no-padding">
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 10px"></th>
+        <th><%= t '.description' %></th>
+        <th><%= t '.rating' %></th>
+        <th><%= t '.type_review' %></th>
+      </tr>
+
+      <% @reviews.each do |review| %>
+      <tr onclick="location.href='<%= edit_review_path(review) %>'" style="cursor:pointer">
+        <td><%= review.id %></td>
+        <td><%= review.description %></td>
+        <td><%= review.rating %></td>
+        <td><%= t ("enums.review_type.#{review.type_review}") %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>

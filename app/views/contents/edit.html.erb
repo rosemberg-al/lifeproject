@@ -17,6 +17,7 @@
         <li class="active"><a href="#tab_1" data-toggle="tab"><%= t(".content")%></a></li>
         <li><a href="#tab_2" data-toggle="tab"><%= t(".summary") %></a></li>
         <li><a href="#tab_3" data-toggle="tab"><%= t(".quotation") %></a></li>
+        <li><a href="#tab_4" data-toggle="tab"><%= t(".review") %></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab_1">
@@ -37,6 +38,11 @@
         <!-- /.tab-pane -->
         <div class="tab-pane" id="tab_3">
             <%= render 'quotations'  %>
+        </div>
+        <!-- /.tab-pane -->
+        <!-- /.tab-pane -->
+        <div class="tab-pane" id="tab_4">
+            <%= render 'reviews'  %>
         </div>
         <!-- /.tab-pane -->
       </div>

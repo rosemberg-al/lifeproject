@@ -19,12 +19,16 @@
       <tr>
         <th style="width: 10px"></th>
         <th><%= t '.description' %></th>
+        <th><%= t '.content_type' %></th>
+        <th><%= t '.content_genre' %></th>
       </tr>
 
       <% @contents.each do |content| %>
       <tr onclick="location.href='<%= edit_content_path(content) %>'" style="cursor:pointer">
         <td><%= content.id %></td>
         <td><%= content.description %></td>
+        <td><%= content.ct_description %></td>
+        <td><%= content.cg_description %></td>
       </tr>
     <% end %>
     </table>

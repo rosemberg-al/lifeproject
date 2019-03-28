@@ -200,16 +200,21 @@ pt-BR:
    content: Conteúdo
    summary: Fichamentos/Resumos
    quotation: Citações/Insights
+   review: "Crítica/Análise"
   person:
    name: Nome
   index:
    title: 'Listar Conteúdo'
    search_results: 'Resultados da busca'
    description: "Descrição"
+   content_type: "Tipo de Conteúdo"
+   content_genre: "Gênero"
   search:
    search_for: 'Buscar por...'
    inactive: "Inativo?"
    description: "Descrição"
+   content_type: "Tipo de Conteúdo"
+   content_genre: "Gênero"
   show:
    title: "Conteúdo"
    description: "Descrição: %{description}"
@@ -229,6 +234,10 @@ pt-BR:
    quotation: "Citação"
    indication: "Indicação"
    type_quote: "Tipo Citação"
+  reviews:
+    description: "Descrição"
+    rating: "Nota"
+    type_review: "Tipo"
 
  people:
   new:

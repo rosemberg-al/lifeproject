@@ -23,8 +23,8 @@ class ContentsController < ApplicationController
 
   before_action :set_content, only: [:show]
   before_action :set_content_edit, only: [:edit, :update, :destroy]
-  before_action :content_types_list, only: [:edit, :update, :new, :create]
-  before_action :content_genres_list, only: [:edit, :update, :new, :create]
+  before_action :content_types_list, only: [:edit, :update, :new, :create, :index]
+  before_action :content_genres_list, only: [:edit, :update, :new, :create, :index]
   before_action :people_list, only: [:edit, :update, :new, :create]
 
 
@@ -35,7 +35,7 @@ class ContentsController < ApplicationController
 
 
      @contents=current_user.contents.active.select("id, description as label").where("description ilike '%#{description}%'").limit(30)
-     logger.debug "LISTA: #{@contents.inspect}"
+
      #head :ok
      render :json => @contents
    else
@@ -94,8 +94,12 @@ class ContentsController < ApplicationController
     .select("quotations.id,quotations.indication, quotations.type_quote,quotations.quotation ")
     .active
 
+    @reviews =   @content.reviews
+    .select("reviews.id,reviews.description,reviews.rating,reviews.type_review ")
+    .active
 
-    #logger.debug "@@@@: #{@summaries.inspect}"
+
+  #  logger.debug "@@@@: #{@reviews.inspect}"
     ##puts "%%%%% #{@content.type_desc}"
 
 
@@ -201,10 +205,16 @@ class ContentsController < ApplicationController
 
     define_argument argument: "description", type: "ilike", table: "contents"
     define_argument argument: "inactive", type: "inactive", table: "contents"
+    define_argument argument: "content_type_id", type: "=", table: "contents"
+    define_argument argument: "content_genre_id", type: "=", table: "contents"
+
     define_argument_values(:content,params_index)
 
     if @content.has_key? :q
          @contents = current_user.contents
+         .select("contents.id,contents.description,content_types.description as ct_description,content_genres.description as cg_description ")
+         .joins(:content_type)
+         .joins(:content_genre)
          .where(@condition,@value_condition)
          .most_recent
          .page(@content[:page])
@@ -251,7 +261,7 @@ class ContentsController < ApplicationController
     end
 
     def params_index
-      return params.require(:content).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content
+      return params.require(:content).permit(:description,:inactive,:content_type_id,:content_genre_id).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :content
       params.permit(:page)
     end
 end

@@ -19,6 +19,27 @@
         <%= check_box_tag "content[inactive]", "Y",  ( @content["inactive"]=="Y")  %>
       </div>
     </div>
+
+
+    <div class="row col-md-12">
+      <div class="col-md-4 ">
+          <%= t ".content_type" %> <br>
+          <%=
+          select_tag "content[content_type_id]",
+          options_for_select(@content_types.collect {|t| [ t.description, t.id ] },@content["content_type_id"]),
+          { include_blank: true ,:class => "form-control"}
+          %>
+      </div>
+
+      <div class="col-md-4 ">
+          <%= t ".content_genre" %> <br>
+          <%=
+          select_tag "content[content_genre_id]",
+          options_for_select(@content_genres.collect {|t| [ t.description, t.id ] },@content["content_genre_id"]),
+          { include_blank: true ,:class => "form-control"}
+          %>
+      </div>
+    </div>
   </div>
 </div>
 <% end %>
