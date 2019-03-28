@@ -119,7 +119,7 @@ class ApplicationController < ActionController::Base
 
       @arguments.each do |arg|
 
-       unless values[arg[:argument]].empty?
+       if( values.has_key?(arg[:argument])  and values[arg[:argument]] and not values[arg[:argument]].empty?)
           if condition.empty?
 
             if(arg[:type]=="inactive" )
