@@ -71,7 +71,7 @@ class SummariesController < ApplicationController
     end
 
     if @summary.save
-      redirect_to @summary, notice: t('flash.notice.save_success') #'Person was successfully created.'
+      redirect_to edit_summary_path(@summary), notice: t('flash.notice.save_success') #'Person was successfully created.'
     else
 
       logger.debug "ERROS: #{@summary.errors.inspect}"

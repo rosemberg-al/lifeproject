@@ -1,3 +1,9 @@
+
+<div class="box-header">
+    <%=   content_tag :button, t('.button_new_summary'), :class => 'btn btn-primary', :onclick =>"location.href='#{new_summary_path}?content_id=#{@content.id}';", :type => :button, :id => :new_summary %>
+</div>
+
+
 <div class="box box-primary">
 <div class="box box-default">
   <!-- /.box-header -->
@@ -13,7 +19,7 @@
       <tr onclick="location.href='<%= edit_summary_path(summary) %>'" style="cursor:pointer">
         <td><%= summary.id %></td>
         <td><%= summary.description %></td>
-        <td><%= t("enums.summary_type.#{summary.type_summary}") %></td>        
+        <td><%= t("enums.summary_type.#{summary.type_summary}") %></td>
       </tr>
     <% end %>
     </table>
@@ -22,3 +28,10 @@
 </div>
 <!-- /.box -->
 </div>
+
+
+<% content_for :javascript do %>
+  shortcut.add("F10",function(){
+    $("#new_summary").click();
+  });
+<% end %>

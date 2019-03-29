@@ -162,7 +162,7 @@ class ContentsController < ApplicationController
       #   end
       # end
 
-      redirect_to @content, notice: t('flash.notice.save_success') #'Content was successfully created.'
+      redirect_to edit_content_path(@content), notice: t('flash.notice.save_success') #'Content was successfully created.'
     else
       logger.debug "ERROS: #{@content.errors.inspect}"
       render :new

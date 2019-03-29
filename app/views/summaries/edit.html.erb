@@ -8,6 +8,14 @@
   </div>
 <% end %>
 
+
+<% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+
 <%= form_for @summary do |f| %>
 
 

@@ -200,7 +200,7 @@ pt-BR:
    content: Conteúdo
    summary: Fichamentos/Resumos
    quotation: Citações/Insights
-   review: "Crítica/Análise"
+   review: "Críticas/Análises"
   person:
    name: Nome
   index:
@@ -230,14 +230,16 @@ pt-BR:
   summaries:
    description: "Descrição"
    type_summary: "Tipo de Resumo"
+   button_new_summary: "F10 - Novo Resumo"
   quotations:
    quotation: "Citação"
    indication: "Indicação"
    type_quote: "Tipo Citação"
   reviews:
-    description: "Descrição"
-    rating: "Nota"
-    type_review: "Tipo"
+   description: "Descrição"
+   rating: "Nota"
+   type_review: "Tipo"
+   button_new_review: "F11 - Nova Crítica"
 
  people:
   new:
