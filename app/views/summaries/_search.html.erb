@@ -19,6 +19,19 @@
         <%= check_box_tag "summary[inactive]", "Y",  (@summary["inactive"]=="Y")  %>
       </div>
     </div>
+
+
+    <div class="row col-md-12">
+      <div class="col-md-4 ">
+          <%= t ".type_summary" %> <br>
+          <%=
+          select_tag "summary[type_summary]",
+          options_for_select(Summary.summary_types.keys.map { |key,_| [t("enums.summary_type.#{key}"), key] },@summary["type_summary"]),
+          { include_blank: true ,:class => "form-control"}
+          %>
+
+      </div>
+    </div>
   </div>
 </div>
 <% end %>

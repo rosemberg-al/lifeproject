@@ -274,9 +274,11 @@ pt-BR:
    title: 'Listar Fichamentos/Resumos'
    search_results: 'Resultados da busca'
    description: "Descrição"
+   type_summary: "Tipo"
   search:
    inactive: "Inativo?"
    description: "Descrição"
+   type_summary: "Tipo"
   show:
    title: "Fichamento/Resumo"
    description: "Descrição: %{description}"

@@ -26,7 +26,22 @@ class ReviewsController < ApplicationController
 
 
   def new
-    @review = current_user.reviews.build
+
+
+    if(params.has_key? "content_id")
+      content = current_user.contents
+      .select("contents.id,contents.description")
+      .find(params[:content_id])
+
+      if(content)
+          @review = current_user.reviews.build(content_id: content.id, content_description: content.description)
+      else
+        @review = current_user.reviews.build
+      end
+
+    else
+        @review = current_user.reviews.build
+    end
 
   end
 

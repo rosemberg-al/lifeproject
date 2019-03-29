@@ -19,12 +19,14 @@
       <tr>
         <th style="width: 10px"></th>
         <th><%= t '.description' %></th>
+        <th><%= t '.type_summary' %></th>
       </tr>
 
       <% @summaries.each do |summary| %>
       <tr onclick="location.href='<%= edit_summary_path(summary) %>'" style="cursor:pointer">
         <td><%= summary.id %></td>
         <td><%= summary.description %></td>
+        <td><%= t("enums.summary_type.#{summary.type_summary}") %></td>
       </tr>
     <% end %>
     </table>

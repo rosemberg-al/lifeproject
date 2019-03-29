@@ -26,9 +26,33 @@ class SummariesController < ApplicationController
 
 
   def new
+
     @summary = current_user.summaries.build
-    2.times do @summary.summary_contents.build end
-    2.times do @summary.summary_people.build end
+
+    if(params.has_key? "content_id")
+      contents = current_user.contents
+      .left_joins(:people)
+      .select("contents.id,contents.description,people.id as p_id,people.name as p_name")
+      .where("contents.id = :id and contents.inactivated_at is null ",{id: params[:content_id]})
+      .most_recent
+
+      if(contents)
+
+        contents.each do |content|
+             @summary.summary_people.build(person_id: content.p_id, person_name: content.p_name)
+        end
+
+        @summary.summary_contents.build(content_id: contents.first.id, content_description: contents.first.description)
+      else
+        2.times do @summary.summary_contents.build end
+        2.times do @summary.summary_people.build end
+      end
+
+    else
+      2.times do @summary.summary_contents.build end
+      2.times do @summary.summary_people.build end
+    end
+
   end
 
   def edit
@@ -126,10 +150,12 @@ class SummariesController < ApplicationController
 
     define_argument argument: "description", type: "ilike", table: "summaries"
     define_argument argument: "inactive", type: "inactive", table: "summaries"
+    define_argument argument: "type_summary", type: "=", table: "summaries"
     define_argument_values(:summary,params_index)
 
     if @summary.has_key? :q
          @summaries = current_user.summaries
+         .select("summaries.id,summaries.description,summaries.type_summary")
          .where(@condition,@value_condition)
          .most_recent
          .page(@summary[:page])
@@ -157,7 +183,7 @@ class SummariesController < ApplicationController
     end
 
     def params_index
-      return params.require(:summary).permit(:description,:inactive).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :summary
+      return params.require(:summary).permit(:description,:inactive,:type_summary).merge(params.permit(:q)).merge(params.permit(:page)).to_h if params.has_key? :summary
       params.permit(:page)
     end
 
