@@ -32,14 +32,15 @@ class SummariesController < ApplicationController
     if(params.has_key? "content_id")
       contents = current_user.contents
       .left_joins(:people)
-      .select("contents.id,contents.description,people.id as p_id,people.name as p_name")
+      .select("contents.id,contents.description,people.id as p_id,people.name as p_name,content_people.type_content_person ")
       .where("contents.id = :id and contents.inactivated_at is null ",{id: params[:content_id]})
       .most_recent
 
       if(contents)
 
         contents.each do |content|
-             @summary.summary_people.build(person_id: content.p_id, person_name: content.p_name)
+             
+             @summary.summary_people.build(person_id: content.p_id, person_name: content.p_name, type_person: content.type_content_person)
         end
 
         @summary.summary_contents.build(content_id: contents.first.id, content_description: contents.first.description)
