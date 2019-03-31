@@ -52,6 +52,19 @@ en:
   quotation_indication:
    avoid: To Avoid
    follow: To Follow
+  type_person:
+   real: Real
+   fictional: Fictional
+  review_type:
+   negative: Negative
+   neutral: Neutral
+   positive: Positive
+  content_type_feature:
+   printed: "Printed"
+   audiovisual: "Audiovisual"
+   song: "Song"
+   play: "Play"
+
 
  errors:
   messages:
@@ -60,7 +73,7 @@ en:
  helpers:
   submit:
    user_session:
-    create: 'Save'
+    create: 'Enter'
    subject:
     create: "Save"
     update: "Save"
@@ -85,6 +98,7 @@ en:
   profile: Profile
   summaries: Annotation/Summary
   quotations: Quotation/Insight
+  reviews: "Review"
   motivated: "Improve yourself as a person every moment, get yourself inspired:"
 
  home:
@@ -168,34 +182,39 @@ en:
    title: 'List Content Types'
    search_results: 'Search results'
    description: "Description"
+   feature: "Feature"
   search:
    search_for: 'Search for...'
    inactive: "Inactive?"
    description: "Description"
+   feature: "Feature"
   show:
    title: " Content Type"
    description: "Description: %{description}"
-  form:
-   printed: "Press"
-   audiovisual: "Audiovisual"
-   song: "Music/Song"
-   play: "Presentation"
 
  contents:
   new:
    title: Add Content
   edit:
    title: Edit Content
+   content: Contents
+   summary: Summarys
+   quotation: Quotations
+   review: Reviews
   person:
    name: Name
   index:
    title: 'List Content'
    search_results: 'Search results'
    description: "Description"
+   content_type: "Content Type"
+   content_genre: "Content Genre"
   search:
    search_for: 'Search for...'
    inactive: "Inactive?"
    description: "Description"
+   content_type: "Content Type"
+   content_genre: "Content Genre"
   show:
    title: "Content"
    description: "Description: %{description}"
@@ -208,6 +227,22 @@ en:
    add_person: Add Person
    content_subjects: Related Subject
    add_subject: Add Subject
+  summaries:
+   description: "Description"
+   type_summary: "Summary Type"
+   button_new_summary: "F10 - New Summary"
+  quotations:
+   quotation: "Quotation"
+   indication: "Indication"
+   type_quote: "Type"
+   button_new_quotation: "New Quotation"
+  reviews:
+   description: "Description"
+   rating: "Rating"
+   type_review: "Type"
+   button_new_review: "F11 - New Review"
+  new_quotation:
+   new_quotation: "New Quotation"
 
  people:
   new:
@@ -219,10 +254,12 @@ en:
    title: 'List Person/Artist'
    search_results: 'Search results'
    name: "Name"
+   type_person: "Type"
   search:
    search_for: 'Search for...'
    inactive: "Inactive?"
    name: "Name"
+   type_person: "Type"
   show:
    title: "Person/Artist"
    name: "Name: %{name}"
@@ -240,9 +277,11 @@ en:
    title: 'List Annotations/Summaries'
    search_results: 'Search results'
    description: "Description"
+   type_summary: "Type"
   search:
    inactive: "Inactive?"
    description: "Description"
+   type_summary: "Type"
   show:
    title: "Annotation/Summary"
    description: "Description: %{description}"
@@ -265,9 +304,13 @@ en:
    title: 'List Quotations/Insights'
    search_results: 'Search results'
    quotation: "Quotation"
+   content: "Conteúdo"
+   type_quote: "Tipo"
   search:
    inactive: "Inactive?"
    quotation: "Quotation"
+   content: "Conteúdo"
+   content_description: "Conteúdo"
   show:
    title: "Quotation/Insight"
    quotation: "Quotation: %{quotation}"
@@ -276,6 +319,25 @@ en:
   form:
    quotation_people: Related Person/Artist
    add_person: Add Person
+
+ reviews:
+  new:
+   title: Add Review
+  edit:
+   title: Edit Review
+  index:
+   title: 'List Reviews'
+   search_results: 'Search Results'
+   description: "Description"
+   content: "Content"
+  search:
+   inactive: "Inactive?"
+   description: "Description"
+   content: "Content"
+   content_description: "Content"
+  show:
+   title: "Review"
+   review: "Review: %{review}"
 
  user_sessions:
   new:
@@ -303,6 +365,7 @@ en:
    content_type: Content Type
    content: Content
    person: Person
+   review: Review
   attributes:
    user:
     bio: Biography
@@ -362,6 +425,13 @@ en:
    quotation_person:
     person: Name
     type_person: Person Type
+   review:
+    description: Description
+    content_id: Content
+    content: Content
+    type_review: Type
+    review: Review
+    rating: Rating
    user_session:
     email: Email
     password: Password

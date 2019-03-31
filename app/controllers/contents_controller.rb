@@ -88,16 +88,33 @@ class ContentsController < ApplicationController
     .joins(:contents)
     .where("contents.id = ?", params[:id])
     .active
+    .most_recent
 
 
     @quotations =   @content.quotations
     .select("quotations.id,quotations.indication, quotations.type_quote,quotations.quotation ")
     .active
+    .most_recent
 
     @reviews =   @content.reviews
     .select("reviews.id,reviews.description,reviews.rating,reviews.type_review ")
     .active
+    .most_recent
 
+
+    #to add a new quotation
+    @quotation = current_user.quotations.build
+    2.times do @quotation.quotation_people.build end
+    @quotation.type_quote=:quote
+    @quotation.content_id=@content.id
+    @quotation.content_description=@content.description
+
+
+    @show_tab1=!params.has_key?("quotation") ? "class=active" :""
+    @show_tab_det1=!params.has_key?("quotation") ? "active" :""
+
+    @show_tab3=params.has_key?("quotation") ? "class=active" :""
+    @show_tab_det3=params.has_key?("quotation") ? "active" :""
 
   #  logger.debug "@@@@: #{@reviews.inspect}"
     ##puts "%%%%% #{@content.type_desc}"

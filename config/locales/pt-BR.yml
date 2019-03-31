@@ -235,11 +235,14 @@ pt-BR:
    quotation: "Citação"
    indication: "Indicação"
    type_quote: "Tipo Citação"
+   button_new_quotation: "Nova Citação"
   reviews:
    description: "Descrição"
    rating: "Nota"
    type_review: "Tipo"
    button_new_review: "F11 - Nova Crítica"
+  new_quotation:
+   new_quotation: "Nova Citação"
 
  people:
   new:

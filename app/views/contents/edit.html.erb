@@ -20,13 +20,13 @@
 <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab_1" data-toggle="tab"><%= t(".content")%></a></li>
+        <li <%= @show_tab1 %> ><a href="#tab_1" data-toggle="tab"><%= t(".content")%></a></li>
         <li><a href="#tab_2" data-toggle="tab"><%= t(".summary") %></a></li>
-        <li><a href="#tab_3" data-toggle="tab"><%= t(".quotation") %></a></li>
+        <li <%= @show_tab3 %> ><a href="#tab_3" data-toggle="tab"><%= t(".quotation") %></a></li>
         <li><a href="#tab_4" data-toggle="tab"><%= t(".review") %></a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="tab_1">
+        <div class="tab-pane <%= @show_tab_det1 %>" id="tab_1">
           <%= form_for @content do |f| %>
 
           <%= render 'form' , f: f %>
@@ -42,7 +42,7 @@
             <%= render 'summaries'  %>
         </div>
         <!-- /.tab-pane -->
-        <div class="tab-pane" id="tab_3">
+        <div class="tab-pane <%= @show_tab_det3 %>" id="tab_3">
             <%= render 'quotations'  %>
         </div>
         <!-- /.tab-pane -->

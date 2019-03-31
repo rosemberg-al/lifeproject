@@ -21,7 +21,7 @@ class Summary < ApplicationRecord
     text: "Text", script: "Script", tutorial: "Tutorial"}
 
   scope :most_recent, -> {
-     order 'created_at desc'
+     order 'summaries.created_at desc'
   }
 
   scope :active, -> {

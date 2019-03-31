@@ -80,10 +80,18 @@ class QuotationsController < ApplicationController
     end
 
 
+
     if @quotation.save
-      redirect_to @quotation, notice: t('flash.notice.save_success') #'Quotation was successfully created.'
+
+      redirect_to @quotation, notice: t('flash.notice.save_success') unless params.has_key? :modal
+      render json: {status: :success,url:edit_content_path(params[:content_id])} if params.has_key? :modal
+      #redirect_to controller: 'content', action: 'edit', id: params[:content_id], quotation: 'y'
+      #redirect_to edit_content_path(params[:content_id], quotation: 'y')
     else
-      render :new
+      render :new unless params.has_key? :modal
+      message=""
+      @quotation.errors.full_messages.each {|msg| message+=msg+"<br>" }
+      render json: {status: :failure, message: message} if params.has_key? :modal
     end
   end
 

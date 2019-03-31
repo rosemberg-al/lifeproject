@@ -1,3 +1,11 @@
+<div class="box-header">
+    <%=   content_tag :button, t('.button_new_quotation'), :class => 'btn btn-primary',
+     "data-toggle" =>"modal", "data-target"=>"#modal-quotation",:type => :button, :id => :new_quotation %>
+</div>
+
+<%= render 'new_quotation'  %>
+
+
 <div class="box box-primary">
 <div class="box box-default">
   <!-- /.box-header -->

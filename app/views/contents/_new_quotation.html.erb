@@ -1,0 +1,178 @@
+<div class="modal fade" id="modal-quotation">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= t(".new_quotation") %></h4>
+      </div>
+      <div class="modal-body">
+
+
+        <%= form_for @quotation , :html=> {:id => 'quot_form'} do |f| %>
+
+
+        <div class="box-body">
+          <div class="row col-md-12 " id="quot_message" style="display:none;" >
+            <div class="alert alert-danger alert-dismissible">
+              <div id="quot_message_text">
+              </div>
+            </div>
+          </div>
+        <div class="row col-md-12">
+          <div class="col-md-6   <%= error_div @quotation, :type_quote %>">
+              <%= f.label :type_quote %> <br>
+              <%=
+              f.select :type_quote, Quotation.quotation_types.keys.map { |key,_| [t("enums.quotation_type.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+              %>
+              <%= error_tag @quotation, :type_quote %>
+          </div>
+
+
+          <div class="col-md-6   <%= error_div @quotation, :indication %>">
+              <%= f.label :indication %> <br>
+              <%=
+              f.select :indication, Quotation.quotation_indications.keys.map { |key,_| [t("enums.quotation_indication.#{key}"), key] },{ include_blank: true } ,:class => "form-control"
+              %>
+              <%= error_tag @quotation, :indication %>
+          </div>
+        </div>
+
+
+
+          <div class="row col-md-12">
+            <div class="col-md-12   <%= error_div @quotation, :quotation %>">
+                <%= f.label :quotation %> <br>
+                <%= f.text_area :quotation, cols: 20, rows: 10 ,:class => "form-control" %>
+                <%= error_tag @quotation, :quotation %>
+            </div>
+          </div>
+
+          <div class="row col-md-12">
+            <div class="col-md-6 ">
+
+                <%= f.label :content %><br>
+                <%= f.hidden_field :content_id %>
+                <%= f.text_field :content_description, :class => "form-control", :readonly => "readonly" %>
+                <%= error_tag @quotation, "content_id" %>
+            </div>
+
+            <div class="col-md-6   <%= error_div @quotation, :order %>">
+
+                <%= f.label :order %> <br>
+                <%= f.text_field :order, {:class => "form-control"} %>
+                <%= error_tag @quotation, :order %>
+
+            </div>
+          </div>
+
+
+          <div class="row col-md-12">
+            <div class="col-md-6   <%= error_div @quotation, :page_initial %>">
+
+                <%= f.label :page_initial %> <br>
+                <%= f.text_field :page_initial, {:class => "form-control"} %>
+                <%= error_tag @quotation, :page_initial %>
+
+            </div>
+            <div class="col-md-6   <%= error_div @quotation, :page_final %>">
+
+                <%= f.label :page_final %> <br>
+                <%= f.text_field :page_final, {:class => "form-control"} %>
+                <%= error_tag @quotation, :page_final %>
+
+            </div>
+          </div>
+
+          </div>
+
+        <% end %>
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <%= content_tag :button, t('button.save'), :class => 'btn btn-primary', :onclick =>"save_quotation()", :type => :button, :id => :save_quotation %>
+      </div>
+
+
+
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+
+<% content_for :javascript do %>
+
+  $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
+
+  $(function () {
+
+    // Replace the textarea  with a CKEditor
+    // instance, using default configuration.
+
+     CKEDITOR.replace('quotation_quotation');
+
+     //bootstrap WYSIHTML5 - text editor
+    // $('#quotation_quotation').wysihtml5()
+   })
+
+
+
+  $("#quotation_page_initial").change(function() {
+    $("#quotation_page_final").val( $("#quotation_page_initial").val() );
+  });
+
+
+
+  function save_quotation(){
+
+        var urlQuotation="<%= quotations_path %>?modal=y&content_id=<%=@content.id%>";
+
+        var form=$('#quot_form').serializeArray();
+        form.push({ name : 'modal', value : 'y' });
+        form.push({ name : 'quotation[quotation]', value : CKEDITOR.instances.quotation_quotation.getData() });
+
+      //  console.log(form);
+      //  console.log(urlQuotation);
+		  	$.ajax({
+			  	//timeout : 600000,
+			  	url : urlQuotation,
+			  	data : form,
+			  	type : 'POST',
+			  	dataType : 'json',
+			  	success : function(json) {
+            //console.log(json);
+            if(json.status=="success"){
+              window.location.href = json.url + "?quotation=y";
+            }else{
+              $("#quot_message").show();
+              $("#quot_message_text").html(json.message);
+              console.log(json.message)
+            }
+			  	},
+			  	error : function(xhr, status) {
+			  		alert('Please try again...');
+			  	},
+			  	complete : function(xhr, status) {
+
+			  		$("#save_quotation").attr("disabled", false);
+
+			  	},
+
+			  	beforeSend: function(){
+
+		  	   $("#save_quotation").attr("disabled", true);
+
+			  	}
+		  	});
+
+  }
+<% end %>
