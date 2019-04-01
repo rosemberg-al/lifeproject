@@ -30,6 +30,7 @@ en:
   edit: 'F10 - Edit'
   inactivate: 'Inactivate'
   activate: 'Activate'
+  save_2: 'Save'
 
  enums:
   type_content_person:
@@ -243,12 +244,16 @@ en:
    button_new_review: "F11 - New Review"
   new_quotation:
    new_quotation: "New Quotation"
+   quotation_people: "Related Person/Artist"
+   add_person: Add Person
+  quotation_person_fields:
+   remove_person: Remove Person
 
  people:
   new:
    title: Add Person/Artist
   edit:
-   title: Editar Person/Artist
+   title: Edit Person/Artist
    submit: 'Save'
   index:
    title: 'List Person/Artist'
@@ -293,7 +298,7 @@ en:
    summary_contents: Related Content
    summary_people: Related Person
    add_content: Add Content
-   add_person: Adicionar Person
+   add_person: Add Person
 
  quotations:
   new:

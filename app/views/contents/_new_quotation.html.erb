@@ -84,6 +84,37 @@
             </div>
           </div>
 
+
+          <div class="row col-md-12">
+          <br>
+          <div class="box box-danger">
+          <div class="box box-default">
+          <div class="row col-md-12">
+          <div class="row col-md-12">
+          <h4><%= t '.quotation_people' %></h4>
+
+          </div>
+          </div>
+          <div class="box-body">
+          <div class="row" id="quotation_people_div">
+          <%= hidden_field_tag "quotation[size_people]", @quotation.quotation_people.size %>
+          <%= f.fields_for :quotation_people do |cp| %>
+             <%= render 'quotation_person_fields', f: cp %>
+          <% end %>
+          </div>
+          <br>
+          <%= link_to_add_association t('.add_person'), f, :quotation_people, :class => 'btn btn-primary' %>
+          </div>
+
+          </div>
+          </div>
+          </div>
+
+
+
+
+
+
           </div>
 
         <% end %>
@@ -95,7 +126,7 @@
 
       </div>
       <div class="modal-footer">
-        <%= content_tag :button, t('button.save'), :class => 'btn btn-primary', :onclick =>"save_quotation()", :type => :button, :id => :save_quotation %>
+        <%= content_tag :button, t('button.save_2'), :class => 'btn btn-primary', :onclick =>"save_quotation()", :type => :button, :id => :save_quotation %>
       </div>
 
 
@@ -114,16 +145,8 @@
   $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
 
   $(function () {
-
-    // Replace the textarea  with a CKEditor
-    // instance, using default configuration.
-
      CKEDITOR.replace('quotation_quotation');
-
-     //bootstrap WYSIHTML5 - text editor
-    // $('#quotation_quotation').wysihtml5()
    })
-
 
 
   $("#quotation_page_initial").change(function() {
@@ -175,4 +198,60 @@
 		  	});
 
   }
+
+
+
+   $("[id^=quotation_quotation_people_attributes_]").on("focus", function() {
+     $(this).autocomplete({
+     source: function( request, response ) {
+       $.ajax({
+         url: "<%= person_json_path %>",
+         dataType: "json",
+         method : 'GET',
+         data: {
+           name: request.term
+         },
+         success: function( data ) {
+           console.log(data);
+           response( data);
+         },
+         error : function(xhr, status) {
+           alert('It happened some error, please try again later...');
+           }
+       });
+     },
+     minLength: 3,
+     select: function( event, ui ) {
+
+       $(this).val(ui.item.name);
+
+       var idAutoComplete=$(this).attr("id");
+       idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
+       idAutoComplete=idAutoComplete.replace("_person_name","");
+       console.log(idAutoComplete+"CC");
+
+       $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
+       console.log($("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val()+"A");
+
+     },
+     change: function( event, ui ) {
+       if(ui.item){
+
+       }else{
+         //caso nao selecione nenhuma linha, limpa tudo
+         // f.options[:child_index] = f.index  -> it works the same way to get the child index form
+         idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
+         idAutoComplete=idAutoComplete.replace("_person_name","");
+         $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val('');
+
+         $(this).val('');
+
+       }
+     }
+   });
+   });
+
+
+
+
 <% end %>

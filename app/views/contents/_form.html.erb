@@ -182,7 +182,8 @@ function change_type(){
 
 
 $(function() {
-  $("[id$=_person_name]").on("focus", function() {
+  $("[id^=content_content_people_attributes_]").on("focus", function() {
+
     $(this).autocomplete({
 
       source: function( request, response ) {
@@ -307,13 +308,11 @@ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
 
 
   $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
-    //var oi=inserted_item.find('input:hidden:eq(0)').attr("id");
-    //console.log("A");
-    //console.log(oi);
-    //inserted_item.replace('new_content_item','1000000000000000')
+
 
     $(function() {
-      $("[id$=_person_name]").on("focus", function() {
+      //$("[id$=_person_name]").on("focus", function() {
+      $("[id^=content_content_people_attributes_]").on("focus", function() {
         $(this).autocomplete({
 
           source: function( request, response ) {
@@ -423,6 +422,61 @@ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
   });
 
 
+
+
+
+
+
+       $("[id^=quotation_quotation_people_attributes_]").on("focus", function() {
+         $(this).autocomplete({
+
+           source: function( request, response ) {
+             $.ajax({
+               url: "<%= person_json_path %>",
+               dataType: "json",
+               method : 'GET',
+               data: {
+                 name: request.term
+               },
+               success: function( data ) {
+                 console.log(data);
+                 response( data);
+               },
+               error : function(xhr, status) {
+                 alert('It happened some error, please try again later...');
+                 }
+             });
+           },
+           minLength: 3,
+           select: function( event, ui ) {
+
+             $(this).val(ui.item.name);
+             var idAutoComplete=$(this).attr("id");
+             idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
+             idAutoComplete=idAutoComplete.replace("_person_name","");
+             console.log(idAutoComplete+"CC");
+
+             $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
+             console.log($("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val()+"A");
+
+           },
+           change: function( event, ui ) {
+             if(ui.item){
+
+             }else{
+               //caso nao selecione nenhuma linha, limpa tudo
+               // f.options[:child_index] = f.index  -> it works the same way to get the child index form
+               var idAutoComplete=$(this).attr("id");
+               idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
+               idAutoComplete=idAutoComplete.replace("_person_name","");
+               $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val('');
+               $(this).val('');
+
+             }
+           }
+         });
+
+    });
 
 
 } )

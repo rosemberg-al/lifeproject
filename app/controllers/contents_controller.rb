@@ -75,9 +75,7 @@ class ContentsController < ApplicationController
       end
     end
 
-    @content.content_people.map do |cp|
-      cp.person_name=cp.person.name
-    end
+
 
     @content.content_subjects.map do |cs|
       cs.subject_description=cs.subject.description
@@ -104,10 +102,16 @@ class ContentsController < ApplicationController
 
     #to add a new quotation
     @quotation = current_user.quotations.build
-    2.times do @quotation.quotation_people.build end
+    #2.times do @quotation.quotation_people.build end
     @quotation.type_quote=:quote
     @quotation.content_id=@content.id
     @quotation.content_description=@content.description
+
+    @content.content_people.map do |cp|
+      cp.person_name=cp.person.name
+
+      @quotation.quotation_people.build(person_id: cp.person.id, person_name: cp.person.name, type_person: cp.type_content_person)
+    end
 
 
     @show_tab1=!params.has_key?("quotation") ? "class=active" :""

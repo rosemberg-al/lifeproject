@@ -1,0 +1,27 @@
+
+  <div class="row col-md-12">
+    <div class="col-md-4 ">
+
+        <%= f.label :person %><br>
+        <%= f.hidden_field :person_id %>
+        <%= f.text_field :person_name, :class => "form-control" %>
+        <%= error_tag @quotation, "quotation_people.person_id" %>
+    </div>
+
+    <div class="col-md-4 ">
+        <%= f.label :type_person %><br>
+        <%=
+        f.select :type_person, QuotationPerson.type_content_people.map { |key,_| [t("enums.type_content_person.#{key}"), key] },
+        { include_blank: true } ,:class => "form-control"
+        %>
+        <%= error_tag @quotation, "quotation_people.type_person" %>
+
+    </div>
+
+    <div class="col-md-4 ">
+    <br>
+    <%=link_to_remove_association t('.remove_person'), f,
+    {:wrapper_class=> 'row', :class=> 'btn btn-primary'} %>
+    </div>
+
+  </div>

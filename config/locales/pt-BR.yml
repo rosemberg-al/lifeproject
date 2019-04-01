@@ -30,6 +30,7 @@ pt-BR:
   edit: 'F10 - Editar'
   inactivate: 'Inativar'
   activate: 'Ativar'
+  save_2: 'Gravar'
 
  enums:
   type_content_person:
@@ -243,6 +244,10 @@ pt-BR:
    button_new_review: "F11 - Nova Crítica"
   new_quotation:
    new_quotation: "Nova Citação"
+   quotation_people: "Pessoa/Artista Relacionado"
+   add_person: Adicionar Pessoa
+  quotation_person_fields:
+   remove_person: Remover Pessoa
 
  people:
   new:

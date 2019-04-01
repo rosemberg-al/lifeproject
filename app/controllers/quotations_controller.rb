@@ -88,10 +88,13 @@ class QuotationsController < ApplicationController
       #redirect_to controller: 'content', action: 'edit', id: params[:content_id], quotation: 'y'
       #redirect_to edit_content_path(params[:content_id], quotation: 'y')
     else
-      render :new unless params.has_key? :modal
-      message=""
-      @quotation.errors.full_messages.each {|msg| message+=msg+"<br>" }
-      render json: {status: :failure, message: message} if params.has_key? :modal
+      unless params.has_key? :modal
+        render :new unless params.has_key? :modal
+      else
+        message=""
+        @quotation.errors.full_messages.each {|msg| message+=msg+"<br>" }
+        render json: {status: :failure, message: message}
+      end
     end
   end
 
