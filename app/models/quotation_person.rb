@@ -38,6 +38,6 @@ class QuotationPerson < ApplicationRecord
 
 
   #virtual attributes
-  attr_accessor :person_name
+  attr_accessor :person_name_quote
 
 end

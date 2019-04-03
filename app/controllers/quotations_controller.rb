@@ -43,7 +43,7 @@ class QuotationsController < ApplicationController
     @quotation.content_description=@quotation.content.description if @quotation.content.present?
 
     @quotation.quotation_people.map do |cp|
-      cp.person_name=cp.person.name
+      cp.person_name_quote=cp.person.name
     end
 
   end
@@ -164,7 +164,7 @@ class QuotationsController < ApplicationController
 
     def quotation_params
       params.require(:quotation).permit(:quotation,:content_id,:page_initial,:page_final,:order,:type_quote,:indication,
-      quotation_people_attributes: [:id,:person_id, :type_person, :_destroy, :person_name])
+      quotation_people_attributes: [:id,:person_id, :type_person, :_destroy, :person_name_quote])
     end
 
     def params_index

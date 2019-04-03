@@ -170,7 +170,7 @@ $("#quotation_page_initial").change(function() {
 
 
 
- $("[id^=quotation_quotation_people_attributes_]").on("focus", function() {
+ $("[id$=_person_name_quote]").on("focus", function() {
    $(this).autocomplete({
    source: function( request, response ) {
      $.ajax({
@@ -195,7 +195,7 @@ $("#quotation_page_initial").change(function() {
 
      var idAutoComplete=$(this).attr("id");
      idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
-     idAutoComplete=idAutoComplete.replace("_person_name","");
+     idAutoComplete=idAutoComplete.replace("_person_name_quote","");
      console.log(idAutoComplete);
 
      $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
@@ -209,7 +209,7 @@ $("#quotation_page_initial").change(function() {
        //caso nao selecione nenhuma linha, limpa tudo
        // f.options[:child_index] = f.index  -> it works the same way to get the child index form
        idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
-       idAutoComplete=idAutoComplete.replace("_person_name","");
+       idAutoComplete=idAutoComplete.replace("_person_name_quote","");
        $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val('');
 
        $(this).val('');
@@ -228,7 +228,7 @@ $("#quotation_page_initial").change(function() {
 
    $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
 
-   $("[id^=quotation_quotation_people_attributes_]").on("focus", function() {
+   $("[id$=_person_name_quote]").on("focus", function() {
      $(this).autocomplete({
 
        source: function( request, response ) {
@@ -253,7 +253,7 @@ $("#quotation_page_initial").change(function() {
          $(this).val(ui.item.name);
          var idAutoComplete=$(this).attr("id");
          idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
-         idAutoComplete=idAutoComplete.replace("_person_name","");
+         idAutoComplete=idAutoComplete.replace("_person_name_quote","");
          console.log(idAutoComplete);
 
          $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
@@ -268,7 +268,7 @@ $("#quotation_page_initial").change(function() {
            // f.options[:child_index] = f.index  -> it works the same way to get the child index form
            var idAutoComplete=$(this).attr("id");
            idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
-           idAutoComplete=idAutoComplete.replace("_person_name","");
+           idAutoComplete=idAutoComplete.replace("_person_name_quote","");
            $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val('');
            $(this).val('');
 

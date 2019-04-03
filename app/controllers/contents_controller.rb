@@ -110,7 +110,7 @@ class ContentsController < ApplicationController
     @content.content_people.map do |cp|
       cp.person_name=cp.person.name
 
-      @quotation.quotation_people.build(person_id: cp.person.id, person_name: cp.person.name, type_person: cp.type_content_person)
+      @quotation.quotation_people.build(person_id: cp.person.id, person_name_quote: cp.person.name, type_person: cp.type_content_person)
     end
 
 
