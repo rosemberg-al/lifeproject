@@ -131,7 +131,7 @@ $(function () {
 
    $(".remove_fields").on("click", function() {return confirm("<%= t('dialogs.remove_confim') %>") ;});
 
-   $("[id^=summary_summary_contents_attributes_]").on("focus", function() {
+   $("[id$=_content_description]").on("focus", function() {
          $(this).autocomplete({
 
 
@@ -186,7 +186,7 @@ $(function () {
 
 
 
-   $("[id^=summary_summary_contents_attributes_]").on("focus", function() {
+   $("[id$=_content_description]").on("focus", function() {
      $(this).autocomplete({
 
 
@@ -246,7 +246,7 @@ $(function () {
 
 
 $(function() {
-  $("[id^=summary_summary_people_attributes_]").on("focus", function() {
+  $("[id$=_person_name]").on("focus", function() {
     $(this).autocomplete({
 
       source: function( request, response ) {
@@ -311,7 +311,7 @@ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
     //inserted_item.replace('new_content_item','1000000000000000')
 
     $(function() {
-      $("[id^=summary_summary_people_attributes_]").on("focus", function() {
+      $("[id$=_person_name]").on("focus", function() {
         $(this).autocomplete({
 
           source: function( request, response ) {
