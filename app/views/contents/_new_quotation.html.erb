@@ -282,7 +282,7 @@ $(document).on("cocoon:after-insert",   function(e, inserted_item) {
                $(this).val(ui.item.name);
                var idAutoComplete=$(this).attr("id");
                idAutoComplete=idAutoComplete.replace("quotation_quotation_people_attributes_","");
-               idAutoComplete=idAutoComplete.replace("_person_name","");
+               idAutoComplete=idAutoComplete.replace("_person_name_quote","");
                console.log(idAutoComplete+"CC");
 
                $("#quotation_quotation_people_attributes_"+idAutoComplete+"_person_id").val(ui.item.id);
