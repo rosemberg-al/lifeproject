@@ -18,10 +18,12 @@ module Lifeproject
     #commented, it is using now through npm/node
     #17/10/18
 
-    config.i18n.default_locale = :'pt-BR'
+    config.i18n.default_locale = 'pt-BR'
     config.time_zone = 'Brasilia'
     config.i18n.available_locales = ["en", "pt-BR"]
-
+    #added a new folder to separate the name of the languages
+    config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/languages/*.yml"]
+    #config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
 
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -36,6 +38,6 @@ module Lifeproject
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
-    
+
   end
 end
