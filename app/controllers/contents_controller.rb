@@ -158,13 +158,18 @@ class ContentsController < ApplicationController
   def create
 
     @content = current_user.contents.build(content_params)
-    @content.content_people.map do |cp|
-      cp.user_id=current_user.id
-    end
 
-    @content.content_subjects.map do |cs|
-      cs.user_id=current_user.id
-    end
+
+    # it was moved to a call back in the model
+    # @content.content_people.map do |cp|
+    #   cp.user_id=current_user.id
+    # end
+    #
+    # @content.content_subjects.map do |cs|
+    #   cs.user_id=current_user.id
+    # end
+
+
    #logger.debug "OBJECTTTT: #{@content.content_people.inspect}"
     #@content = Content.new(content_params)
     #@content.user_id = current_user.id
@@ -197,24 +202,26 @@ class ContentsController < ApplicationController
 
   def update
 
-    attributes = content_params.clone
-    if attributes[:content_people_attributes]
-      attributes[:content_people_attributes].each do |key,cp|
-        if (!cp[:person_id].empty? && cp[:id].nil?)
-          cp[:user_id]=current_user.id
-        end
-      end
-    end
 
-    if attributes[:content_subjects_attributes]
-      attributes[:content_subjects_attributes].each do |key,cs|
-        if (!cs[:subject_id].empty? && cs[:id].nil?)
-          cs[:user_id]=current_user.id
-        end
-      end
-    end
+    # it was moved to a call back in the model
+    # attributes = content_params.clone
+    # if attributes[:content_people_attributes]
+    #   attributes[:content_people_attributes].each do |key,cp|
+    #     if (!cp[:person_id].empty? && cp[:id].nil?)
+    #       cp[:user_id]=current_user.id
+    #     end
+    #   end
+    # end
+    #
+    # if attributes[:content_subjects_attributes]
+    #   attributes[:content_subjects_attributes].each do |key,cs|
+    #     if (!cs[:subject_id].empty? && cs[:id].nil?)
+    #       cs[:user_id]=current_user.id
+    #     end
+    #   end
+    # end
 
-    if @content.update(attributes)
+    if @content.update(content_params)
       redirect_to @content, notice: t('flash.notice.save_success') #notice: 'Content was successfully updated.'
     else
       logger.debug "ERROS: #{@content.errors.inspect}"

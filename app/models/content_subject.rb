@@ -25,6 +25,8 @@ class ContentSubject < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
+  before_validation :set_user
+
   #validates_presence_of :content_id, :person_id
   #não ser dever colocar o id do mestre na validação da tela de mestre detalhe
   validates_presence_of  :subject_id
@@ -36,5 +38,10 @@ class ContentSubject < ApplicationRecord
 
   #virtual attributes
   attr_accessor :subject_description
+
+  private
+    def set_user
+      self.user_id = self.content.user_id
+    end
 
 end
