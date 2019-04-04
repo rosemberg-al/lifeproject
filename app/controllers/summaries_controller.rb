@@ -39,7 +39,7 @@ class SummariesController < ApplicationController
       if(contents)
 
         contents.each do |content|
-             
+
              @summary.summary_people.build(person_id: content.p_id, person_name: content.p_name, type_person: content.type_content_person)
         end
 
@@ -87,13 +87,15 @@ class SummariesController < ApplicationController
   def create
     @summary = current_user.summaries.build(summary_params)
 
-    @summary.summary_contents.map do |cp|
-      cp.user_id=current_user.id
-    end
+    # it was moved to a call back in summary_content
+    # @summary.summary_contents.map do |cp|
+    #   cp.user_id=current_user.id
+    # end
 
-    @summary.summary_people.map do |sp|
-      sp.user_id=current_user.id
-    end
+    # it was moved to a call back in summary_person
+    # @summary.summary_people.map do |sp|
+    #   sp.user_id=current_user.id
+    # end*
 
     if @summary.save
       redirect_to edit_summary_path(@summary), notice: t('flash.notice.save_success') #'Person was successfully created.'
@@ -122,25 +124,25 @@ class SummariesController < ApplicationController
 
   def update
 
-    attributes = summary_params.clone
-    unless attributes[:summary_contents_attributes].nil?
-      attributes[:summary_contents_attributes].each do |key,cp|
-        if (!cp[:content_id].empty? && cp[:id].nil?)
-          cp[:user_id]=current_user.id
-        end
-      end
-    end
+    # attributes = summary_params.clone
+    # unless attributes[:summary_contents_attributes].nil?
+    #   attributes[:summary_contents_attributes].each do |key,cp|
+    #     if (!cp[:content_id].empty? && cp[:id].nil?)
+    #       cp[:user_id]=current_user.id
+    #     end
+    #   end
+    # end
+    #
+    # unless attributes[:summary_people_attributes].nil?
+    #   attributes[:summary_people_attributes].each do |key,cp|
+    #     if (!cp[:person_id].empty? && cp[:id].nil?)
+    #       cp[:user_id]=current_user.id
+    #     end
+    #   end
+    # end
 
-    unless attributes[:summary_people_attributes].nil?
-      attributes[:summary_people_attributes].each do |key,cp|
-        if (!cp[:person_id].empty? && cp[:id].nil?)
-          cp[:user_id]=current_user.id
-        end
-      end
-    end
 
-
-    if @summary.update(attributes)
+    if @summary.update(summary_params)
       redirect_to @summary, notice: t('flash.notice.save_success') #notice: 'Person was successfully updated.'
     else
       render :edit
