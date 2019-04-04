@@ -13,6 +13,7 @@ module Lifeproject
     config.assets.enabled = true
 
     config.assets.paths << Rails.root.join("app", "assets", "img")
+    config.assets.paths << Rails.root.join("app", "assets", "stylesheets", "font")
     #config.assets.paths << Rails.root.join("app", "assets", "adminlte")
     #comentado, utilizando agora pelo modulo npm/node
     #commented, it is using now through npm/node
