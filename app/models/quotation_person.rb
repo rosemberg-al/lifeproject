@@ -28,6 +28,8 @@ class QuotationPerson < ApplicationRecord
     where.not(inactivated_at: nil)
   }
 
+  before_validation :set_user
+  
   #validates_presence_of :content_id, :person_id
   #não ser dever colocar o id do mestre na validação da tela de mestre detalhe
   validates_presence_of  :person_id, :type_person
@@ -39,5 +41,11 @@ class QuotationPerson < ApplicationRecord
 
   #virtual attributes
   attr_accessor :person_name
+
+
+  private
+    def set_user
+      self.user_id = self.quotation.user_id
+    end
 
 end
