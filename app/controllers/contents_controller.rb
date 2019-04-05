@@ -25,6 +25,7 @@ class ContentsController < ApplicationController
   before_action :set_content_edit, only: [:edit, :update, :destroy]
   before_action :content_types_list, only: [:edit, :update, :new, :create, :index]
   before_action :content_genres_list, only: [:edit, :update, :new, :create, :index]
+  before_action :languages_list, only: [:edit, :update, :new, :create]
   before_action :people_list, only: [:edit, :update, :new, :create]
 
 
@@ -271,7 +272,7 @@ class ContentsController < ApplicationController
       params.require(:content).permit(:description,:content_type_id,:content_genre_id,:synopsis,
       :book_publisher,:book_date_published,
       :movie_company,:movie_date_released,:movie_time,
-      :type_feature,
+      :type_feature,:language_id,
       content_people_attributes: [:id,:person_id, :type_content_person, :_destroy, :person_name],
       content_subjects_attributes: [:id,:subject_id, :_destroy, :subject_description])
     end
@@ -282,6 +283,10 @@ class ContentsController < ApplicationController
 
     def content_genres_list
       @content_genres=current_user.content_genres.active.select("id, description")
+    end
+
+    def languages_list
+      @languages=Language.select("id, description")
     end
 
     def people_list

@@ -397,6 +397,7 @@ pt-BR:
     movie_company: Empresa (Produção)
     movie_date_released: Data Estréia
     movie_time: Duração (min)
+    language_id: Idioma
    content_person:
     person: Nome
     type_content_person: Tipo Pessoa

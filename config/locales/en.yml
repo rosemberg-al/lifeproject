@@ -397,6 +397,7 @@ en:
     movie_company: Company (Production)
     movie_date_released: Date Released
     movie_time: Length (min)
+    language_id: Language
    content_person:
     person: Name
     type_content_person: Person Type
