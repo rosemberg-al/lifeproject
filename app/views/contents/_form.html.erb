@@ -13,7 +13,7 @@
         <div class="col-md-6   <%= error_div @content, :language_id %>">
 
           <%= f.label :language_id %> <br>
-          <%= f.select :language_id, @languages.collect {|t| [ t.description, t.id ] },{ include_blank: true } ,{:class => "form-control"} %>
+          <%= f.select :language_id, @languages.collect {|lang| [ t("languages.#{lang.iso_639_2t}"), lang.id ] },{ include_blank: true } ,{:class => "form-control"} %>
           <%= error_tag @content, :language_id %>
 
         </div>

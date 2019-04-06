@@ -286,7 +286,7 @@ class ContentsController < ApplicationController
     end
 
     def languages_list
-      @languages=Language.select("id, description")
+      @languages=Language.select("id,iso_639_2t,description")
     end
 
     def people_list
