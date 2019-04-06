@@ -31,7 +31,7 @@ class SubjectsController < ApplicationController
      #@people=Person.active.select("id, name").where("name like '%#{name}%'").limit(30)
 
      @subjects=current_user.subjects.active.select("id, description as label").where("description ilike '%#{description}%'").limit(30)
-     
+
      #head :ok
      render :json => @subjects
    else
@@ -104,7 +104,7 @@ class SubjectsController < ApplicationController
          .page(@subject[:page])
          .per(PER_PAGE)
     else
-        @contents = {}
+        @subjects = {}
     end
 
 
