@@ -26,19 +26,6 @@ class UsersController < ApplicationController
 
 
   def new
-
-
-    #teste rotas
-    # puts "@@@@@"
-    # puts new_user_url()
-    # puts new_user_path()
-    # puts root_url
-    # puts root_path
-    # u=User.last
-    # puts edit_user_url u
-    # puts user_path u
-
-
     @user = User.new
   end
 
@@ -83,10 +70,6 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    #def set_room
-    #  @room = Room.find(params[:id])
-    #end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
@@ -95,10 +78,8 @@ class UsersController < ApplicationController
 
 
     def can_change
-      #puts current_user
-      #puts user
+
       unless user_signed_in? && current_user==user
-        #puts "AAAA"
         redirect_to user_path(params[:id])
       end
     end
