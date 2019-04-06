@@ -4,7 +4,7 @@ LifeProject is a web based application that helps you to manage your life in var
 
 We will add areas as the project evolves. Areas like finance, goals and others. Stay tuned.
 
-Take a look at its [site](http://www.lifeproctapp.com).
+Take a look at its [site](https://lifeprojectapp.com).
 
 # License
 
