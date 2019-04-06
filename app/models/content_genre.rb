@@ -34,11 +34,5 @@ class ContentGenre < ApplicationRecord
 
   belongs_to :user
 
-  def self.search(query)
-    if query.present?
-      where(['description LIKE :query', :query => "%#{query}%"])
-    else
-      all
-    end
-  end
+  
 end

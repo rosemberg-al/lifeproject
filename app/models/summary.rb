@@ -47,6 +47,4 @@ class Summary < ApplicationRecord
   has_many :people, through: :summary_people
   accepts_nested_attributes_for :summary_people, reject_if: :all_blank, allow_destroy: true
 
-
-
 end

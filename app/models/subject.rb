@@ -33,37 +33,5 @@ class Subject < ApplicationRecord
   validates_length_of :description, :minimum => 3, :allow_blank => false
 
   belongs_to :user
-
-  def self.search(query)
-    if query.present?
-      where(['description LIKE :query', :query => "%#{query}%"])
-    else
-      all
-    end
-  end
-
-  def self.index(options={})
-
-    #if (options.key? :description)
-    if (options.key?(:inactive) && options[:inactive]=="Y")
-       options[:current_user].subjects
-       .inactive
-       .where([" description ilike ? ","%#{options[:description]}%"])
-       .most_recent
-       .page(options[:page])
-       .per(options[:per_page])
-
-
-       #.where.not(inactivated_at: nil)
-    else
-      options[:current_user].subjects
-      .active
-      .where([" description ilike ? ","%#{options[:description]}%"])
-      .most_recent
-      .page(options[:page])
-      .per(options[:per_page])
-
-      #.where(inactivated_at: nil)
-    end
-  end
+  
 end
