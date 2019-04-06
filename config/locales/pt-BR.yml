@@ -92,6 +92,8 @@ pt-BR:
   contents: Conteúdo
   people: Pessoa/Artista
   culture: Cultura
+  finance: Finanças
+  project: Projetos
   signup: Cadastro
   signin: Login
   my_profile: Meu perfil
@@ -100,6 +102,7 @@ pt-BR:
   summaries: Fichamento/Resumo
   quotations: Citações/Insights
   reviews: "Críticas/Análises"
+  soon: "Em breve.."
   motivated: "Melhore como pessoa a todo momento, inspire-se:"
 
  home:
