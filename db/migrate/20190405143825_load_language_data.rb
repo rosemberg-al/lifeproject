@@ -133,6 +133,7 @@ class LoadLanguageData < ActiveRecord::Migration[5.2]
       insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('pl','pol','pol','Polish');
       insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('ps','pus','pus','Pashto, Pushto');
       insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('pt','por','por','Portuguese');
+      insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('pt-BR','pt-BR','pt-BR','Portuguese (Brazil)');
       insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('qu','que','que','Quechua');
       insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('rm','roh','roh','Romansh');
       insert into languages (iso_639_1,iso_639_2t,iso_639_2b,description) values('rn','run','run','Kirundi');
