@@ -72,8 +72,6 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @review, notice: t('flash.notice.save_success')
     else
-
-      logger.debug "ERROS: #{@review.errors.inspect}"
       render :new
     end
   end

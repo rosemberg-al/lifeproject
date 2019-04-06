@@ -101,7 +101,7 @@ class SummariesController < ApplicationController
       redirect_to edit_summary_path(@summary), notice: t('flash.notice.save_success') #'Person was successfully created.'
     else
 
-      logger.debug "ERROS: #{@summary.errors.inspect}"
+      
       render :new
     end
   end
@@ -110,7 +110,7 @@ class SummariesController < ApplicationController
   end
 
   def save_text
-    #logger.debug "TEXTOOO #{params["text"]} - #{params["id"]}"
+
 
     summary = current_user.summaries.find(params[:id])
     summary.text=params["text"]

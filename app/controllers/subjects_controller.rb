@@ -31,7 +31,7 @@ class SubjectsController < ApplicationController
      #@people=Person.active.select("id, name").where("name like '%#{name}%'").limit(30)
 
      @subjects=current_user.subjects.active.select("id, description as label").where("description ilike '%#{description}%'").limit(30)
-     logger.debug "LISTA: #{@subjects.inspect}"
+     
      #head :ok
      render :json => @subjects
    else
@@ -43,7 +43,7 @@ class SubjectsController < ApplicationController
   def new
     @subject = current_user.subjects.build
     #@subject = Subject.new
-    #puts @subject
+
   end
 
   def edit

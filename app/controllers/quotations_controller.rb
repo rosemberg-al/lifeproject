@@ -105,13 +105,13 @@ class QuotationsController < ApplicationController
 
     #if the user do not type the order and the quotation is from a content, we get the amount the quotation to
     #that content and then we set the next value as the order of the quotations saved
-    #attributes = quotation_params.clone
-
     if (quotation_params[:order].empty? && !quotation_params[:content_id].nil?)
        amount=current_user.quotations.active.where(content_id: quotation_params[:content_id]).count
        quotation_params[:order]=amount+1
     end
+    
 
+    #attributes = quotation_params.clone
     # unless attributes[:quotation_people_attributes].nil?
     #   attributes[:quotation_people_attributes].each do |key,cp|
     #     if (!cp[:person_id].empty? && cp[:id].nil?)

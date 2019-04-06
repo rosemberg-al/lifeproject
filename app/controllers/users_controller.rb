@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def create
 
 
-    #puts params[:user]
+    
     @user = User.new(user_params)
     if @user.save
       SignupMailer.confirm_email(@user).deliver #enviando email de cadastro

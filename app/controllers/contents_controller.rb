@@ -51,23 +51,15 @@ class ContentsController < ApplicationController
     2.times do @content.content_subjects.build end
 
 
-    #logger.debug "type: #{@content.content_type.inspect}"
+
 
     #@content.content_people << ContentPerson.new
     #@content.content_people << ContentPerson.new
 
-    #@content
-    #@content_types=ContentType.active.select("id, description")
-    #@content_types.map { |e| puts e.description  }
+
   end
 
   def edit
-
-    #@content.attributes[:casa] = "sim"
-    ##t=ContentType.select("id,description").where(id: @content.content_type_id).limit(1)
-    #type_desc.each do |t|
-    ##@content.type_desc=t[0].description
-    #end
 
     @content_types.each do |ct|
       if ct.id == @content.content_type_id
@@ -75,8 +67,6 @@ class ContentsController < ApplicationController
         break
       end
     end
-
-
 
     @content.content_subjects.map do |cs|
       cs.subject_description=cs.subject.description
@@ -121,23 +111,7 @@ class ContentsController < ApplicationController
     @show_tab3=params.has_key?("quotation") ? "class=active" :""
     @show_tab_det3=params.has_key?("quotation") ? "active" :""
 
-  #  logger.debug "@@@@: #{@reviews.inspect}"
-    ##puts "%%%%% #{@content.type_desc}"
 
-
-  #  @contenta = Content.find(params[:id])
-  #  itens=@contenta.content_people
-  #  logger.debug "New article: #{itens.inspect}"
-  #  itens.map do |item|
-    #@content.content_people.map do |item|
-    #    logger.debug "Person: #{item.person_id}, Type: #{item.type_content_person}"
-    #end
-  #  Rails.logger.debug @contenta
-  #  puts "AAAA"
-  #  puts @contenta
-  #  itens.each do |key,cp|
-  #      Rails.logger.debug cp.person_id
-  #  end
   end
 
   def destroy
@@ -170,39 +144,20 @@ class ContentsController < ApplicationController
     #   cs.user_id=current_user.id
     # end
 
-
-   #logger.debug "OBJECTTTT: #{@content.content_people.inspect}"
-    #@content = Content.new(content_params)
-    #@content.user_id = current_user.id
     if @content.save
-
-      #debug(params)
-      #Rails.logger.debug params[:content_people]#params.inspect
-      # content_people=params[:content_people]
-      # content_people.each do |kc,cperson|
-      #   if(cperson[:person_id]!="" && cperson[:type_content_person]!="")
-      #     content_person = current_user.content_people.build
-      #     content_person.content=@content
-      #     content_person.person_id=cperson[:person_id]
-      #     content_person.type_content_person=cperson[:type_content_person]
-      #     content_person.save
-      #   end
-      # end
 
       redirect_to edit_content_path(@content), notice: t('flash.notice.save_success') #'Content was successfully created.'
     else
-      logger.debug "ERROS: #{@content.errors.inspect}"
+
       render :new
     end
   end
 
   def show
-    #@content = Content.find params[:id]
-    #@content = current_user.contents.find params[:id]
+
   end
 
   def update
-
 
     # it was moved to a call back in the model
     # attributes = content_params.clone
@@ -225,7 +180,7 @@ class ContentsController < ApplicationController
     if @content.update(content_params)
       redirect_to @content, notice: t('flash.notice.save_success') #notice: 'Content was successfully updated.'
     else
-      logger.debug "ERROS: #{@content.errors.inspect}"
+      
       render :edit
     end
   end
